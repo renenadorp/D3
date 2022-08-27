@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, Helvetica, sans-serif
+}
+rect.TransMapGraph {
+    stroke: rgb(152, 151, 151);
+    stroke-width:1  ;
+
+}
+circle.CurrentState {
+    stroke: rgb(255, 255, 255);
+    stroke-width:4;
+    fill: #008272;
+}
+circle.FutureState {
+    stroke: rgb(255, 255, 255);
+    stroke-width:4;
+    fill: #00395F;
+}
+text.CurrentState {
+    stroke: none;
+    fill: rgb(255, 255, 255);
+    font-size: 0.7em;
+
+}
+text.FutureState {
+    stroke: none;
+    fill: rgb(255, 255, 255);
+    font-size: 0.7em;
+
+}
+
+text.transyear {
+    stroke: none;
+    fill: rgb(255, 255, 255);
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+
+}
+rect.transyear {
+    fill: #3A3A3A;
+}
+#gTransMapBox {
+    stroke:rgb(152, 151, 151);
+    stroke-width: 1px;
+    fill:rgb(248, 194, 194)
+}
+#gTransMapGraph {
+    stroke:#00395F;
+    stroke-width: 5em;
+    fill:red;
+}
