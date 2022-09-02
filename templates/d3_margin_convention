@@ -1,0 +1,10 @@
+const MARGIN = {LEFT: 10, RIGHT: 10, TOP: 10, BOTTOM: 10}
+const WIDTH = 960 - MARGIN.LEFT - MARGIN.RIGHT
+const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM
+
+const g = d3.select('#chart-area').append("svg")
+    .attr('width', WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
+    .attr('height', HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
+    .append('g')
+        .attr('transform', `translate(${MARGIN.LEFT},${MARGIN.TOP})`)
+        
