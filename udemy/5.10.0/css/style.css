@@ -12,3 +12,11 @@
 	height: 60px;
 	padding: 5px 0px;
 }
+
+text.year {
+	fill: #D0D7DC;
+	font-weight: bold;
+	font-size: 144pt;
+	font-family: 'Courier New', Courier, monospace;
+	letter-spacing: 30px;
+}
