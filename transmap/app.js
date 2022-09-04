@@ -1,125 +1,213 @@
-// Data
-const TRANSYEARS     = ["Current", 2022, 2023, 2024]
 
-// Constants
-const SVG = {
-      "width" : 1000, 
-      "height": 800,
-      "pad"   : 0
+//MARGIN CONVENTION
+const MARGIN = { LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
+const CANVAS = { WIDTH : 800 - MARGIN.LEFT - MARGIN.RIGHT,
+                 HEIGHT: 800  - MARGIN.TOP  - MARGIN.BOTTOM}
+
+const W2H    = +(CANVAS.WIDTH/CANVAS.HEIGHT)
+const H2W    = +(CANVAS.HEIGHT/CANVAS.WIDTH)
+
+const STATE   = { RX: 50, RY: 50 }
+const YEARBOX = {HEIGHT: 40, WIDTH:CANVAS.WIDTH}
+const DIM     = {WIDTH: 160, HEIGHT: 40}
+const svg     = d3.select("#viz-area").append("svg")
+  					.attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
+  					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
+const svgCanvas = svg.append("g")
+  					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
+
+//DATA
+const data={years: [2022,2023,2024,2025, 2026], 
+            dims:  ['Data Strategy','Data Management', 'Data Architecture', 'Data Quality', 'Compliance']
+            }
+const DIMCOUNT  = data.dims.length
+const YEARCOUNT = data.years.length
+const TLINES    = []
+const YEARPAD   = 2
+const YEARWIDTH = (YEARBOX.WIDTH / YEARCOUNT)-YEARPAD 
+
+//YEARS
+const gYearBox  = svgCanvas.append('g').attr('id', 'gYearBox')
+const gYear     = gYearBox.selectAll().data(data.years)
+const gYearEnter= gYear.enter().append('g').attr('transform', (d,i)=> {return `translate(${(i*(YEARWIDTH+YEARPAD))},${5   })`})
+
+gYearEnter.append('rect')
+            .attr('width', YEARWIDTH)
+            .attr('height', YEARBOX.HEIGHT)
+            .attr('rx', 5)
+            .attr('ry', 5)
+            
+gYearEnter.append('text')
+            .text(d=> d)
+            .attr('dx', YEARWIDTH/2)
+            .attr('dy', (YEARBOX.HEIGHT/2) +2)
+            .attr('text-anchor', 'middle')    
+        
+//TMAP
+const TMAP = {    HEIGHT: CANVAS.HEIGHT-YEARBOX.HEIGHT, 
+                  WIDTH : CANVAS.WIDTH}
+
+const gMap = svgCanvas.append("g").attr("id", "gMap")
+            .attr("transform", `translate(${0},${YEARBOX.HEIGHT})`)
+
+gMap.append("rect")
+      .attr("width" , TMAP.WIDTH)
+      .attr("height", TMAP.HEIGHT)
+
+//TRANSFORMATION CURVES      
+const gCurve = gMap.append('g').attr('class', 'gCurve')
+
+const sCurve = gCurve.selectAll('TCurve').data(data.years)
+sCurve.enter().append('path')
+      .attr('d', (d,i)=>TCurve(d,i,YEARCOUNT))
+      //.attr('class', (d,i) => {return `TCurve-${i+1}`})
+      
+var Angle = 90 / DIMCOUNT //Divide 90 degree angle by number of dimensions
+
+function r2d(radians){
+      return (180/Math.PI)*radians
+}
+function d2r(degrees){
+      return (Math.PI/180)*degrees
 }
 
-const CircleState    = {"radius": 50}
-const TransMapBox    = {"x": SVG.pad, "y": SVG.pad, "width": (SVG.width-SVG.pad), "height": SVG.height-SVG.pad}
-const YearsBox                = {"x": TransMapBox.x, "y": TransMapBox.y, "width": TransMapBox.width, "height": 30}
-const TransMapGraph           = {"x": TransMapBox.x, "y": TransMapBox.y + YearsBox.height,  "width": TransMapBox.width, "height":  (TransMapBox.height-YearsBox.height)}
-const CurrentStateCircle      = {"x": TransMapGraph.x, "y": TransMapBox.height  }
-const FutureStateCircle       = {"x": TransMapGraph.width, "y": TransMapGraph.y }
+//console.log(Math.tan(d2r(45))*WIDTH) // [VERIFIED] Using 45 degrees, the HEIGHT should be the same as WIDTH
+//console.log(r2d(Math.atan(1)))       // [VERIFIED] 1 is the value when both sides have the same length. The angle should be 45 
 
 
-const RectTransYears = {"width": (SVG.width-(CircleState.radius*2))/TRANSYEARS.length, "height": 30}
+//TODO: This loop needs to be rewritten to a form using d3.selectAll().data().append..... 
+for (var i = 1; i <= DIMCOUNT; i++) {
+      var sumAngle = (Angle*i)
+      var radian, A, O, X1, X2, Y1, Y2, C
 
-// SVG Container            
-var svgContainer = d3.select("body").append("svg")
-      .attr("height", SVG.height)
-      .attr("width", SVG.width);
+      CutoverAngle = r2d(Math.atan(H2W))
+      //console.log(`Dims:${Dims} i:${i}, Angle:${Angle}, SumAngle:${sumAngle}, CutoverAngle: ${CutoverAngle}`)
+
+      if (sumAngle <= CutoverAngle) {
+            A  = TMAP.WIDTH
+            O  = TMAP.WIDTH*Math.tan(d2r(sumAngle))
+            X1 = TMAP.WIDTH
+            Y1 = 0
+            X2 = 0
+            Y2 = O
+      }
+      else {            
+            A  = TMAP.HEIGHT
+            O  = TMAP.HEIGHT*Math.tan(d2r(90-sumAngle))
+            X1 = TMAP.WIDTH
+            Y1 = 0
+            X2 = TMAP.WIDTH - O
+            Y2 = TMAP.HEIGHT
+      }
+      //Store coordinates to use for axis Dimension
+      TLINES.push({Number:  i, 
+                   Name  : data.dims[i-1], //VERY UGLY! I KNOW.
+                   x1    : X1, 
+                   y1    : Y1, 
+                   x2    : X2, 
+                   y2    : Y2
+                  })  
+      //}, Y1:${Y1}, X2:${X2}, Y2:${Y2}`)
+      //console.log(`Angle: ${r2d(Math.atan(O/A))}`)
+      gMap.append("line")
+            .attr("x1", X1)
+            .attr("y1", Y1)
+            .attr("x2", X2)
+            .attr("y2", Y2)
+            .attr('class', 'dimension')
+}
 
 
-// SVG Group Elements 
-var gTransMapBox     = svgContainer.append("g").attr("id", "gTransMapBox").attr('transform',`translate(${( TransMapBox.x)}, ${TransMapBox.y}) rotate(0)`) ; 
-
-
-var gTransMapGraph      = gTransMapBox.append("g").attr("id", "gTransMapGraph").attr('transform',`translate(${( 0)}, 0) rotate(0)`) ;
-var gTransYearsBox      = gTransMapBox.append("g").attr("id", "gTransYearsBox").attr('transform',`translate(${( YearsBox.x)}, ${YearsBox.y}) rotate(0)`) ;
-
-var gCurrentStateCircle = gTransMapBox.append("g").attr("id", "gCurrentStateCircle").attr('transform', `translate(${CurrentStateCircle.x}, ${CurrentStateCircle.y }) rotate(0)`);
-var gFutureStateCircle  = gTransMapBox.append("g").attr("id", "gFutureStateCircle").attr('transform', `translate(${FutureStateCircle.x}, ${FutureStateCircle.y}) rotate(0)`);
-
-
-
-gTransMapGraph.append("rect")
-      .attr("x", TransMapGraph.x+0)
-      .attr("y", TransMapGraph.y+0)
-      .attr("width", TransMapGraph.width)
-      .attr("height", TransMapGraph.height)
-      .classed("TransMapGraph", true)
-      ;
-
-
-// Transformation Years
-gTransYears = gTransYearsBox
-    .selectAll('.transyear')
-    .data(TRANSYEARS)
-    .enter()
-    .append('g')
-    .classed('transyear', true)
-    .attr('transform', (d, i) => `translate(${(i * (RectTransYears.width + 10))}, 0) rotate(0)` ) ; 
-
-    ;
-
-gTransYears.append('rect')    
-      .attr("dx", TransMapBox.x)
-      .attr("dy", TransMapBox.y)
-      .attr("width", RectTransYears.width)
-      .attr("height", RectTransYears.height)
-      .attr("rx", 1)
-      .attr("ry", 1)
-      .attr("class", "transyear")
-    ;
-
-gTransYears.append('text')    
-    .text(d=>d)
-    .attr("x", RectTransYears.width / 2)
-    .attr("y", (RectTransYears.height / 2) + 0)
-    .attr("text-anchor", "middle")
-    .attr('class', 'transyear')
-
-    ;
-
-    
-
-// Circle Current State
-
-gCurrentStateCircle.append("circle")
-      .attr("r", CircleState.radius)
-      .classed("CurrentState", true)
-      ;
-
-gCurrentStateCircle.append("text")
-      .attr("dx", "0")
-      .attr("dy", "0")
-      .classed('CurrentState', true)
-      .attr("text-anchor", "middle")
-      .text("CURRENT")
-      ;
+//TRANSFORMATION CURVES      
+function TCurve(d,i,c) {
+      //console.log('called')
+      const x0  = (TMAP.WIDTH/c) * (i+1),
+            y0  = 0,
+            cpx = (TMAP.WIDTH/c)*(i+1),
+            cpy = (TMAP.HEIGHT/c)*(c-(i+1)),
+            x   = TMAP.WIDTH,
+            y   = (TMAP.HEIGHT/c)*(c-(i+1));
       
-gCurrentStateCircle.append("text")
-      .attr("dx", "0")
-      .attr("dy", "15")
-      .classed('CurrentState', true)
-      .attr("text-anchor", "middle")
-      .text("STATE")
-      ;
+      const path = d3.path();
+      path.moveTo(TMAP.WIDTH, 0)
+      path.lineTo(x0, y0)
+      path.quadraticCurveTo(cpx, cpy, x, y);
+      path.lineTo(TMAP.WIDTH, 0)
+      const curve = `${path}Z`
       
+      return curve;
+      }
+//AXIS
+console.log(TLINES)
+const sAxisDim = gMap.selectAll('.gAxisDim').data(TLINES)
+const gAxisDim = sAxisDim.enter().append('g')
+      .attr('class','gAxisDim')
+      .attr('transform', (d,i,n) => transformDim(d,i,n))
+gAxisDim.append('rect')
+      .attr('width', (d,i,n) => DIM.WIDTH)
+      .attr('height', (d,i,n) => DIM.HEIGHT)
+      .attr('rx', 20)
+      .attr('ry', 20)
 
-// Circle Future State
+gAxisDim.append('text').text(d=>d.Name)
+      .attr('text-anchor', 'middle')//.attr('transform', (d,i,n) => transformDim(d,i,n))
+      .attr('dy', DIM.HEIGHT/2 +5)
+      .attr('dx', DIM.WIDTH/2)
 
-gFutureStateCircle.append("circle")
-.attr("r", CircleState.radius)
-.classed("FutureState", true)
-;
+//Function to calculate location and rotation of Dimension
+function transformDim(d,i,n){
+      var X = undefined
+      var Y = undefined
+      var svg =''
+      if (i==0) {
+            X = d.x2 == 0 ? -DIM.HEIGHT-5                   : 0
+            Y = d.x2 == 0 ? (d.y2 / 2) + (DIM.WIDTH/2)      : CANVAS.HEIGHT
+            R = d.x2 == 0 ? -90                             : 0
+      }
+      else
+      {
+            X = d.x2 == 0 ? -DIM.HEIGHT -5                  :  TLINES[i-1].x2 + ((d.x2 - TLINES[i-1].x2 ) /2) - (DIM.WIDTH/2)
+            Y = d.x2 == 0 ? TLINES[i-1].y2 + 
+                              ((d.y2-TLINES[i-1].y2)/2) + 
+                              (DIM.WIDTH/2)                 : CANVAS.HEIGHT - DIM.HEIGHT+5 
+            R = d.x2 == 0 ? -90                             : 0
+      }
+      console.log(i, TLINES[i].y2, d.y2)
+      svg = `translate (${X},${Y}) rotate(${R})`
+      return svg
+}
 
-gFutureStateCircle.append("text")
-      .attr("dx", "0")
-      .attr("dy", "0")
-      .classed('FutureState', true)
-      .attr("text-anchor", "middle")
-      .text("Future")
-      ;
+//CURRENT - FUTURE 
+const gCurrent=gMap.append('g').attr('class','gState').attr('transform', `translate(${0},${TMAP.HEIGHT})`)
+const gFuture =gMap.append('g').attr('class','gState').attr('transform', `translate(${TMAP.WIDTH},${0})`)
 
-gFutureStateCircle.append("text")
-.attr("dx", "0")
-.attr("dy", "15")
-.classed('FutureState', true)
-.attr("text-anchor", "middle")
-.text("STATE")
-;
+gCurrent.append('ellipse')
+      .attr('rx', STATE.RX)
+      .attr('ry', STATE.RY)
+      .attr('class', 'CurrentState')
+
+gCurrent.append('text')
+      .attr('text-anchor', 'middle') 
+      .text('CURRENT')
+      .attr('class', 'State')
+      .attr('dy', 5)
+
+gFuture.append('ellipse')
+      .attr('rx', STATE.RX)
+      .attr('ry', STATE.RY)
+      .attr('class', 'FutureState')
+
+gFuture.append('text')
+      .attr('text-anchor', 'middle') 
+      .text('FUTURE')
+      .attr('class', 'State')
+      .attr('dy', 5)
+
+
+//HSO LOGO
+gHSO = gMap.append('g').attr('id', 'HSO').attr('transform',`translate(${TMAP.WIDTH +2},${TMAP.HEIGHT}) rotate(-90)`)
+gHSO.append('image')
+      .attr('href', 'assets/hso.png')
+      .attr('width', 145)
+
+
