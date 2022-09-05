@@ -1,7 +1,7 @@
 
 //MARGIN CONVENTION
 const MARGIN = { LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
-const CANVAS = { WIDTH : 800 - MARGIN.LEFT - MARGIN.RIGHT,
+const CANVAS = { WIDTH : 1000 - MARGIN.LEFT - MARGIN.RIGHT,
                  HEIGHT: 800  - MARGIN.TOP  - MARGIN.BOTTOM}
 
 const W2H    = +(CANVAS.WIDTH/CANVAS.HEIGHT)
@@ -18,9 +18,11 @@ const svgCanvas = svg.append("g")
 
 //DATA
 const data={years: [2022,2023,2024,2025, 2026], 
-            dims:  ['Data Strategy','Data Management', 'Data Architecture', 'Data Quality', 'Compliance']
+            dims:  { names: ['Data Strategy','Data Management', 'Data Architecture', 'Data Quality', 'Compliance'],
+                     details: [{year: 2022, detail: 'Data Entry' }]
+                  }
             }
-const DIMCOUNT  = data.dims.length
+const DIMCOUNT  = data.dims.names.length
 const YEARCOUNT = data.years.length
 const TLINES    = []
 const YEARPAD   = 2
@@ -101,7 +103,7 @@ for (var i = 1; i <= DIMCOUNT; i++) {
       }
       //Store coordinates to use for axis Dimension
       TLINES.push({Number:  i, 
-                   Name  : data.dims[i-1], //VERY UGLY! I KNOW.
+                   Name  : data.dims.names[i-1], //VERY UGLY! I KNOW.
                    x1    : X1, 
                    y1    : Y1, 
                    x2    : X2, 
@@ -204,10 +206,20 @@ gFuture.append('text')
       .attr('dy', 5)
 
 
+// const gProjects = gMap.append('g').attr('class', 'gProjects')
+// const sProjects = gProjects.selectAll('.gProject').data(data.dims.details)
+// sProjects.enter().append('circle')
+//             .attr('class', '.gProject')
+//             .attr('r', 50)
+//             .attr('cx', 0)
+//             .attr('cy', 0)
+
+//console.log(data.dims.details)
+
 //HSO LOGO
-gHSO = gMap.append('g').attr('id', 'HSO').attr('transform',`translate(${TMAP.WIDTH +2},${TMAP.HEIGHT}) rotate(-90)`)
-gHSO.append('image')
-      .attr('href', 'assets/hso.png')
-      .attr('width', 145)
+// gHSO = gMap.append('g').attr('id', 'HSO').attr('transform',`translate(${TMAP.WIDTH +2},${TMAP.HEIGHT}) rotate(-90)`)
+// gHSO.append('image')
+//       .attr('href', 'assets/hso.png')
+//       .attr('width', 145)
 
 
