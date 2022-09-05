@@ -1,7 +1,7 @@
 
 //MARGIN CONVENTION
 const MARGIN = { LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
-const CANVAS = { WIDTH : 1000 - MARGIN.LEFT - MARGIN.RIGHT,
+const CANVAS = { WIDTH : 700 - MARGIN.LEFT - MARGIN.RIGHT,
                  HEIGHT: 800  - MARGIN.TOP  - MARGIN.BOTTOM}
 
 const W2H    = +(CANVAS.WIDTH/CANVAS.HEIGHT)
@@ -17,11 +17,11 @@ const svgCanvas = svg.append("g")
   					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
 //DATA
-const data={years: [2022,2023,2024,2025, 2026], 
-            dims:  { names: ['Data Strategy','Data Management', 'Data Architecture', 'Data Quality', 'Compliance'],
+const data={years: [2022, 2023, 2024, 2025, 2026, 2027], 
+            dims:  { names: ['Data Strategy','Data Management', 'Project Governance'],
                      details: [{year: 2022, detail: 'Data Entry' }]
                   }
-            }
+            }     
 const DIMCOUNT  = data.dims.names.length
 const YEARCOUNT = data.years.length
 const TLINES    = []
@@ -206,20 +206,50 @@ gFuture.append('text')
       .attr('dy', 5)
 
 
-// const gProjects = gMap.append('g').attr('class', 'gProjects')
-// const sProjects = gProjects.selectAll('.gProject').data(data.dims.details)
+const gProjects = gMap.append('g').attr('class', 'gProjects')
+const sProjects = gProjects.selectAll('.gProject').data(data.dims.details)
 // sProjects.enter().append('circle')
 //             .attr('class', '.gProject')
 //             .attr('r', 50)
 //             .attr('cx', 0)
 //             .attr('cy', 0)
 
-//console.log(data.dims.details)
 
 //HSO LOGO
-// gHSO = gMap.append('g').attr('id', 'HSO').attr('transform',`translate(${TMAP.WIDTH +2},${TMAP.HEIGHT}) rotate(-90)`)
-// gHSO.append('image')
-//       .attr('href', 'assets/hso.png')
-//       .attr('width', 145)
+gHSO = gMap.append('g').attr('id', 'HSO').attr('transform',`translate(${TMAP.WIDTH +2},${TMAP.HEIGHT}) rotate(-90)`)
+gHSO.append('image')
+      .attr('href', 'assets/hso.png')
+      .attr('width', 145)
 
 
+//INTERACTIVITY
+d3.select("#nHeight").on("input", function() {
+  updateHeight(+this.value);
+});
+
+d3.select("#nWidth").on("input", function() {
+  updateWidth(+this.value);
+});
+
+function updateHeight(nHeight) {
+
+      // adjust the text on the range slider
+      d3.select("#nHeight-value").text(nHeight);
+      d3.select("#nHeight").property("value", nHeight);
+      
+      // // update the rectangle height
+      // holder.selectAll("rect") 
+      //   .attr("y", 150-(nHeight/2)) 
+      //   .attr("height", nHeight); 
+    }
+    
+function updateWidth(nWidth) {
+
+      // adjust the text on the range slider
+      d3.select("#nWidth-value").text(nWidth);
+      d3.select("#nWidth").property("value", nWidth);
+
+// holder.selectAll("rect")
+//       .attr("x", 300-(nWidth/2)) 
+//       .attr("width", nWidth);
+}
