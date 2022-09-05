@@ -16,17 +16,18 @@ const svg     = d3.select("#viz-area").append("svg")
 const svgCanvas = svg.append("g")
   					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
+//DATA
+d3.json("https://gist.githubusercontent.com/renenadorp/db0d14231fbd15a2972e3593bbaba6f6/raw/f4db13d1a6f6950b44a2b4a3ff39811ac2f4e800/transmap_data_online").then(
+
+    data => {
+
+        //console.log(data)
+        updateTMap(data)
+    }
 
 
-const myRequest = new Request('data/data.json');
+)
 
-fetch(myRequest, {method: 'GET',  
-                  mode: 'no-cors', 
-                  headers: {"Content-type": "application/json" } })
-  .then((response) => response.json())
-  .then((data) => {
-      updateTMap(data)
-  })
 
 function updateTMap(data){
 

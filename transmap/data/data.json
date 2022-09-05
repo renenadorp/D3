@@ -1,8 +1,5 @@
-[
-    {
-        "years": [2022,2023, 2024]
-    },
-    {
-        "dimensions" : ["Technology", "Architecture", "Data Governance", "Data Management"]
-    }
-]
+{"years": [2022, 2023, 2024, 2025, 2026, 2027], 
+            "dims":  { "names":   ["Data Strategy","Data Management", "Project Governance", "Service Governance"],
+                     "details": [{"year": 2022, "detail": "Data Entry" }]
+                  }
+            }   

@@ -134,8 +134,6 @@ function update(year, countries){
 	//AXES
 	gAxisX.call(xAxis)
 	gAxisY.call(yAxis)
-
-
 	
 	//YEAR LABEL
 	textYearLabel.text(year )
