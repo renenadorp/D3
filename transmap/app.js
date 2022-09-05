@@ -1,7 +1,7 @@
 
 //MARGIN CONVENTION
 const MARGIN = { LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
-const CANVAS = { WIDTH : 700 - MARGIN.LEFT - MARGIN.RIGHT,
+const CANVAS = { WIDTH : 1000 - MARGIN.LEFT - MARGIN.RIGHT,
                  HEIGHT: 800  - MARGIN.TOP  - MARGIN.BOTTOM}
 
 const W2H    = +(CANVAS.WIDTH/CANVAS.HEIGHT)
@@ -18,7 +18,7 @@ const svgCanvas = svg.append("g")
 
 //DATA
 const data={years: [2022, 2023, 2024, 2025, 2026, 2027], 
-            dims:  { names: ['Data Strategy','Data Management', 'Project Governance'],
+            dims:  { names: ['Data Strategy','Data Management', 'Project Governance', 'Service Governance'],
                      details: [{year: 2022, detail: 'Data Entry' }]
                   }
             }     

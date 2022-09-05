@@ -6,8 +6,8 @@
 
 //MARGIN CONVENTION
 const MARGIN = { LEFT: 100, RIGHT: 10, TOP: 10, BOTTOM: 100 }
-const WIDTH  = 1000 - MARGIN.LEFT - MARGIN.RIGHT
-const HEIGHT = 600 - MARGIN.TOP  - MARGIN.BOTTOM
+const WIDTH  = 1200 - MARGIN.LEFT - MARGIN.RIGHT
+const HEIGHT = 1000 - MARGIN.TOP  - MARGIN.BOTTOM
 const svg    = d3.select("#chart-area").append("svg")
   					.attr("width" , WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
   					.attr("height", HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
