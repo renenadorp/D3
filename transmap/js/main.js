@@ -1,4 +1,3 @@
-
 //MARGIN CONVENTION
 var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
 var CANVAS = {  WIDTH : 1200  - MARGIN.LEFT - MARGIN.RIGHT,
@@ -16,8 +15,25 @@ const svg     = d3.select("#viz-area").append("svg")
 const svgCanvas = svg.append("g")
   					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
+//TIP
+var tip = d3.tip().attr('class', 'd3-tip').html(d=>{ 
+                let text =`
+                
+                <div class="container">
+                <div class="row"><div class="col-sm"> ${d.dim}</div></div>
+                <div class="row"><div class="col-sm"> ${d.number}.${d.name}</div></div>
+                <div class="row"><div class="col-sm"> ${d.descr}</div></div>
+                </div>                        
+                        
+                        `
+                
+                
+                
+                
+                return text;      })
+svgCanvas.call(tip)
 
-
+//DATA
 const myRequest = new Request('data/data.json');
 
 fetch(myRequest, {method: 'GET',  
@@ -70,6 +86,7 @@ function updateTMap(data){
     const sCurve = gCurve.selectAll('TCurve').data(data.years)
     sCurve.enter().append('path')
         .attr('d', (d,i)=>TCurve(d,i,YEARCOUNT))
+        .attr('id', (d,i)=> `TCurve-${i}`)
         //.attr('class', (d,i) => {return `TCurve-${i+1}`})
         
     var Angle = 90 / DIMCOUNT //Divide 90 degree angle by number of dimensions
@@ -125,6 +142,7 @@ function updateTMap(data){
                 .attr("x2", X2)
                 .attr("y2", Y2)
                 .attr('class', 'dimension')
+                .attr('id', `TLine-${i}`)
         }
 
 
@@ -215,10 +233,7 @@ function updateTMap(data){
         .attr('dy', 5)
 
 
-    const gProjects = gMap.append('g').attr('class', 'gProjects')
-    const sProjects = gProjects.selectAll('.gProject').data(data.dims.details)
-
-
+  
     //console.log(data.dims.details)
 
     //HSO LOGO
@@ -226,5 +241,97 @@ function updateTMap(data){
     gHSO.append('image')
         .attr('href', 'assets/hso.png')
         .attr('width', 145)
+
+    const gProjects = gMap.append('g').attr('class', 'gProjects')
+    const sProjects = gProjects.selectAll('.gProject').data(data.projects)
+    sProjects.exit().remove()
+
+    gProject = sProjects.enter().append('g').attr('class', 'gProject').attr( 'transform', d=>`translate(${d.cx},${d.cy})`)
+    gProject.append('circle')
+        .attr('class', 'Project')
+        .attr( 'r', 20)
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)
+        
+    gProject.append('text').text(d=>d.number).attr('fill', 'white').attr('dx', -5).attr('dy', 5)
+        
+
+    
+    //******************************************************************************************************************* */
+    // INTERSECTIONS: LINE-CURVE
+    // Credits: https://bl.ocks.org/bricof
+    // Link: https://bl.ocks.org/bricof/f1f5b4d4bc02cad4dea454a3c5ff8ad7
+    
+    var n_segments = 100;
+    var path = svg.select("path#TCurve-0");
+    var pathEl = path.node();
+    //console.log(pathEl)
+
+    var pathLength = pathEl.getTotalLength();
+    var line = gMap.select("line#TLine-1");
+
+    // console.log(line.attr('x1'), line.attr('y1'), line.attr('x2'), line.attr('y2') )
+    // console.log(pathLength)
+    // console.log(TLINES)
+
+    pts_i = path_line_intersections(pathEl,line)
+    console.log(pts_i)
+    for (i=0; i< pts_i.length; i++){
+        if (pts_i[i].x!==1000){
+            gMap.append('circle')
+                .attr('r', 5)
+                .attr('cx', pts_i[i].x)
+                .attr('cy', pts_i[i].y).attr('stroke', 'none').attr('fill', 'none')
+        }
+    }
+    function positionLine(line) {
+        line
+            .attr("x1", function(d) { return d[0][0]; })
+            .attr("y1", function(d) { return d[0][1]; })
+            .attr("x2", function(d) { return d[1][0]; })
+            .attr("y2", function(d) { return d[1][1]; });
+    }
+    
+    function btwn(a, b1, b2) {
+        if ((a >= b1) && (a <= b2)) { return true; }
+        if ((a >= b2) && (a <= b1)) { return true; }
+        return false;
+    }
+    
+    function line_line_intersect(line1, line2) {
+        var x1 = line1.x1, x2 = line1.x2, x3 = line2.x1, x4 = line2.x2;
+        var y1 = line1.y1, y2 = line1.y2, y3 = line2.y1, y4 = line2.y2;
+        var pt_denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+        var pt_x_num = (x1*y2 - y1*x2) * (x3 - x4) - (x1 - x2) * (x3*y4 - y3*x4);
+        var pt_y_num = (x1*y2 - y1*x2) * (y3 - y4) - (y1 - y2) * (x3*y4 - y3*x4);
+        if (pt_denom == 0) { return "parallel"; }
+        else { 
+        var pt = {'x': pt_x_num / pt_denom, 'y': pt_y_num / pt_denom}; 
+        if (btwn(pt.x, x1, x2) && btwn(pt.y, y1, y2) && btwn(pt.x, x3, x4) && btwn(pt.y, y3, y4)) { return pt; }
+        else { return "not in range"; }
+        }
+    }
+  
+    function path_line_intersections(pathEl, line) {
+
+        var pts = []
+        for (var i=0; i<n_segments; i++) {
+          var pos1 = pathEl.getPointAtLength(pathLength * i / n_segments);
+          var pos2 = pathEl.getPointAtLength(pathLength * (i+1) / n_segments);
+          var line1 = {x1: pos1.x, x2: pos2.x, y1: pos1.y, y2: pos2.y};
+          var line2 = {x1: line.attr('x1'), x2: line.attr('x2'), 
+                       y1: line.attr('y1'), y2: line.attr('y2')};
+          var pt = line_line_intersect(line1, line2);
+          if (typeof(pt) != "string") {
+            pts.push(pt);
+          }
+        }
+        
+        return pts;
+      
+      }
+
+
+
 
 }
