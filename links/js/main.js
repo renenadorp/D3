@@ -1,28 +1,22 @@
-link ="https://docs.google.com/spreadsheets/d/e/2PACX-1vS-WMdDjr9hcAJrhiiJlpCybwNUKqWwbWVd125xH6z-Eamzp_DuQllP9dtKcbhXR2SD3rElX3dSoNdm/pub?gid=0&single=true&output=csv";
+// code based on https://observablehq.com/@sjengle/java-11-api-hierarchy-visualization
 
 
+LINK ="https://docs.google.com/spreadsheets/d/e/2PACX-1vS-WMdDjr9hcAJrhiiJlpCybwNUKqWwbWVd125xH6z-Eamzp_DuQllP9dtKcbhXR2SD3rElX3dSoNdm/pub?gid=0&single=true&output=csv";
 
 //MARGIN CONVENTION
-var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
-var CANVAS = {  WIDTH : 1200  - MARGIN.LEFT - MARGIN.RIGHT,
-                HEIGHT: 1000  - MARGIN.TOP  - MARGIN.BOTTOM}
-
-var W2H    = +(CANVAS.WIDTH/CANVAS.HEIGHT)
-var H2W    = +(CANVAS.HEIGHT/CANVAS.WIDTH)
+var MARGIN = {  LEFT  : 1, RIGHT: 1, TOP: 1, BOTTOM: 1 }
+var CANVAS = {  WIDTH : 50000  - MARGIN.LEFT - MARGIN.RIGHT,
+                HEIGHT: 400  - MARGIN.TOP  - MARGIN.BOTTOM}
 
 const STATE   = { RX: 50, RY: 50 }
-const YEARBOX = {HEIGHT: 40, WIDTH:CANVAS.WIDTH}
-const DIM     = {WIDTH: 160, HEIGHT: 40}
+const NODE 	  = {HEIGHT: 20, WIDTH:200, PAD: {LEFT: 1700, TOP: 10}}
 const svg     = d3.select("#viz-area").append("svg")
   					.attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
   					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
 const svgCanvas = svg.append("g")
   					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
-const pad = 5
-const height = 400
-const r=5	 
-
+const r = 5;
 //TIP
 /*
 var tip = d3.tip().attr('class', 'd3-tip').html(d=>{ 
@@ -41,19 +35,21 @@ svgCanvas.call(tip)
 */
 //DATA.then(
 
-const myRequest = new Request(link);
+const myRequest = new Request(LINK);
 
-d3.csv(link)
+d3.csv(LINK)
 .then(raw => update(raw));
 
 	
 function update (raw){  
-	
+	const raw_active = raw.filter(link => link.Active==='1')
+
+	// Returns
 	pc_root=[];
 	pc_tab=[];
 	pc_group=[];
 	pc_link=[];
-	raw.map((row, i)=>{
+	raw_active.map((row, i)=>{
 	//Clear arrays
 	if (i==0) {
 	  pc_root.length=0;
@@ -94,31 +90,32 @@ function update (raw){
 	}
   
   });
-
   
   pc=  [...pc_root, ...pc_tab, ...pc_group, ...pc_link];
-  //console.log(pc)
+  
   root = d3.stratify()
     .id(function(row) { return row.cId; })
     .parentId(function(row) {
       return row.pId;
     })
     (pc);
+	console.log('pc:',pc)
+	console.log('root:',root)
+  
 	color = d3.scaleSequential([10, root.height], d3.interpolateBlues) //)interpolateBlues)//interpolateViridis)
-
 	let data = root;//findModule();
-	 
+	
 	data.sort(function(a, b) { 
 	  return b.height - a.height || b.count - a.count; 
 	});
-	
-	let layout = d3.tree().size([CANVAS.WIDTH - 2 * pad, height - 2 * pad]);
-	
+	let width = pc_link.length * NODE.WIDTH + (NODE.PAD.LEFT);
+	let layout = d3.tree().size([width , CANVAS.HEIGHT - 2 * NODE.PAD.TOP]);
+	//console.log(data)
 	layout(data);
 	
 	let plot = svgCanvas.append("g")
 	  .attr("id", "plot")
-	  .attr("transform", translate(pad, pad));
+	  .attr("transform", translate(MARGIN.LEFT, MARGIN.TOP));
 	
 	drawLinks(plot.append("g"), data.links(), curvedLine());
 	drawNodes(plot.append("g"), data.descendants(), 'rect',true);
@@ -126,7 +123,6 @@ function update (raw){
 	return svg.node();
   }
 
- 
   //console.log(root)
 function drawLinks(g, links, generator) {
 	let paths = g.selectAll('path')
@@ -137,20 +133,21 @@ function drawLinks(g, links, generator) {
 		.attr('class', 'link');
 }
 function drawNodes(g, nodes, type, raise) {
-console.log('drawNodes/nodes:', nodes, 'drawnodes/g:',g);
+//console.log('drawNodes/nodes:', nodes, 'drawnodes/g:',g);
 
 	let g_nodes = g.selectAll(type)
-		.data(nodes, node => {console.log(node.data); return node.data})
+		.data(nodes, node => {//console.log(node.data); 
+			return node.data})
 		.enter().append('g');
 	let svg_nodes = g_nodes
 		.append(type)
 		.attr('r',  r)
 		.attr('cx', d => d.x)
 		.attr('cy', d => d.y)
-		.attr('x', d => d.x - 60)
+		.attr('x', d => d.x - (NODE.WIDTH/2))
 		.attr('y', d => d.y)
-		.attr('width', 120)
-		.attr('height', 20)
+		.attr('width', NODE.WIDTH)
+		.attr('height', NODE.HEIGHT)
 		.attr('id', d => d.data.cName)
 		.attr('class', 'node')
 		.style('fill', d => color(d.depth))
@@ -163,11 +160,9 @@ console.log('drawNodes/nodes:', nodes, 'drawnodes/g:',g);
 			.text(d=>d.data.cName)
 			.attr('x', d => d.x)
 			.attr('y', d => d.y)			
-			.attr('dy', 15)
+			.attr('dy', (NODE.HEIGHT/2) + 5)
 			.attr('class', 'nodetext')
 			.attr('text-anchor', 'middle')
-
-	
 	//g_nodes.attr('transform', `translate(${d.x},${d.y})`)
 
 setupEvents(g, g_nodes, raise);
