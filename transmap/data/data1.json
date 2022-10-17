@@ -11,8 +11,7 @@
             "Data Management",
             "Data Governance",
             "Service Governance",
-            "Compliance",
-            "Analytics"
+            "Compliance"
         ]
     },
     "projects": [
@@ -77,64 +76,64 @@
         {
             "number": 8,
             "name": "Development Process",
-            "cx": 257,
-            "cy": 239,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 9,
             "name": "Data Quality",
-            "cx": 551,
-            "cy": 78,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 10,
             "name": "Enterprise Data Layer",
-            "cx": 657,
-            "cy": 653,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 11,
             "name": "Support Organisation",
-            "cx": 514,
-            "cy": 206,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 12,
             "name": "Sustainability Reporting",
-            "cx": 735,
-            "cy": 446,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 13,
             "name": "Self Service BI",
-            "cx": 454,
-            "cy": 486,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 14,
             "name": "Data Catalog",
-            "cx": 174,
-            "cy": 558,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
         {
             "number": 15,
             "name": "Merge Data Platforms",
-            "cx": 117,
-            "cy": 364,
+            "cx": 925,
+            "cy": 150,
             "dim": "Service Governance",
             "descr": "Project 1"
         },
