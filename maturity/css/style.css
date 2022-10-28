@@ -1,0 +1,30 @@
+svg {
+	 border: 1px dotted whitesmoke;
+  }
+text.AxisMaturity { fill: rgb(75, 74, 74); font-weight: 700;}
+
+line.vertical {
+
+	fill: rgb(87, 168, 238);
+	stroke-width: 5px;
+	stroke: rgb(87, 168, 238);
+	stroke-dasharray: 15px;
+}
+
+path.maturity-line {
+
+	fill: none;
+	stroke-width: 10px;
+	stroke: rgb(167, 204, 237);
+	stroke-dasharray: 0px;
+}
+
+
+
+path.line-vertical {
+
+	fill: rgb(87, 168, 238);
+	stroke-width: 10px;
+	stroke: rgb(87, 168, 238);
+	stroke-dasharray: 0px;
+}
