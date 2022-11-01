@@ -1,5 +1,5 @@
 //MARGIN CONVENTION
-var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 100 }
+var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 10, BOTTOM: 100 }
 var CANVAS = {  WIDTH : 1200  - MARGIN.LEFT - MARGIN.RIGHT,
                 HEIGHT: 1000  - MARGIN.TOP  - MARGIN.BOTTOM}
 
@@ -427,6 +427,17 @@ function changeProject(what, e){
 function updateProjectList(data)  {
     const tableStringStart = 
     `
+    <div class="row">
+    <div class="col-1"></div>
+        <div class="col-6"><H1> Transformation Map</H1></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-1"></div>
+    <div class="col-6">
+    <details>     
+        <summary>Click here to update Projects</summary>                
+
     <table class="table table-sm table-light" id="project-list">
                     <thead>
                         <tr>
@@ -462,6 +473,10 @@ function updateProjectList(data)  {
        </td></tr>
         </tbody>
         </table>
+        </details>
+        </div>
+        </div>
+
         `;
 
     const html = tableStringStart + tableStringRows + tableStringEnd;

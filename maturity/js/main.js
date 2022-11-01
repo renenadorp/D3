@@ -1,6 +1,5 @@
-
 //MARGIN CONVENTION
-var MARGIN = {  LEFT  : 100, RIGHT: 1, TOP: 100, BOTTOM: 1 }
+var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 100, BOTTOM: 1 }
 var CANVAS = {  WIDTH : 1200  - MARGIN.LEFT - MARGIN.RIGHT,
                 HEIGHT: 600  - MARGIN.TOP  - MARGIN.BOTTOM}
 var GRAPH = {  	WIDTH : CANVAS.WIDTH,
@@ -23,16 +22,38 @@ const gAxisMaturity = svgCanvas.append('g')
 
 //LABELS
 const xAxisLabel = svgCanvas.append('g').attr('class', 'xAxisLabel')
-xAxisLabel.append('text').text('Maturity Level')
-xAxisLabel.attr('transform', `translate(${GRAPH.WIDTH/2}, ${GRAPH.HEIGHT+60})`)
+xAxisLabel.append('text').text('Maturity of Analytics Capabilities').attr('text-anchor', 'end').attr('class', 'label')
+xAxisLabel.attr('transform', `translate(${GRAPH.WIDTH}, ${GRAPH.HEIGHT+60})`)
 
 // GRID
-const xAxisGrid = d3.axisBottom(xScale).tickSize(-CANVAS.HEIGHT).tickFormat('').ticks(5);
+const xAxisGrid = d3.axisBottom(xScale).tickSize(-GRAPH.HEIGHT).tickFormat('').ticks(5);
 gAxisX.call(xAxisGrid)
 
 
 //
 const SHAPES = {"AXISMATURITY": {HEIGHT: 35, PAD:10, ARROWSIZE: 10}}
+
+// MATURITY CURVE
+p1=[0,GRAPH.HEIGHT/3*2.5];
+p2=[GRAPH.WIDTH, 100];
+cp=[GRAPH.WIDTH/5*4, GRAPH.HEIGHT/3*2];
+let pathMaturityCurve = d3.path();
+pathMaturityCurve.moveTo(p1[0], p1[1])
+pathMaturityCurve.quadraticCurveTo(cp[0], cp[1], p2[0], p2[1]);
+
+
+// MATURITY CIRCLES POSITION
+var xPosCircles = [	
+	GRAPH.WIDTH/5*0,   	//None
+	GRAPH.WIDTH/5*0.5, 	//Raw data
+	GRAPH.WIDTH/5*1,   	//Cleaned data
+	GRAPH.WIDTH/5*1.5, 	//Standard Reports	
+	GRAPH.WIDTH/5*2,	//Adhoc & Olap	
+	GRAPH.WIDTH/5*2.5,	//Self Service	
+	GRAPH.WIDTH/5*3.1,	//Predictive
+	GRAPH.WIDTH/5*4.1,	//Prescriptive
+	GRAPH.WIDTH/5*5		//Autonomous
+];
 
 //DATA
 const LINK = "data/data.json"
@@ -42,12 +63,12 @@ d3.json(LINK)
 	
 function update (data){  
 	//console.log(data)
-	drawAxisMaturity(data.maturity);
+	drawMaturityGraph(data.maturity);
 
 	return svg.node();
 }
-
-function drawAxisMaturity(data){
+const axisColours = ['#99B0BF', '#00B294', '#00BCD4', '#F58974', '#00395F']
+function drawMaturityGraph(data){
 	const AxisMaturity = gAxisMaturity.selectAll('.AxisMaturity').data(data);
 	const MaturityLevels = data.length;
 	const MaturityWidth = CANVAS.WIDTH / MaturityLevels
@@ -62,7 +83,10 @@ function drawAxisMaturity(data){
 				.attr( 'transform', (d,i)=>`translate(${(i)*MaturityWidth },${0})`);
 
 		gAxisMaturityEnter.append('svg:polygon').attr('points', (d,i) =>  AxisMaturityShape(i, MaturityWidth))
-		.attr('fill', (d,i) => d3.schemeBlues[8][i]);
+		.attr('fill', (d,i) => 
+					//d3.schemeBlues[8][i]
+					axisColours[i]
+					);
 		gAxisMaturityEnter.append('text').text( (d,i)=> `Level ${d.Level}: ${d.Name}`)
 			.attr('dx', MaturityWidth/2)
 			.attr('dy', SHAPES.AXISMATURITY.HEIGHT/2 + 5)
@@ -76,10 +100,10 @@ function drawAxisMaturity(data){
 		  }
 		
 	)
-	const verticalPosition = MaturityWidth*3.1
-	drawVerticalLine([verticalPosition,0],[verticalPosition,GRAPH.HEIGHT])	
+	drawVerticalLine(MaturityWidth); 
 	drawMaturityCurve();
-
+	drawMaturityCircles();
+	//animateMaturityCircle();
 	return svg.node();
 
 }
@@ -106,19 +130,46 @@ function AxisMaturityShape(i, MaturityWidth){
 
 	return i==0 ? maturity_start : maturity_end
 }
+
 function drawMaturityCurve() {
-		p1=[0,GRAPH.HEIGHT/3*2];
-		p2=[GRAPH.WIDTH, 100];
-		cp=[GRAPH.WIDTH/5*3, GRAPH.HEIGHT/3*2];
-        let path = d3.path();
-        path.moveTo(p1[0], p1[1])
-        path.quadraticCurveTo(cp[0], cp[1], p2[0], p2[1]);
+	
+	svgCanvas.append('path').attr('d', pathMaturityCurve).attr('class', 'maturity-line')
 
-        svgCanvas.append('path').attr('d', path).attr('class', 'maturity-line')
-
-		return svg.node();
+	return svg.node();
 	
 
+}
+
+
+var circleText = ['None', 'Raw Data','Cleaned Data','Standard Reports','Adhoc & Olap','Self Service','Predictive','Prescriptive','Autonomous']
+function drawMaturityCircles(){
+	const xCircleScale = d3.scaleLinear().domain([0, GRAPH.WIDTH]).range([0,1])
+	const svgDetached = d3.create("svg");
+
+	svgDetached
+	.attr("width", GRAPH.WIDTH)
+	.attr("height", GRAPH.HEIGHT);
+	pathCopy = svgDetached.append('path').attr('d', pathMaturityCurve)
+	var l = pathCopy.node().getTotalLength();
+	//xPosCircles.map(item => {console.log(xCircleScale(item))})
+	xPosCircles.map((item, i) => {
+		p = getPoint(pathCopy, l, xCircleScale(item))
+				
+		svgCanvas.append('circle').attr('r', i/xPosCircles.length*30 + 20)
+			.attr('cx', p.x)
+			.attr('cy', p.y)
+			.attr('class','maturity')	
+		svgCanvas.append('text')
+			.text(circleText[i])
+			.attr('x',p.x)
+			.attr('y',p.y - i/xPosCircles.length*30 - 25)
+			.attr('class', 'callout')
+			.attr('text-anchor', 'start')
+			.attr('transform', 'rotate(-45)')
+			.attr('transform-origin', `${p.x+5} ${p.y - 40}`)
+		})
+
+	return svg.node();
 }
 function drawMaturityLines() {
 
@@ -142,22 +193,54 @@ function drawMaturityLines() {
 	return svg.node();
 	}
 
-function drawVerticalLine (p1,p2) {
-	
-	svgCanvas.append("line")
-	.attr("x1", p1[0])
-	.attr("y1", p1[1])
-	.attr("x2", p2[0])
-	.attr("y2", p2[1])
-	.attr('class', 'vertical')
-	
+function drawVerticalLine (MaturityWidth) {
+	const horizontalPosition = MaturityWidth*3.1;
 
+	p = [[horizontalPosition,0],[horizontalPosition,GRAPH.HEIGHT]]
+	svgCanvas.append("line")
+	.attr("x1", p[0][0])
+	.attr("y1", p[0][1])
+	.attr("x2", p[1][0])
+	.attr("y2", p[1][1])
+	.attr('class', 'vertical')
+	const MATURITYWIDTH = MaturityWidth;
+	const future=
+	[
+		[0, 0],
+		[MATURITYWIDTH-SHAPES.AXISMATURITY.ARROWSIZE, 0],
+		[MATURITYWIDTH, SHAPES.AXISMATURITY.HEIGHT/2],
+		[MATURITYWIDTH-SHAPES.AXISMATURITY.ARROWSIZE, SHAPES.AXISMATURITY.HEIGHT],
+		[0, SHAPES.AXISMATURITY.HEIGHT]
+	]	
+	
+	const past=
+	[
+		[SHAPES.AXISMATURITY.ARROWSIZE, 0],
+		[MATURITYWIDTH, 0],
+		[MATURITYWIDTH, SHAPES.AXISMATURITY.HEIGHT],
+		[SHAPES.AXISMATURITY.ARROWSIZE, SHAPES.AXISMATURITY.HEIGHT],
+		[0, SHAPES.AXISMATURITY.HEIGHT/2],
+	]
+	gPast = svgCanvas.append('g').attr("transform", `translate(${p[0][0]-MATURITYWIDTH},${0})`);
+	gPast.append('svg:polygon').attr('points', past).attr('class', 'past').attr('fill', axisColours[1]);
+	gPast.append('text').text('Looking back')
+		.attr('dx', MATURITYWIDTH / 2)
+		.attr('text-anchor', 'middle')
+		.attr('dy', SHAPES.AXISMATURITY.HEIGHT /2 + 5)
+		.attr('class', 'past-future')
+
+	gFuture = svgCanvas.append('g').attr("transform", `translate(${p[0][0]},${0})`);
+	gFuture.append('svg:polygon').attr('points', future).attr('class', 'future').attr('fill', axisColours[1]);
+	gFuture.append('text').text('Predicting')
+			.attr('dx', MATURITYWIDTH / 2)
+			.attr('text-anchor', 'middle')
+			.attr('dy', SHAPES.AXISMATURITY.HEIGHT /2 + 5)
+			.attr('class', 'past-future')
 	return svg.node();
 
 }	
 
-
-function drawMaturityCurveCircles(data)
+function drawMaturityCurveCirclesOLD(data)
 {
 	var n_segments = 100;
 	var path = svg.select("path#TCurve-0");
@@ -220,7 +303,6 @@ function drawMaturityCurveCircles(data)
 	return svg.node();
 }
 
-
 function pathVerticalLines(){
 	var xPosCircles = [	GRAPH.WIDTH/5*1,
 						GRAPH.WIDTH/5*2,
@@ -235,56 +317,69 @@ function pathVerticalLines(){
 	xPosCircles.map((d)=>svgCanvas.append('path').attr('d', line([{x:d,y:0},{x:d,y:GRAPH.HEIGHT}]))
 	.attr('class', 'line-vertical'));
 	
-	return;
+	return svg.node();
 }
-
-pathVerticalLines();
-test();
-//https://stackoverflow.com/questions/57410977/cant-get-gettotallength-from-path
-function test(){
-
-	var group = d3.select(document.createElementNS(d3.namespace('svg:svg'), 'g'));
-
-	p1=[0,GRAPH.HEIGHT/3*2];
-	p2=[GRAPH.WIDTH, 100];
-	cp=[GRAPH.WIDTH/5*3, GRAPH.HEIGHT/3*2];
-	let path = d3.path();
-	path.moveTo(p1[0], p1[1])
-	path.quadraticCurveTo(cp[0], cp[1], p2[0], p2[1]);
-	//console.log(path._)
-	// var path_test1 = svgCanvas.append('path').attr('d', path)
-	// console.log(path_test1)
-	// var l = path_test1.node().getTotalLength();
-	// console.log(l)
-
-
-	const path_test3 = d3.create("svg");
-
-	// Manipulate detached element.
-	path_test3
-	.attr("width", GRAPH.WIDTH)
-	.attr("height", GRAPH.HEIGHT);
-
-	// Bind data. Append sub-elements (also not attached to DOM).
-	p3 = path_test3.append('path').attr('d', path)
-	//console.log(path_test3, p3)
-	var l = p3.node().getTotalLength();
-	//console.log(l)
-	//console.log(svg.node())
-	p = getPoint(p3, l, 0.7)
-	svgCanvas.append('circle').attr('r', 50).attr('cx', p.x).attr('cy', p.y)
-
-	return;
-}
-
 
 function getPoint(path, l, t) {
 	point = path.node().getPointAtLength(t * l)
-	console.log(point)
+	//console.log(point)
 	return point
   };
 
 
+function animateMaturityCircle() {
+	p1=[0,GRAPH.HEIGHT/3*2.5];
+	p2=[GRAPH.WIDTH, 100];
+	cp=[GRAPH.WIDTH/5*4, GRAPH.HEIGHT/3*2];
+	let path = d3.path();
+	path.moveTo(p1[0], p1[1])
+	path.quadraticCurveTo(cp[0], cp[1], p2[0], p2[1]);
+
+	// Calculate path length without showing it	
+	//const xCircleScale = d3.scaleLinear().domain([0, GRAPH.WIDTH]).range([0,1])
+	const svgDetached = d3.create("svg");
+
+	svgDetached
+	.attr("width", GRAPH.WIDTH)
+	.attr("height", GRAPH.HEIGHT);
+	pathCopy = svgDetached.append('path').attr('d', path)
+	var l = pathCopy.node().getTotalLength();
+	var t=0;
+	p0 = getPoint(pathCopy, length,t);
+	// draw circle at initial location
+	const maturityCircle = svgCanvas.append('circle')
+	.attr('class', 'maturity')
+	//.attr('r', 100)
+	.attr('transform', `translate(${p0.x},${p0.y})`);
+	
+	maturityCircle.transition()
+		.ease(d3.easeLinear)
+		.duration(5000)
+		.attrTween('transform', translateAlong(pathCopy.node()))
+		.attrTween('r', tweenCircleRadius())
+	return;
+
+}
+function translateAlong(path) {
+	const length = path.getTotalLength();
+	return function() {
+	  return function(t) {
+		const {x, y} = path.getPointAtLength(t * length);
+		return `translate(${x},${y})`;
+	  }
+	}
+  }
+  function tweenCircleRadius() {
+	return function() {
+	  return function(t) {
+		//console.log('tweencircle:', t)
+		return t*25+20;
+	  }
+	}
+  }
+  
+function showMaturityCallouts(){
 
 
-//console.log(createSomething())
+
+}
