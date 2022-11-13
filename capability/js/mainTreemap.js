@@ -1,4 +1,7 @@
 /*
+  Adapted from https://codepen.io/stopyransky/pen/EXdrOo
+*/
+/*
 var data = {
     "name": "A1",
     "children": [
@@ -25,15 +28,45 @@ var data = {
       }
     ]
   };
-  */
- var root;
-  const LINK = 'data/flare.json'
-  d3.json(LINK)
-  .then(data => {
-      globalThis.root = d3.hierarchy(data);
-      updateTreeMap(root);
+*/
+//const LINK = 'data/capabilities.json'
+//const LINK = 'data/flare.json'
+//d3.json(LINK)
+const LINK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRsPYbjoqHYm3bFzi6wCVO0ucGbyIcXG6z6ylGpuINMY5IFoZxMcslDowOavp1A4g/pub?output=csv'
+
+d3.csv(LINK)
+.then(data => {
+      //console.log('data:', data)
+      if (LINK != 'data/flare.json') {
+        prepData = prepareData(data)
+        //console.log('prepData:', prepData)
+
+        stratData = stratify(prepData)
+        //console.log('stratify:', stratData)
+      }
+      else stratData = data;
+          
+      globalThis.root = d3.hierarchy(stratData);
+
+      updateTreeMapLayout();
+      updateTreeLayout();
+      updatePackLayout();
+      updatePartitionLayout();
+      updateSunburstLayout();
     }
     );
+
+  const child  = 'ChildId';
+  const parent = 'ParentId';
+  
+  var prepareData = function(data) {
+    data.map(r => {r.Value=  +r.Value; r.value=+r.Value; r.Score = +r.Score})
+    return data
+
+  }
+  var stratify = d3.stratify()
+    .id(d => d[child])
+    .parentId(d => d[parent]);
 
   var handleEvents = function( selection ) {
     selection.on('mouseover', function() {
@@ -70,8 +103,8 @@ var data = {
         .transition().duration(700)
         .style('fill', "black")
     });
-  }      
-  
+  } 
+
   /* TREE LAYOUT */
   function updateTreeLayout(){
     var treeLayout = d3.tree()
@@ -117,7 +150,7 @@ var data = {
   }
 
   /* CLUSTER LAYOUT */
-  function updateTreeMapLayout(){
+  function updateClusterLayout(){
   var clusterLayout = d3.cluster()
       .size([400,200])
       (root);
@@ -159,55 +192,75 @@ var data = {
   }
   
   /* TREEMAP LAYOUT  */
-  function updateTreeMap(){
+  function updateTreeMapLayout(){
     var treemapLayout = d3.treemap(); 
-    treemapLayout.size([400,200]);
-    treemapLayout.paddingOuter(20);
-    // treemapLayout.paddingInner(4);
+    treemapLayout.size([1000,400]);
+    treemapLayout.paddingOuter(15);
+    treemapLayout.paddingInner(20);
     /* paddingTop, paddingRight, Left and Bottom available */
-    treemapLayout.tile(d3.treemapSquarify.ratio(2))
+    treemapLayout.tile(d3.treemapSquarify.ratio(3))
+    // treemapLayout.tile(d3.treemapSliceDice)
+    //treemapLayout.tile(d3.treemapSquarify.ratio(2))
     /* .tile allows different tiling strategies:
       - treemapSquarify.ratio(n) (default) - using rect aspect ratio 
       - treemapSlice - tile horizontally
       - treemapDice - tile vertically
       - treemapSliceDice - alter each layer horizontal/vertical
     */
-    
-    root.sum(d => d.value);
+    root.eachAfter(d => 
+        {
+          if (d.children) {
+            d.SumScore = d3.sum(d.children.map(r => r.SumScore))
+            d.CountScore = d3.sum(d.children.map(r => r.CountScore))
+          }
+          else {
+            d.SumScore = d.data.data.Score;
+            d.CountScore = 1;
+          }
+      }
+      )
+
+    root.sum(d => d.data.Value);
+    //root.sum(d => d.data.Score);
+    //console.log('root:', root)
+    // root=root.copy().sum(d => d.data.Score);
+    // console.log('rootScore:', root)
     treemapLayout(root);
-    
     var treemapNodes = d3.select("#treemap g")
     .selectAll("g")
     .data(root.descendants())
     .enter()
     .append('g').attr('class', 'node')
     .attr('transform', d => 'translate('+[d.x0, d.y0]+')')
-    .call(handleEvents)
+    //.call(handleEvents)
     
     treemapNodes
     .append('rect')
-    .classed('the-node', true)
-    .attr("width", d => d.x1 - d.x0)
+    .attr('class', d=> {if (!d.parent) ScoreColour ="";else if (d.SumScore/d.CountScore > 8) ScoreColour = ' green'; else if (d.SumScore/d.CountScore > 6) ScoreColour = ' yellow'; else ScoreColour = ' red'; return `the-node${ScoreColour}`})
+    .attr("width", d => { //console.log(d.x1-d.x0); 
+      return d.x1 - d.x0})
     .attr("height", d => d.y1 - d.y0)
-    .style("fill", "rgba(255,255,255,0.2)")
+    //.style("fill", "rgba(255,255,255,0.2)")
     .style('stroke', "#2f2f2f")
     
     treemapNodes
     .append('text')
     .attr('class', 'label')
-    .attr('dx', d => 12)
-    .attr('dy', d => 14)
-    .text( d => d.data.name);
+    .attr('dx', d => 2)
+    .attr('dy', d => 8)
+    .text( d => d.data.data.ChildName)
+    .attr('text-anchor', 'start');
     return ;
   }
+
   
   /* PACK LAYOUT */
-  function updatePackLaout(){
+  function updatePackLayout(){
     var packLayout = d3.pack();
-    packLayout.size([400,200]);
+    packLayout.size([800,600]);
     packLayout.padding(10);
     
-    root.sum(d => d.value);
+    root.sum(d => d.data.value);
     packLayout(root);
     
     var packNodes = d3.select('#pack g')
@@ -239,7 +292,7 @@ var data = {
     var partitionLayout = d3.partition();
     partitionLayout.size([400,200]);
     partitionLayout.padding(2);
-    root.sum(d  => d.value);
+    root.sum(d  => d.data.value);
     partitionLayout(root);
     
     var partitionNodes = d3.select('#partition g') 
@@ -262,7 +315,7 @@ var data = {
     .append('text')
       .attr('class', 'label')
       .attr('dx', 12)
-      .attr('dy', 14)
+      .attr('dy', 8)
       .text( d =>  d.data.name )
     return ;
   }
@@ -281,7 +334,7 @@ var data = {
     .innerRadius(function(d) { return d.y0 })
     .outerRadius(function(d) { return d.y1 })
     
-    root.sum(d  => d.value);
+    root.sum(d  => d.data.value);
     
     sunburstLayout(root);
     
