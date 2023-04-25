@@ -32,7 +32,9 @@ var data = {
 //const LINK = 'data/capabilities.json'
 //const LINK = 'data/flare.json'
 //d3.json(LINK)
-const LINK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRsPYbjoqHYm3bFzi6wCVO0ucGbyIcXG6z6ylGpuINMY5IFoZxMcslDowOavp1A4g/pub?output=csv'
+//const LINK  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRsPYbjoqHYm3bFzi6wCVO0ucGbyIcXG6z6ylGpuINMY5IFoZxMcslDowOavp1A4g/pub?gid=294767777&single=true&output=csv'
+const LINK  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEY6n5tJtxi-d8T4W1Ytg-y1XC7rqSH7u2cA_8vsuOy0SCOwYzpO3mDrRrr71Lsw/pub?gid=294767777&single=true&output=csv'
+const showCapabilityIndicator = true;
 
 d3.csv(LINK)
 .then(data => {
@@ -60,7 +62,7 @@ d3.csv(LINK)
   const parent = 'ParentId';
   
   var prepareData = function(data) {
-    data.map(r => {r.Value=  +r.Value; r.value=+r.Value; r.Score = +r.Score})
+    data.map(r => {r.Value=  +r.Value; r.value=+r.Value; r.Score = +r.Score;r.Gap = +r.Gap; r.Ambition = +r.Ambition})
     return data
 
   }
@@ -75,11 +77,15 @@ d3.csv(LINK)
   
       if(n.classed('solid')) {
         n.transition().duration(400)
-        .style('fill', "rgba(211,0,0,0.8)" )
+        //.style('fill', "rgba(211,0,0,0.8)" )
+        .style('-webkit-filter', 'drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7))')
+        .style('filter', 'drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7))')
         .attr('r', 18);
       } else {
         n.transition().duration(400)
-        .style('fill', "rgba(211,0,0,0.8)" );
+        //.style('fill', "rgba(211,0,0,0.8)" );
+        .style('-webkit-filter', 'drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7))')
+        .style('filter', 'drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7))')
       }
       
       g.select('.label')
@@ -93,17 +99,47 @@ d3.csv(LINK)
    
       if(n.classed('solid')) {
         n.transition().duration(400)
-        .style('fill', "#696969" )
+        .style('-webkit-filter', 'none')
+        .style('filter', 'none')
         .attr('r',14);
       }  else {
        n.transition().duration(400)
-        .style('fill', "rgba(255,255,255,0.2)" )
+       .style('-webkit-filter', 'none')
+       .style('filter', 'none')
       }
       g.select('.label')
         .transition().duration(700)
         .style('fill', "black")
     });
   } 
+	//colorScore = d3.scaleSequential([0, 10], d3.interpolateReds) //)interpolateBlues)//interpolateViridis)
+  //const colorIndicator        = d3.scaleOrdinal().domain ( [0,10])   .range ( ["lightgreen","yellow","red"])
+  //const colorIndicatorReverse = d3.scaleOrdinal().domain ( [-10,10]) .range ( ["lightgreen","yellow","red"])
+  // const colorIndicator        = d3.scaleLinear([0  , 10], ["red","yellow","lightgreen"]);
+  // const colorIndicatorReverse = d3.scaleLinear([-10, 10], ["lightgreen","yellow","red"]);
+
+  // var colorIndicator = d3.scaleSequential(["lightgreen","yellow","red"]).domain([10, 0]);
+  // var colorIndicatorReverse = d3.scaleSequential(["lightgreen","yellow","red"]).domain([-10, 10]);
+
+  // Explanation of invertExtent: https://www.appsloveworld.com/d3js/100/6/understanding-invertextent-in-a-threshold-scale
+
+  var colorIndicator = d3.scaleThreshold().domain([5, 7, 10]).range([ "red","yellow","lightgreen"]);
+  colorIndicator.range().map(function(d) {
+    d = colorIndicator.invertExtent(d);
+    if (d[0] == null) d[0] = 0;
+    if (d[1] == null) d[1] = 10;
+    // console.log(d)
+    return d
+  })
+
+  var colorIndicatorReverse = d3.scaleThreshold().domain([5, 7, 10]).range([ "lightgreen","yellow","red"]);
+  colorIndicatorReverse.range().map(function(d) {
+    d = colorIndicatorReverse.invertExtent(d);
+    if (d[0] == null) d[0] = 0;
+    if (d[1] == null) d[1] = 10;
+    // console.log(d)
+    return d
+  })
 
   /* TREE LAYOUT */
   function updateTreeLayout(){
@@ -194,11 +230,11 @@ d3.csv(LINK)
   /* TREEMAP LAYOUT  */
   function updateTreeMapLayout(){
     var treemapLayout = d3.treemap(); 
-    treemapLayout.size([1000,400]);
-    treemapLayout.paddingOuter(15);
-    treemapLayout.paddingInner(20);
+    treemapLayout.size([1100,600]);
+    treemapLayout.paddingOuter(16);
+    treemapLayout.paddingInner(2);
     /* paddingTop, paddingRight, Left and Bottom available */
-    treemapLayout.tile(d3.treemapSquarify.ratio(3))
+    treemapLayout.tile(d3.treemapSquarify.ratio(4))
     // treemapLayout.tile(d3.treemapSliceDice)
     //treemapLayout.tile(d3.treemapSquarify.ratio(2))
     /* .tile allows different tiling strategies:
@@ -211,11 +247,15 @@ d3.csv(LINK)
         {
           if (d.children) {
             d.SumScore = d3.sum(d.children.map(r => r.SumScore))
-            d.CountScore = d3.sum(d.children.map(r => r.CountScore))
+            d.Count = d3.sum(d.children.map(r => r.Count))
+            d.SumAmbition = d3.sum(d.children.map(r => r.SumAmbition))
+            d.SumGap = d3.sum(d.children.map(r => r.SumGap))
           }
           else {
-            d.SumScore = d.data.data.Score;
-            d.CountScore = 1;
+            d.SumScore    = d.data.data.Score;
+            d.SumGap = d.data.data.Gap;
+            d.SumAmbition = d.data.data.Ambition;
+            d.Count = 1;
           }
       }
       )
@@ -226,34 +266,90 @@ d3.csv(LINK)
     // root=root.copy().sum(d => d.data.Score);
     // console.log('rootScore:', root)
     treemapLayout(root);
-    var treemapNodes = d3.select("#treemap g")
-    .selectAll("g")
-    .data(root.descendants())
-    .enter()
-    .append('g').attr('class', 'node')
-    .attr('transform', d => 'translate('+[d.x0, d.y0]+')')
-    //.call(handleEvents)
+
+    updateCapabilities('SumGap');
     
-    treemapNodes
-    .append('rect')
-    .attr('class', d=> {if (!d.parent) ScoreColour ="";else if (d.SumScore/d.CountScore > 8) ScoreColour = ' green'; else if (d.SumScore/d.CountScore > 6) ScoreColour = ' yellow'; else ScoreColour = ' red'; return `the-node${ScoreColour}`})
-    .attr("width", d => { //console.log(d.x1-d.x0); 
-      return d.x1 - d.x0})
-    .attr("height", d => d.y1 - d.y0)
-    //.style("fill", "rgba(255,255,255,0.2)")
-    .style('stroke', "#2f2f2f")
-    
-    treemapNodes
-    .append('text')
-    .attr('class', 'label')
-    .attr('dx', d => 2)
-    .attr('dy', d => 8)
-    .text( d => d.data.data.ChildName)
-    .attr('text-anchor', 'start');
     return ;
   }
 
+function updateCapabilities(indicator){
+  //console.log('updateCapabilityIndicators', 'indicator:', indicator)
+  var treemapNodes = d3.select("#treemap g")
+  .selectAll("g .node")
+  .data(root.descendants());
   
+  
+  treemapNodes.join(
+  enter =>
+  {
+    enterNode=
+    enter
+     .append('g').attr('class', 'node')
+    .attr('transform', d => 'translate('+[d.x0, d.y0]+')')
+    .call(handleEvents);
+
+    enterNode
+    .append('rect')
+    .attr('class', 'the-node')
+    .attr("width", d => { //console.log(d.x1-d.x0); 
+      return d.x1 - d.x0})
+    .attr("height", d => d.y1 - d.y0)
+    .style('fill', d => {//console.log('depth:', d.depth); 
+      return d3.schemeBlues[6][d.depth];});
+
+    enterNode
+    .append('text')
+    .attr('class', 'label')
+    .attr('dx', d => 4)
+    .attr('dy', d => 12)
+    .text( d => d.data.data.ChildName)
+    .attr('text-anchor', 'start');
+
+    enterNode
+    .append('circle')
+    .attr('r', d=> { if (d.depth<2 || !showCapabilityIndicator) return 0; else return 4;})
+    .attr('class', d=> getIndicatorClass(d, indicator) )
+    .attr('fill', d=> getIndicatorColor(d,indicator))
+    .attr('cx', d => d.x1 - d.x0 -7)
+    .attr('cy', d=> 7)
+    
+  }
+    ,
+  update =>
+      update.select('circle, .indicator')
+        .transition()
+        .duration(750)
+        .attr('fill', d=> getIndicatorColor(d,indicator))//.attr('r', 10)
+        .attr('class', d=> getIndicatorClass(d, indicator) )
+        // .attr('cx', d => d.x1 - d.x0 -5)
+      // .attr('cy', d=> 5)
+  )};
+
+function getIndicatorClass(d, indicator){
+  const pulse = (
+                  (indicator != 'SumAmbition' && (getIndicatorColor(d,indicator) == colorIndicatorReverse.range()[colorIndicatorReverse.range().length -1]))
+                  ||
+                  (indicator == 'SumAmbition' && (getIndicatorColor(d, indicator) == colorIndicator.range()[colorIndicator.range().length-1]))
+                ) 
+                ? ' pulse'
+                :'';
+                //console.log(indicator, colorIndicatorReverse.range()[0], getIndicatorColor(d,indicator))
+  return `indicator${pulse}`
+}
+function getIndicatorColor(d, indicator){
+  //console.log('d:', d)
+
+  IndicatorValue = Math.round(d[indicator]/d.Count); 
+        //console.log('name:', d.data.data.ChildName, 'iv:',IndicatorValue, 'ind:',indicator, d); 
+                          if (indicator == 'SumGap')
+                          {
+                            return colorIndicatorReverse(IndicatorValue) //.attr('r', 10)
+                          }
+                          else
+                          return colorIndicator(IndicatorValue) 
+}
+
+
   /* PACK LAYOUT */
   function updatePackLayout(){
     var packLayout = d3.pack();

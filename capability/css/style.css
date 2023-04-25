@@ -1,94 +1,128 @@
 html, body {
-    margin: 0px;
-    background: #32333b;
-    height: 100%;
-    xfont-family: sans-serif;
-    xfont-size: 0.9rem;
+  margin: 0;
+  background: #32333b;
+  height: 100%;
+  xfont-family: sans-serif;
+  xfont-size: 0.9rem;
+}
+
+.container {
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 10px;
+}
+
+.wrapper:hover .caption {
+  visibility: visible;
+  opacity: 1;
+}
+
+.caption {
+  color: #f2f2f2;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  visibility: hidden;
+  opacity: 0;
+  height: 50px;
+  transition : all 0.4s ease-out;
+}
+
+.label {
+  xtext-anchor: none;
+  pointer-events : none;
+  font-size: 8pt;
+  text-shadow: none;
+  fill:rgb(71, 71, 71);
+  font-weight: 400;
+  font-variant: small-caps;
+}
+
+.node {
+  cursor : pointer;
+}
+
+.the-node {
+  /* fill: #ffffff33; */
+  /* stroke:grey; */
+  /* stroke-opacity: 0.5; */
+  /* stroke-width: .5px; */
+  rx:5px;
+  ry:5px;
+}
+
+svg {
+  // border: 1px dotted whitesmoke;
   }
-  
-  .container {
-    padding: 10px;
-    display: flex;
-    flex-flow: row wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-  }
-  .wrapper {
-    display: flex;
-    flex-flow: column wrap;
-  }
-  
-  .wrapper:hover .caption {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .caption {
-    color: #f2f2f2;
-    display: flex;
-    align-items:center;
-    justify-content:center;
-    visibility: hidden;
-    opacity: 0;
-    height: 50px;
-    transition : all 0.4s ease-out;
-  }
-  
-  .label {
-    xtext-anchor: none;
-    pointer-events : none;
-    font-size: 6pt;
-    text-shadow: none;
-  }
-  
-  .node {
-    cursor : pointer;
+.node {
+  xstroke: silver;
+  xstroke-width: 1px;
   }
 
-  .the-node.green {
-    fill: #7BB662;
+.nodetext{ fill: white;}  
+.link {
+  fill: none;
+  xstroke: silver;
+  xstroke-width: 1px;
   }
-  .the-node.red {
-    fill: #D61F1F;
+  
+  .selected {
+  stroke: red !important;
   }
-  .the-node.yellow {
-    fill: #FFD301;
-  }
-  .the-node {
-    fill: rgba(255,255,255,0.2)
+  
+  text#tooltip {
+  font-family: sans-serif;
+  font-size: 12px;
+  text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+  font-weight: 900;
   }
 
-  svg {
-    // border: 1px dotted whitesmoke;
-    }
-  .node {
-    xstroke: silver;
-    xstroke-width: 1px;
-    }
-  
-  .nodetext{ fill: white;}  
-  .link {
-    fill: none;
-    xstroke: silver;
-    xstroke-width: 1px;
-    }
-    
-    .selected {
-    stroke: red !important;
-    }
-    
-    text#tooltip {
-    font-family: sans-serif;
-    font-size: 12px;
-    text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
-    font-weight: 900;
-    }
-  
-  .a{
-    color: rgba(47, 4, 202, 0);
-    
-  }
 
-  
-  
+
+.input-group{
+  font-size: 1pt;
+}
+
+circle.indicator{
+  stroke:grey;
+  /* stroke-opacity: 1; */
+  stroke-width: .3px;  
+}
+
+
+.pulse {
+-webkit-animation: pulse 2s infinite;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%   { stroke: rgba(255, 255, 255, 0.1); stroke-width: 1.0px}
+17%  { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.3px }
+25%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.6px }
+33%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 2.0px }
+50%  { stroke: rgba(255, 255, 255, 0.9); stroke-width: 2.1px }
+67%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 2.0px }
+75%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.6px }
+83%  { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.3px }
+100% { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1.0px }
+}
+
+@-webkit-keyframes pulse {
+0%   { stroke: rgba(255, 255, 255, 0.1); stroke-width: 1.0px}
+17%  { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.3px }
+25%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.6px }
+33%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 2.0px }
+50%  { stroke: rgba(255, 255, 255, 0.9); stroke-width: 2.1px }
+67%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 2.0px }
+75%  { stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.6px }
+83%  { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.3px }
+100% { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1.0px }
+}

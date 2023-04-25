@@ -1,1 +1,31 @@
-{"years":["2022","2023","2024","2025"],"dims":{"names":["Dashboards","Project Governance","Data Management"]},"projects":[{"number":1,"name":"Modern Data Platform","status":"completed","cx":788,"cy":595.1840209960938,"dim":"Data Architecture","descr":"Modern data platform"},{"number":2,"name":"PCC Dashboard","cx":231,"cy":163.18402099609375,"dim":"Dashboards","descr":"Project PCC","status":"inprogress"},{"number":3,"name":"Project Dashboard","cx":325,"cy":91.18402099609375,"dim":"Dashboards","descr":"Project Dashboard","status":"future"},{"number":4,"name":"Entity Dashboard","cx":366,"cy":216.18402099609375,"dim":"Dashboards","descr":"Entity Dashboard","status":"future"},{"number":5,"name":"Sustainability Reporting","cx":585,"cy":86.18402099609375,"dim":"Service Governance","descr":"Project 1","status":"future"},{"number":6,"name":"Analytics Team","cx":589,"cy":442.4444580078125,"dim":"Service Governance","descr":"Project 1","status":"future"},{"number":7,"name":"Development Process","cx":469,"cy":374.4444580078125,"dim":"Service Governance","descr":"Project 1","status":"future"},{"number":9,"name":"Business Glossary","status":"future","cx":821,"cy":426.18402099609375,"dim":"Data Architecture","descr":"Create Enterprise Data Layer"},{"number":10,"name":"Data Quality Monitoring","cx":867,"cy":324.5173645019531,"dim":"Data Management","descr":"Project 1","status":"future"},{"number":8,"name":"Data Ownership","cx":816,"cy":500.18402099609375,"dim":"Data Management","descr":"Data Ownership","status":"future"}]}
+{"years":["1","2","3","4", "5"],
+"dimsPPTD":[
+     {"name": "Mens"     , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Proces"   , "maturityCurrent": 2, "maturityAmbition":3}
+    ,{"name": "Technologie"      , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Data"            , "maturityCurrent": 1, "maturityAmbition":3}
+],
+"projects":[
+     {"number":1,"name":"Modern Data Platform","status":"completed","cx":788,"cy":595.1840209960938,"dim":"Data Architecture","descr":"Modern data platform"},
+    {"number":5,"name":"Sustainability Reporting","cx":585,"cy":86.18402099609375,"dim":"Service Governance","descr":"Project 1","status":"future"},
+    {"number":7,"name":"Development Process","cx":469,"cy":374.4444580078125,"dim":"Service Governance","descr":"Project 1","status":"future"},
+    {"number":9,"name":"Business Glossary","status":"future","cx":821,"cy":426.18402099609375,"dim":"Data Architecture","descr":"Create Enterprise Data Layer"},
+    {"number":8,"name":"Data Ownership","cx":816,"cy":500.18402099609375,"dim":"Data Management","descr":"Data Ownership","status":"future"},
+    {"number":10,"name":"Data Quality Monitoring","cx":867,"cy":324.5173645019531,"dim":"Data Management","descr":"Project 1","status":"future"}
+]
+,
+"dims":
+[{"name": "Strategie & Beleid"     , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Richtlijnen & Controls"        , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Organisatie"    , "maturityCurrent": 1, "maturityAmbition":5}
+    ,{"name": "Modellering"        , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Architectuur"       , "maturityCurrent": 0, "maturityAmbition":4}
+    ,{"name": "Kwaliteit"          , "maturityCurrent": 0, "maturityAmbition":2}
+    ,{"name": "Risico Data"            , "maturityCurrent": 0, "maturityAmbition":2}    
+    ,{"name": "Metadata"                , "maturityCurrent": 2, "maturityAmbition":3}
+    ,{"name": "Consumptie"                , "maturityCurrent": 2, "maturityAmbition":3}
+
+],
+"yearsMaturity":["0-Absent","1-Initial","2-Managed","3-Defined","4-Measured", "5-Optimizing"]
+
+}   

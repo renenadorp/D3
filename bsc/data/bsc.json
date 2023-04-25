@@ -1,0 +1,172 @@
+{ 	
+	"boxes":
+	[	
+		{
+			"id": "b1",
+			"name": "Vision",
+			"description": ["Improve the performance of our customers with data and analytics services. These services include but are not limited by:  ",
+							"- Data platforms",
+							"- Business Intelligence",
+							"- Data management services"
+							],
+			"guidance": ["The vision statement is about what you want to become. It’s aspirational.",
+						"Vision statement questions look like:",
+						"What are our hopes and dreams?",
+						"What problem are we solving for the greater good?",
+						"Who and what are we inspiring to change?"
+		],
+			"goals": []
+		}
+		,{
+			"id": "b2",
+			"name": "Mission",
+			"description": ["It is our mission to provide practical data and analytics solutions to our customers. ",
+			"In order to we are continuously adding and improving our services. "
+		],
+			"goals": []
+		}
+		,
+		{
+			"id": "b3",
+			"name": "Financial",
+			"description": "",
+			"goals" : [
+				{
+					"id": "f1",
+					"name" : "Increase Revenue",
+					"relations": []
+				}
+				,
+				{
+					"id": "f2",
+					"name": "Increase Profitability",
+					"relations": []
+				},
+				{
+					"id": "f3",
+					"name": "Decrease Cost",
+					"relations": []
+				}
+			]
+		}
+		,
+		{
+			"id": "b4",
+			"name": "Customer",
+			"description": "",
+			"goals" : [
+				{
+					"id": "c1",
+					"name": "Improve Customer Satisfaction",
+					"relations": [{"id": "f1"}],
+					"impactedByCauses":[
+						{
+							"id":1,
+							"impact": 7
+						}
+					]
+				}
+				,
+				{
+					"id": "c2",
+					"name": "Improve Overall Sales",
+					"relations": [{"id":"f1"}, {"id":"f2"}]
+				}
+				,
+				{
+					"id": "c3",
+					"name": "Improve Brand Image",
+					"relations":[{"id":"f3"}]
+				}
+			]
+			
+		}
+		,
+		{
+			"id": "b5",
+			"name": "Process",
+			"description": "",
+			"goals" : [
+				{
+					"id": "p1",
+					"name": "Improve Marketing Process",
+					"relations": [{"id":"c1"}]
+				}
+				,
+				{
+					"id": "p2",
+					"name": "Improve Knowledge Distribution",
+					"colour": "green",
+					"relations": [{"id":"c1"}, {"id":"c2"}]
+				}
+				,
+				{
+					"id": "p3",
+					"name": "Improve External Communications",
+					"relations": [{"id":"c2"}, {"id":"c3"}],
+					"impactedByCauses":[
+						{
+							"id":1,
+							"impact": 4
+
+					}
+					]
+				}
+			]
+		}
+		,
+		{
+			"id": "b6",
+			"name": "Learning",
+			"description":"",
+			"goals" : [
+				{
+					"id": "l1",
+					"name": "Improve Knowledge Base",
+					"relations": [{"id":"f3"}],
+					"impactedByCauses":[
+						{
+							"id":2,
+							"impact": 9
+					}
+					]
+				}
+				,
+				{
+					"id": "l2",
+					"name": "Improve Staff Skills",
+					"colour": "green",
+					"relations": [{"id":"p1"}, {"id":"p2"}, {"id":"p3"}]
+				}
+				,
+				{
+					"id": "l3",
+					"name": "Reduce Energy Consumption",
+					"colour": "green",
+					"relations": [{"id":"p3"}],
+					"impactedByCauses":[
+						{
+							"id":1,
+							"impact": 2
+
+					}
+					]
+				}
+			]
+		}
+		
+	],
+	"causes" :
+	[
+		{	"id": 1,
+			"name" : "cause 1",
+			"group": "group 1"
+		},
+		{	"id": 2,
+			"name" : "cause 2",
+			"group": "group 1"
+		}
+		
+	]
+	
+}
