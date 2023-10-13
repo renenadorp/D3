@@ -1,11 +1,27 @@
-const LINK = "data/bsc.json"
-d3.json(LINK)
-.then(data => {
-  //console.log(data)
-  //updateScoreCard(data);
-  //updateCauses(data);
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+import {log, drawLogo} from "./functions.js" ;
+
+// LOGO
+const vizLogo     = d3.select("#viz-logo");
+
+const svgLogo = vizLogo.append("svg")
+  					.attr("width" , 100)
+  					.attr("height", 100);
+
+const gLogo = svgLogo.append('g')
+              .attr("transform", `translate(30,20)`)
+            //.attr("viewBox", `0 -20 ${WIDTH} 33`)
+            ;
+
+drawLogo(gLogo, {
+  width   : 200,
+  height  : 200,
+  scale   : .2
+
 });
-	
+const T = {BOXES: 1000, GOALS: 1000, RELATIONS: 2000}
+
 const SCHEMAS  = 
 [
   { //Sheet 1: Boxes
@@ -24,22 +40,23 @@ const SCHEMAS  =
     'goalIdRelated' : {		prop: 'goalIdRelated',type: String,		required: true	  } ,
     'strength'      : {		prop: 'strength'     ,type: String,		required: false	  } ,
   },
-  { //Sheet 4: Causes
+  { //Sheet 4: Issues
     'id'            : {   prop: 'id',		        type: String,		required: true	  } ,
     'name'          : {		prop: 'name'    ,		  type: String,		required: true	  } ,
     'groupId'       : {		prop: 'groupId'    ,	type: String,		required: false	  } ,
   },
   { //Sheet 5: Impacts
+    'issueId'       : {		prop: 'issueId'    ,	type: String,		required: true	  } ,
     'goalId'        : {   prop: 'goalId',		    type: String,		required: true	  } ,
-    'causeId'       : {		prop: 'causeId'    ,	type: String,		required: true	  } ,
     'Impact'        : {		prop: 'Impact'    ,		type: Number,		required: true	  } ,
   }
 ]
-const CUSTOMER = 'Inergy'
+//const CUSTOMER = 'Inergy';//'DQQuickScan'
+const CUSTOMER = 'DQQuickScan';
 const LINKXLS = `data/bsc${CUSTOMER}.xlsx`
 
 function readExcelFile(){
-	//console.log('LINK:', LINK)
+	//log('LINK:', LINK)
 	fetch(LINKXLS)
 		.then(response => response.blob())
 		.then(blob => 
@@ -51,10 +68,12 @@ function readExcelFile(){
         readXlsxFile(blob, {sheet:5, schema: SCHEMAS[4] })
       ] )
       .then((rows ) => {
-        //console.log(rows)
+        //log(rows)
         var data = composeBscJson(rows);
         updateScoreCard(data);
-        updateCauses(data);
+        updateIssueSelection(data);
+        updateBoxSelection(data);
+        updateRelationStrengthSelection(data);
       }) 
     )
 }
@@ -67,21 +86,22 @@ function composeBscJson(sheetData){
   const boxes = sheetData[0].rows;
   const goals = sheetData[1].rows;
   const relations = sheetData[2].rows;
-  const causes = sheetData[3].rows;
+  const issues = sheetData[3].rows;
   const impacts = sheetData[4].rows;
 
   bsc.boxes=boxes;
   bsc.boxes.map(b => {
+    b.selected=true;
     b.goals = goals.filter(r => { return r.boxId==b.id});
-    b.goals.map(g => { g.relations = relations.filter(r => { return r.goalId == g.id})  })
-    b.goals.map(g => { g.impactedByCauses = impacts.filter(r => { return r.goalId == g.id})  })
+    b.goals.map(g => { g.relations = relations.filter(r => { return r.goalId == g.id})})
+    b.goals.map(g => { g.impactedByIssues = impacts.filter(r => { return r.goalId == g.id})  })
   
   }
   )
-  bsc.causes=causes;
+  bsc.issues=issues;
 
 
-  //console.log ('Data From Excel: ', bsc)
+  log ('Data From Excel: ', bsc)
 
   return bsc;
 }
@@ -90,11 +110,11 @@ readExcelFile()
 
 //VIZ BSC
 //########################
-const WIDTH  				  = 1500;
+const WIDTH  				  = 1200;
 const HEIGHT  				= 1300;
-const BOX             = { WIDTH: 1000, HEIGHT: 170}
-const ELLIPSE         = { WIDTH: 120, HEIGHT: 40, INITIALFILL: "#707070", INITIALSTROKE: "#999999"}
-const GOAL            = { CX: 10, CY: 10, RX: 100, RY: 50}
+const BOX             = { WIDTH: WIDTH, HEIGHT: 110}
+const ELLIPSE         = { WIDTH: 100, HEIGHT: 25, INITIALFILL: "#707070", INITIALSTROKE: "#999999", INITIALOFFSET: 2.5, SPACE: 2.5}
+const GOAL            = { CX: 10, CY: 10, RX: 200, RY: 50}
 const MARGIN          = { LEFT  : 550, RIGHT: 1, TOP: 400, BOTTOM: 1 }
 const CANVAS          = { WIDTH : WIDTH  - MARGIN.LEFT - MARGIN.RIGHT,
                           HEIGHT: HEIGHT - MARGIN.TOP  - MARGIN.BOTTOM}
@@ -104,11 +124,12 @@ const vizBsc     = d3.select("#viz-bsc");
 const svg = vizBsc.append("svg")
   					.attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
   					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
+            .attr("id", "vizBsc")
             //.attr("viewBox", `0 -20 ${WIDTH} 33`)
             ;
-colorGoalDomain = [0,1,2,3,4,5,6,7,8,9,10];
-colorGoalRange =  [
-  {"start":"#cccccc","stop":"#bbbbbb", "stroke":"#494c53"}, //DEFAULT - GREY
+const colorGoalDomain = [0,1,2,3,4,5,6,7,8,9,10];
+const colorGoalRange =  [
+  {"start":"#cccccc","stop":"#bbbbbb", "stroke":"#A12119"}, //DEFAULT - GREY (prev stroke color: "#494c53")
 
   {"start":"#CDE386","stop":"#8DB135", "stroke":"#81A331"}, //LOW     - GREEN
   {"start":"#CDE386","stop":"#8DB135", "stroke":"#81A331"},
@@ -156,7 +177,8 @@ const refX = markerBoxWidth /  2;
 const refY = markerBoxHeight / 2;
 const markerWidth = markerBoxWidth / 2;
 const markerHeight = markerBoxHeight / 2;
-const arrowPoints = [[0, 0], [0, 5], [5, 2.5]];           
+const arrowPoints = [[0, 0], [0, 5], [5, 2.5]]; 
+
 svg.select('defs')
 .append('marker')
 .attr('id', 'arrow')
@@ -170,80 +192,87 @@ svg.select('defs')
 .attr('d', d3.line()(arrowPoints))
 .attr('stroke', 'none');
 
-gLogo = svg.append('g').attr('id', 'logo').attr('transform',`translate(${CANVAS.WIDTH +58},${73}) rotate(-90) scale(0.5)`)
-gLogo.append('image')
-    .attr('href', 'images/logo.jpg')
-    .attr('width', 145)
 //BSC
 function updateScoreCard(data){
-  //console.log('UpdateScoreCard data',data);
-  updateBoxes(data.boxes);
-  updateGoals(data.boxes);
-  updateGoalRelations(data.boxes);
+  log('UpdateScoreCard data',data);
+  d3.select("#vizBsc").selectAll(".box").remove();
+  d3.select("#vizBsc").selectAll(".goalRelation").remove();
+  log('updateScoreCard - selectedRelationStrength:', selectedRelationStrength,)
+  var fdata = data.boxes.filter(b => b.selected==true);
+
+  log('fdata:', fdata,)
+  updateBoxes(fdata);
+  updateGoals(fdata);
+  updateGoalRelations(fdata);
   
 }
 
 function updateBoxes(data){
-  //console.log('updateBoxes data:', data)
-  const t = svg.transition().duration(1000);
+  log('updateBoxes data:', data)
+  const t = svg.transition().duration(T.BOXES);
 
-  const bscBox = (join ) => {
+  const enterBox = (join ) => {
     //parm "join": data join (dom-selection + data)
-    //console.log('updateBoxes bscBox start')
+    //log('updateBoxes bscBox start')
     const g = join.append('g').attr("class", "box").attr("id", (d,i)=>`${d.name}`).attr("transform",`translate(${0}, ${-50})`);
 
-    //console.log('updateBoxes bscBox after g append ')
+    //log('updateBoxes bscBox after g append ')
     g.append('g').attr("coord", (d,i) => {d.coord={"x":5,"y":i*(BOX.HEIGHT+5)};return `(${d.coord.x},${d.coord.y})`})
     g.append("rect").attr("class", "box").attr("rx", 5).attr("ry", 5).attr("width", BOX.WIDTH).attr("height", (d,i) => BOX.HEIGHT)
     g.append("text").attr("class", "box").text(d =>d.name).attr("y", 20).attr("x",10)
     
-    //console.log('updateBoxes bscBox boxText ')
+    //log('updateBoxes bscBox boxText ')
     g.selectAll(".boxText").data((d,i) => [d.description]).join(
       enter => enter.append("text").text((d,i)=>d).attr("class", "boxText").attr("x", 20).attr("y", (d,i)=>(i+2)*22 ));
     ;
-    //console.log('updateBoxes bscBox transition')
+    //log('updateBoxes bscBox transition')
 
     g.call(join=> join.transition(t).attr("transform",(d,i)=>`translate(${5}, ${i*(BOX.HEIGHT+5)})`));
     return g.node()//element.node();
   }
-  //data = [data] //convert string to list to ensure single row
+  const exitBox = (join) => {
+    //join.transition().duration(500).remove();
+  }
+
   svg.selectAll(".box")
       .data(data)
       .join(
-        enter  => {enter.call(bscBox);        },
-        update => {},
-        exit  => {}) 
+        enter  => {enter.call(enterBox);        },
+        update => {log('update boxes' , update)},
+        exit   => {log('exit boxes'   , exit); exit.call(exitBox)}) 
       ;
-  //console.log('updateBoxes end;')
+  //log('updateBoxes end;')
   return svg.node();
 
 }
 
 function updateGoals(data){
-  //console.log('data', data)
-  const updateGoal = (update, op) => {
+  log('data updateGoals', data, 50)
+  var updateGoal = (update, op) => {
+    log( 'updateGoal')
     update.select("ellipse").call(updateGoalFill);
-    update.select("text.goal").call(updateGoalText);//.text(d=>{console.log('d:', d.name); return d.name}).attr("text-anchor", "middle").attr("dy", 5)
+    update.select("text.goal").call(updateGoalText);//.text(d=>{log('d:', d.name); return d.name}).attr("text-anchor", "middle").attr("dy", 5)
   }
-  const updateGoalText = (j) => {
+  var updateGoalText = (j) => {
     j.text(d =>  d.name).attr("class","goal").attr("text-anchor", "middle").attr("dy", 5)
   }
-  const updateGoalFill = (j) => {
+  var updateGoalFill = (j) => {
     j.attr("fill", (d,i) => {
-            ellipseColour = "url(#grad0)";
-            if (Object.hasOwn(d, "impactedByCauses")) {
-              //console.log('updateGoalFill:', d, selectedCauseId)
-              impactedBySelectedCause = d.impactedByCauses.find(x => { return x.causeId == selectedCauseId})
-              //console.log('impactedBySelectedCause:',impactedBySelectedCause)
-              impactedBySelectedCause ?  ellipseColour = "url(#grad" + impactedBySelectedCause.Impact + ")" : ELLIPSE.INITIALCOLOR;
+            log( 'updateGoalFill', d)
+            var ellipseColour = "url(#grad0)";
+            if (Object.hasOwn(d, "impactedByIssues")) {
+              log('updateGoalFill:', d, SelectedIssueId, 50)
+              var impactedBySelectedIssue = d.impactedByIssues.find(x => { return x.issueId == SelectedIssueId})
+              log('impactedBySelectedIssue:',impactedBySelectedIssue)
+              impactedBySelectedIssue ?  ellipseColour = "url(#grad" + impactedBySelectedIssue.Impact + ")" : ELLIPSE.INITIALCOLOR;
             }
             return  ellipseColour;
-            })
+          })
           .attr("stroke", (d,i)=>{
-            ellipseStroke = ELLIPSE.INITIALSTROKE;
-            if (Object.hasOwn(d, "impactedByCauses")) {
-              impactedBySelectedCause = d.impactedByCauses.find(x => {return x.causeId == selectedCauseId})
-              impactedBySelectedCause ?  ellipseStroke = colorGoalRange[impactedBySelectedCause.Impact].stroke : ELLIPSE.INITIALSTROKE;
+            var ellipseStroke = ELLIPSE.INITIALSTROKE;
+            if (Object.hasOwn(d, "impactedByIssues")) {
+              const impactedBySelectedIssue = d.impactedByIssues.find(x => {return x.issueId == SelectedIssueId})
+              impactedBySelectedIssue ?  ellipseStroke = colorGoalRange[impactedBySelectedIssue.Impact].stroke : ELLIPSE.INITIALSTROKE;
             }
             return  ellipseStroke;
           })
@@ -251,40 +280,52 @@ function updateGoals(data){
           return j
   }
   const enterGoal = (enter, op,  box) => {
-    const t1 = svg.transition().duration(2000);
-    const t2 = svg.transition().duration(10);
+    log( 'enterGoal', enter)
+    const t1 = svg.transition().duration(T.GOALS);
 
     //Compute goal absolute coordinates: box + goal x and y 
-    goalCoord = (d,i) => {return {"x": (ELLIPSE.WIDTH * 1.8 + (ELLIPSE.WIDTH * i * 2.1)) + box.coord.x,
-                 "y": (BOX.HEIGHT/2 ) + box.coord.y}
-  };
-
-    const g        = enter.append('g').attr("class", "goal").attr("id", (d,i)=>`${d.id}`).attr("transform",`translate(${0}, ${-50})`);
+    const goalCoord = (d,i) => {return {"x": (ELLIPSE.WIDTH * ELLIPSE.INITIALOFFSET + (ELLIPSE.WIDTH * i * ELLIPSE.SPACE)) + box.coord.x,
+                                        "y": (BOX.HEIGHT/2 ) + box.coord.y}
+                  };
+    var g        = enter.append('g').attr("class", "goal").attr("id", (d,i)=>`${d.id}`).attr("transform",`translate(${0}, ${-50})`);
 
     g.append('g').attr("coord", (d,i) => {d.coord=goalCoord(d,i); return `(${goalCoord(d,i)})`})
 
-    const gEllipse = g.append("ellipse").attr("fill",ELLIPSE.INITIALFILL).attr("stroke",ELLIPSE.INITIALSTROKE).attr("rx", ELLIPSE.WIDTH).attr("ry", ELLIPSE.HEIGHT)
-    const gText    = g.append("text").attr("class","goal").text(d=>d.name).attr("text-anchor", "middle").attr("dy", 5)
-    g.call(enter=> enter.transition(t1).attr("transform",(d,i)=>`translate(${ELLIPSE.WIDTH * 1.8 + (ELLIPSE.WIDTH * i * 2.1)}, ${(BOX.HEIGHT/2 )})`));
+    var gEllipse = g.append("ellipse").attr("fill",ELLIPSE.INITIALFILL).attr("stroke",ELLIPSE.INITIALSTROKE).attr("rx", ELLIPSE.WIDTH).attr("ry", ELLIPSE.HEIGHT)
+    var gText    = g.append("text").attr("class","goal").text(d=>d.name).attr("text-anchor", "middle").attr("dy", 5)
+    g.call(enter=> enter.transition(t1).attr("transform",(d,i)=>`translate(${ELLIPSE.WIDTH * ELLIPSE.INITIALOFFSET + (ELLIPSE.WIDTH * i * ELLIPSE.SPACE)}, ${(BOX.HEIGHT/2 )})`));
     gEllipse.call(enter => enter//.transition(t2)
                           .attr("fill", (d,i) => {
-                            ellipseColour = "url(#grad0)";
-                            if (Object.hasOwn(d, "impactedByCauses")) {
-                              impactedBySelectedCause = d.impactedByCauses.find(x => {x.causeId == selectedCauseId})
-                              impactedBySelectedCause ?  ellipseColour = "url(#grad" + impactedBySelectedCause.Impact + ")" : ELLIPSE.INITIALCOLOR;
+                            var ellipseColour = "url(#grad0)";
+                            if (Object.hasOwn(d, "impactedByIssues")) {
+                              var impactedBySelectedIssue = d.impactedByIssues.find(x => {
+                                                    log('x fill: ', x, )  
+                                                    return x.issueId == SelectedIssueId;
+                                                    })
+                              impactedBySelectedIssue ?  ellipseColour = "url(#grad" + impactedBySelectedIssue.Impact + ")" : ELLIPSE.INITIALCOLOR;
+                              log('d fill', d)
+                              log('ellipseColour fill', ellipseColour)
+                              log('impactedBySelectedIssue fill', impactedBySelectedIssue)
+                              log('SelectedIssueId fill', SelectedIssueId)
+                              
                             }
                             return  ellipseColour;
                             })
                           .attr("stroke", (d,i)=>{
-                            ellipseStroke = ELLIPSE.INITIALSTROKE;
-                            if (Object.hasOwn(d, "impactedByCauses")) {
-                              impactedBySelectedCause = d.impactedByCauses.find(x => x.causeId == selectedCauseId)
-                              impactedBySelectedCause ?  ellipseStroke = colorGoalRange[impactedBySelectedCause.Impact].stroke : ELLIPSE.INITIALSTROKE;
-                            }
+                            var ellipseStroke = ELLIPSE.INITIALSTROKE;
+                            if (Object.hasOwn(d, "impactedByIssues")) {
+
+                              
+                              var impactedBySelectedIssue = d.impactedByIssues.find(x => {return x.issueId == SelectedIssueId})
+                              impactedBySelectedIssue ?  ellipseStroke = colorGoalRange[impactedBySelectedIssue.Impact].stroke : ELLIPSE.INITIALSTROKE;
+                              log('d stroke', d)
+                              log('impactedBySelectedIssue stroke', impactedBySelectedIssue)
+                              log('SelectedIssueId stroke', SelectedIssueId)                            }
                             return  ellipseStroke;
                           })
-                          .attr("stroke-width", 2)
+                          .attr("stroke-width", 1)
                           )
+
     return g.node();
     }
   //data = [data] //convert string to list to ensure single row
@@ -292,7 +333,7 @@ function updateGoals(data){
   boxes.each((d,i) => {
       svg.select(`.box#${d.name}`).selectAll(".goal").data(d.goals, d => d.id)
         .join(enter   => { enterGoal(enter, 'enter', d)},
-              update  => { if (selectedCauseId != selectedCauseIdPrev) updateGoal(update, 'update');},
+              update  => { log( "SelectedIssueId", SelectedIssueIdPrev); if (SelectedIssueId != SelectedIssueIdPrev) updateGoal(update, 'update');},
               exit    => {   }
           )}
     )
@@ -301,111 +342,160 @@ function updateGoals(data){
 
 }
 
-// CAUSES
+// issues
 // #####################
 
 //SELECTIONS
-var selectedCauseId;
-var selectedCauseIdPrev;
-
-function updateCauses(data) {
-  //console.log('updateCauses data', data)
-  var causeSelectDiv     = d3.select("#cause-list").data([null]);
-  const causeSelectDivInputGroup = causeSelectDiv.append("div").attr("class", "input-group")
-  causeSelectDivInputGroup.append("div").attr("class","input-group-prepend")
-                          .append("label").attr("class", "input-group-text")
-                          .attr("for", "cause-list").text("Select Cause")
-  causeSelectForm = causeSelectDivInputGroup.append("select")
-                  .attr("class" , "form-control")
-                  .attr("name"  , "cause-list")
-                  .attr("id"    , "cause-list");
-                  
-  //console.log('updateCauses: before dummy')
-  dummyOption = {	"id": 0,  "name" : "Select ...",  "group": ""  }
-  var CauseOptionList = causeSelectForm.selectAll("option").data([dummyOption, ...data.causes]).join(
-      enter => enter.append("option").text((d,i) => d.name).attr("value", (d,i) => d.id)
-    ) 
-
-  const selectCause = document.querySelector('select#cause-list');
-  //console.log('s:', selectCause)
-  selectCause.addEventListener('change', (event) => {
-    selectedCauseIdPrev = selectedCauseId;
-    selectedCauseId     = event.target.value;
-    updateScoreCard(data);
-  });
-  return;
-}
+var SelectedIssueId;
+var SelectedIssueIdPrev;
 
 function updateGoalRelations(data){
-  //console.log('updateGoalRelation', data)
+  log('updateGoalRelation', data)
  
+  const scaleStrength = d3.scaleLog()
+  .base(10)
+  .domain([1, 4]);
+
   const enterGoalRelation = (enter, op ) => {
-    const t1 = svg.transition().duration(4000);
-    const t2 = svg.transition().duration(1000);
-    //console.log('x:', enter.select(this.parentNode).attr("transform").translate);
-    g= enter.append('g').attr('class', 'goalRelation')
-            .append('path').attr('d', d => linkGen(d)).attr('class', 'link').attr('opacity', 0)
+    const t1 = svg.transition().duration(T.RELATIONS);
+    //log('x:', enter.select(this.parentNode).attr("transform").translate);
+    const g= enter.append('g').attr('class', 'goalRelation')
+            .append('path').attr('d', d => {
+              if (d.source.coord.x == d.target.coord.x){ 
+                if (d.source.coord.y == d.target.coord.y) 
+                  alert('Something is wrong'); // Source and Target have same coordinates. That is not correct.
+              
+                else
+                {
+                  if (Math.abs(d.source.coord.y - d.target.coord.y) > BOX.HEIGHT +10)     
+                  {                                   
+                    return linkGoalCurvedVertical(d);
+                  }
+                  else return linkGoalVertical(d);  
+                }
+              }
+              else { //X coordinates not equal
+                if (d.source.coord.y == d.target.coord.y) 
+                {
+                  if (Math.abs(d.source.coord.x - d.target.coord.x) > ELLIPSE.WIDTH + 10) 
+                  {    
+                    return linkGoalCurvedHorizontal(d);
+                  }
+                  else { return linkGoalHorizontal(d)};
+                }
+                else                                      
+                  return linkGoalVertical(d);
+              } 
+              
+            }).attr('class', 'link').attr('opacity', 0)
     
-    g.call(enter => enter.transition(t1).attr('opacity', 1)).attr('marker-end', 'url(#arrow)') .attr("stroke-width", d =>  d.strength) 
+    g.call(enter => enter.transition(t1)
+                          .attr('opacity', 0.5))
+                          .attr('marker-end', 'url(#arrow)') 
+                          .attr("stroke-width", d =>  scaleStrength(d.strength*2)) 
 
     return;
     }
-
-  // SOURCE & TARGET COORDINATES
+    const cReds = d3.schemeReds[9];
+    
+    // SOURCE & TARGET COORDINATES
   var  links=[]
   data.map((box,bi) => {
-    //console.log(box, bi, box.coord)
+    //log(box, bi, box.coord)
   
     if (Object.hasOwn(box, "goals")) {
-      //console.log('box has goal list')
+      //log('box has goal list')
       box.goals.map((goalSource, gi) => {
-        //console.log(goal,gi, goal.coord, box.coord)
+        //log(goal,gi, goal.coord, box.coord)
         //svg.append('circle').attr('cx',goalSource.coord.x).attr('cy',goalSource.coord.y ).attr("r", 10)
         
         if(Object.hasOwn(goalSource, "relations")){
           goalSource.relations.map(relation => {
           //Find Target Goal 
-          try 
-          {
-            data.map(boxTarget => 
-              { 
-                //console.log('goals length:', boxTarget.goals.length )
-                if (boxTarget.goals.length > 0) 
-                {
-                  //console.log(boxTarget.goals)
-                  boxTarget.goals.map(goalTarget => {
-                  //console.log("goalTarget.id", goalTarget.id)
+            if (+relation.strength > selectedRelationStrength)
+            {
+              try 
+              {
+                data.map(boxTarget => 
+                  { 
+                    //log('goals length:', boxTarget.goals.length )
+                    if (boxTarget.goals.length > 0) 
+                    {
+                      //log(boxTarget.goals)
+                      boxTarget.goals.map(goalTarget => {
+                      //log("goalTarget.id", goalTarget.id)
 
-                  if (goalTarget.id==relation.goalIdRelated)  { 
-                    //console.log('Source, Target: ', goalSource, goalTarget);
-                    links.push({"source"  :goalSource,
-                                "target"  :goalTarget,
-                                "strength":+relation.strength
-                              });
-                            }
+                      if (goalTarget.id==relation.goalIdRelated)  { 
+                        //log('Source, Target: ', goalSource, goalTarget);
+                        links.push({"source"  :goalSource,
+                                    "target"  :goalTarget,
+                                    "strength":+relation.strength
+                                  });
+                                }
 
-                  })
-                }
+                      })
+                    }
+                  }
+                )
               }
-            )
+              catch(err) {
+                log('An error occurred!', err)
+                }          
+            }
           }
-           catch(err) {
-            console.log('An error occurred!', err)
-          }          })
-          
+          )
         }
       })
-      }
+    }
      
   })
-  //console.log("links", links)
+  //log("links", links)
 
-  var linkGen = d3.linkVertical()
-    .source(d => { return {x: d.source.coord.x, y: d.source.coord.y-(ELLIPSE.HEIGHT)}})
-    .target(d => { return {x: d.target.coord.x, y: d.target.coord.y+(ELLIPSE.HEIGHT) + (markerWidth*2)}})
+  var linkGoalVertical = d3.linkVertical()
+    .source(d => { return {x: d.source.coord.x, y: d.source.coord.y-(ELLIPSE.HEIGHT * (d.source.coord.y > d.target.coord.y ? 1 : -1))}})
+    .target(d => { return {x: d.target.coord.x, y: d.target.coord.y+(ELLIPSE.HEIGHT * (d.source.coord.y > d.target.coord.y ? 1 : -1)) + (markerWidth*2)*(d.source.coord.y > d.target.coord.y ? 1 : -1)}})
     .x(d => d.x)
     .y(d => d.y);
   
+  var linkGoalHorizontal = d3.linkHorizontal()
+    .source(d => { var c;
+                  (d.source.coord.x < d.target.coord.x ) ? // Is source left or right of target?
+                  c =  {x: d.source.coord.x + (ELLIPSE.WIDTH), y: d.source.coord.y}  : //LEFT
+                  c =  {x: d.source.coord.x - (ELLIPSE.WIDTH), y: d.source.coord.y } ; //RIGHT
+                  return c;
+                }) 
+    .target(d => { var c;
+                  (d.source.coord.x < d.target.coord.x ) ? // Is source left or right of target?
+                  c =  {x: d.target.coord.x - (ELLIPSE.WIDTH)  - (markerWidth), y: d.target.coord.y } : //LEFT
+                  c =  {x: d.target.coord.x + (ELLIPSE.WIDTH)  + (markerWidth), y: d.target.coord.y } ; //RIGHT
+                  return c;
+                }) 
+    .x(d => d.x)
+    .y(d => d.y);
+  
+    var linkGoalCurvedVertical = function(d) {
+      var p = d3.path();
+      p.moveTo( d.source.coord.x - ELLIPSE.WIDTH, d.source.coord.y );
+      p.quadraticCurveTo(d.target.coord.x  - ELLIPSE.WIDTH*2, 
+                         d.target.coord.y - (d.target.coord.y - d.source.coord.y)/2, 
+                         d.target.coord.x - ELLIPSE.WIDTH, 
+                         d.target.coord.y);
+      return p;
+     };
+  
+     var linkGoalCurvedHorizontal = function(d) {
+      var p = d3.path();
+      p.moveTo( d.source.coord.x , d.source.coord.y - ELLIPSE.HEIGHT );
+      p.quadraticCurveTo(d.source.coord.x + (d.target.coord.x - d.source.coord.x)/2, 
+                         d.target.coord.y  - ELLIPSE.HEIGHT*3, 
+                         d.target.coord.x, 
+                         d.target.coord.y - ELLIPSE.HEIGHT);
+      return p;
+     };
+  
+  
+
+
   svg.selectAll('.link').data(links).join(
       enter => enterGoalRelation(enter, 'enter')
   )
@@ -413,3 +503,110 @@ function updateGoalRelations(data){
 
 }
 
+function updateIssueSelection(data) {
+  //log('updateissues data', data)
+  var issueSelectDiv     = d3.select("#selectIssueDiv").data([null]);
+  const issueSelectDivInputGroup = issueSelectDiv.append("div").attr("class", "input-group")
+  issueSelectDivInputGroup.append("div").attr("class","input-group-prepend")
+                          .append("label").attr("class", "input-group-text")
+                          .attr("for", "issue-list").text("Issue")
+  const issueSelectForm = issueSelectDivInputGroup.append("select")
+                  .attr("class" , "form-control")
+                  .attr("name"  , "issue-list")
+                  .attr("id"    , "selectIssue");
+                  
+  //log('updateissues: before dummy')
+  const dummyOption = {	"id": 0,  "name" : "Select ...",  "group": ""  }
+  var IssueOptionList = issueSelectForm.selectAll("option").data([dummyOption, ...data.issues]).join(
+      enter => enter.append("option").text((d,i) => d.name).attr("value", (d,i) => d.id)
+    ) 
+
+  const selectIssue = document.querySelector('#selectIssue');
+  log('selectIssue:', selectIssue, )
+  selectIssue.addEventListener('change', (event) => {
+    SelectedIssueIdPrev = SelectedIssueId;
+    SelectedIssueId     = event.target.value;
+    log('SelectedIssueId', SelectedIssueId, )
+    updateScoreCard(data);
+    // updateGoals(data);
+
+  });
+  return;
+}
+
+function updateBoxSelection(data){
+  log('updateBoxSelection data', data)
+  var boxSelectDiv     = d3.select("#selectBoxDiv").data([null]);
+  const boxSelectDivInputGroup = boxSelectDiv.append("div").attr("class", "input-group")
+  boxSelectDivInputGroup.append("div").attr("class","input-group-prepend")
+                          .append("label").attr("class", "input-group-text")
+                          .attr("for", "selectBox").text("Boxes")
+  const boxSelectDivCheckBoxes = boxSelectDivInputGroup.append('div').attr("class","col");
+  boxSelectDivCheckBoxes.selectAll(".row").data(data.boxes).join(
+    enter => { var divCheckBox = enter.append("div").attr("class", "row").append("div").attr("class", "form-check form-switch");
+              divCheckBox.append("input").attr("class", "form-check-input bscCheckBox").attr("type", "checkbox").attr("id", (d,i) => `${d.id}`).attr("checked",true);
+              divCheckBox.append("label").attr("class", "form-check-label").attr("for", (d,i) => `${i}`).text((d,i) => d.name)
+             }
+  )
+
+  const bscCheckBoxes = document.querySelectorAll('.form-check-input.bscCheckBox');
+  log('s:', bscCheckBoxes)
+  bscCheckBoxes.forEach(r => r.addEventListener('change', (event) => {
+    const boxesCheckedSelection = document.querySelectorAll('.form-check-input.bscCheckBox:checked')
+
+    const bscBoxesChecked = Array.from(boxesCheckedSelection).map(x => x.id)
+    data.selected=bscBoxesChecked
+    log('data:', data)
+    log('Boxes Checked:',bscBoxesChecked)
+    data.boxes.map(b => {b.selected = bscBoxesChecked.includes(b.id) ? true : false})
+    log('data:',data)
+
+    log('boxesCheckedSelection:', boxesCheckedSelection)
+    updateScoreCard(data);
+    
+  }
+  ));
+  
+  return;
+}
+
+var selectedRelationStrength = 0;
+function updateRelationStrengthSelection(data){
+  log('updateRelationSelection data', data)
+  var relationStrengthSelectDiv     = d3.select("#selectRelationStrengthDiv").data([null]);
+  const relationStrengthSelectDivInputGroup = relationStrengthSelectDiv.append("div").attr("class", "input-group")
+  relationStrengthSelectDivInputGroup.append("div").attr("class","input-group-prepend")
+                          .append("label").attr("class", "input-group-text")
+                          .attr("for", "selectRelationStrength").text("Relation Strength")
+
+  const slider = relationStrengthSelectDivInputGroup.append('div');
+  slider.append('label').attr('for','relationStrength').attr('class', 'form-label')
+  slider.append('input').attr('type','range')
+                        .attr('class', 'form-range').attr('min', '0')
+                        .attr('max', '20')
+                        .attr('step', "1")
+                        .attr('id', 'selectRelationStrength')
+  relationStrengthSelectDivInputGroup.append('div').attr('id', 'selectedRelationStrengthValue').text('0')
+
+
+  const selectRelationStrength = document.querySelector('#selectRelationStrength');
+  log('query selector relation strength', selectRelationStrength, )
+  selectRelationStrength.addEventListener('change', (event) => {
+    selectedRelationStrength     = +event.target.value;
+    log('SelectedRelationStrength', selectedRelationStrength,)
+
+    updateScoreCard(data);
+    updateGoals(data);
+  });
+
+  const selectedRelationStrengthValue = document.querySelector('#selectRelationStrength');
+  selectedRelationStrengthValue.addEventListener('change', (event) => {
+    document.getElementById("selectedRelationStrengthValue").textContent = `${+event.target.value}`;
+  });
+
+
+
+  
+  return;
+
+}

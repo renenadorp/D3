@@ -1,4 +1,4 @@
-body {margin:30px 0 0 30px; background-color: #E9ECED; font-size: 10pt}
+body {margin:0 0 0 0 0px; background-color: #E9ECED; font-size: 10pt}
 svg {
   xborder: 1px  solid rgb(221, 102, 102);
   xborder-radius: 5px;
@@ -6,8 +6,8 @@ svg {
 
 div.content {
   display: block;
-  width: 100;
-  margin: 0px 0px 0px 0;
+  width: 100%;
+  margin: 10px 0px 0px 0;
   xpadding:  10px 10px 10px 10px ;
   
 }
@@ -27,32 +27,17 @@ div#viz-logo {
   width: 50px
   
 }
-table {
-  xborder: 1 px solid green;
-}
-
-td#viz-bsc{
-  xborder: 1px solid rgb(230, 230, 230);
-  xwidth: 1200px;
-  overflow: hidden;
-  display: inline-block;
-  white-space: nowrap;
-  xmargin-right: 50px;
-
-}
-td#viz-selections{
-  Xborder: 1px solid rgb(230, 230, 230);
-  width: 500px;
-  overflow: hidden;
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 5px;
-
-}
-
-div#selectCause {
+div#viz-bsc {
   xborder: 1px solid red;
-  margin-left: 0px;
+  width: 920px;
+}
+div#cause-list {
+  width: 1003px
+}
+
+div#cause-list {
+  xborder: 1px solid red;
+  margin-left: 5px
 }
 
 rect.box {
@@ -89,10 +74,6 @@ text.box {
 
 }
 
-label.input-group-text {
-  width: 190px;
-}
-
 text.boxText {
 }
 
@@ -113,12 +94,12 @@ text.boxText {
               }
 path.link {
   fill:none;
-  stroke:  #999999;/*#A12119;*/
+  stroke: #999999;
   xstroke-width: 2px;
 }
 
 #arrow {
-  fill: #999999; /*#A12119;*/
+  fill: #999999;
 }
 
 #selection input {width: 50px }
@@ -135,7 +116,7 @@ li {margin: 0; padding:0;}
 div.intro {font-size: 10pt; height: 200px;}
 
 .form-control {
-  xwidth: 200px;
+  width: 300px;
   border: 1px  solid rgb(224, 224, 224);
   xtext-align: left;
   xpadding-left: 8px;
@@ -143,7 +124,7 @@ div.intro {font-size: 10pt; height: 200px;}
   text-align: left;
   border-radius: 0 5px 5px 0;
 }
-.input-group-prepend {margin-right: 5px; margin-bottom: 1px}
+
 .custom-switch {padding-left: 45px ; }
 .input-group-prepend span {border-radius: 5px  0  0 5px  ; width: 140px;}
 .form-range {width: 250px}
