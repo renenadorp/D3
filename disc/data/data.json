@@ -9,16 +9,8 @@
 				"key":"kenmerken", 
 				"value":
 					[
-						"Toont ambitie en drang om iets te bereiken",
-						"Denkt dat willen gelijk is aan kunnen",
-						"Beoordeelt je op jouw bijdrage voor hem/haar",
-						"Denkt in output",
-						"Wil succes tonen en is gesteld op complimenten",
-						"Vraagt Wanneer",
-						"Is fel en direct",
-						"Ongeduldig en ongedurig",
-						"Doorgaans rap van de tong",
-						"Voelt voor anderen aan alsof deze persoon altijd uittest én de baas wilspelen"
+						"Dominant - kenmerk 1",
+						"Dominant - kenmerk 2"
 					],
 				"type":"characteristics"
 			},
@@ -26,17 +18,9 @@
 				"key": "herkenning", 
 				"value":
 					[
-						"Wanneer is het klaar?",
-						"Je kan dit vast wel voor me doen",
-						"Ik verwacht dat ...",
-						"Ik ben het niet eens met ...",
-						"Ik wil je manager spreken",
-						"Dat vertel ik je niet",
-						"Ik heb weinig tijd",
-						"Daar ben ik het niet mee eens",
-						"Jouw concurrent bood mij ... aan",
-						"Ik wil niet teveel betalen",
-						"Wat ga je nu doen?"
+						"Dominant - herkenning 1",
+
+						"Dominant - herkenning 9"
 					]
 			}
 			]
@@ -51,16 +35,11 @@
 				"key":"kenmerken", 
 				"value":
 					[
-						"Toont ambitie en drang om iets te bereiken",
-						"Denkt dat willen gelijk is aan kunnen",
-						"Beoordeelt je op jouw bijdrage voor hem/haar",
-						"Denkt in output",
-						"Wil succes tonen en is gesteld op complimenten",
-						"Vraagt Wanneer",
-						"Is fel en direct",
-						"Ongeduldig en ongedurig",
-						"Doorgaans rap van de tong",
-						"Voelt voor anderen aan alsof deze persoon altijd uittest én de baas wilspelen"
+
+						
+						"Interactief - kenmerken 1",
+		
+						"Interactief - kenmerken 9"					
 					],
 				"type":"characteristics"
 			},
@@ -68,17 +47,10 @@
 				"key": "herkenning", 
 				"value":
 					[
-						"Wanneer is het klaar?",
-						"Je kan dit vast wel voor me doen",
-						"Ik verwacht dat ...",
-						"Ik ben het niet eens met ...",
-						"Ik wil je manager spreken",
-						"Dat vertel ik je niet",
-						"Ik heb weinig tijd",
-						"Daar ben ik het niet mee eens",
-						"Jouw concurrent bood mij ... aan",
-						"Ik wil niet teveel betalen",
-						"Wat ga je nu doen?"
+						"Interactief - herkenning 1",
+
+
+						"Interactief - herkenning 9"					
 					]
 			}
 			]

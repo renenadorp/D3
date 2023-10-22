@@ -42,6 +42,12 @@ rect#Type-I {
   fill: rgb(203, 173, 4);
 }
 
-g.TypeCharBlock text {
-  fill: black
+g.gTypeCharBlock text.title {
+  fill: #0a68c6;
+
+}g.gTypeCharBlock text.line {
+  fill: #333;
+
 }
+
+

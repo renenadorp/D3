@@ -3,7 +3,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import {log, drawLogo, drawCharacteristics} from "./functions.js" ;
 
 //MARGIN CONVENTION
-var MARGIN = {  LEFT  : 100, RIGHT: 100, TOP: 10, BOTTOM: 100 }
+var MARGIN = {  LEFT  : 50, RIGHT: 100, TOP: 0, BOTTOM: 100 }
 var CANVAS = {  WIDTH : 1300  - MARGIN.LEFT - MARGIN.RIGHT,
                 HEIGHT: 1200  - MARGIN.TOP  - MARGIN.BOTTOM}
 
@@ -12,7 +12,8 @@ const svg      = d3.select("#viz").append("svg")
   					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
                     .attr("version", "1.1")
 
-var TYPE = {WIDTH: 500, HEIGHT:300}
+var TYPE = {WIDTH: 300, HEIGHT:300}
+var CHARBLOCK = {LINEHIGHT: 15,TEXTOFFSET: {TOP:30, LEFT: 10}}
 
 const svgCanvas = svg.append("g")
   					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
@@ -42,32 +43,33 @@ fetch(myRequest, {method: 'GET',
     .ease(d3.easeLinear);
 
 
-    function TypeCharBlock(s,d,i, xpos){
-        console.log('tc')
-        console.log(s, d, i, xpos)
-        d.value.map(
-            (v, i) => {
-                console.log(v,i)
-                s.append('text').text(v).attr('x', xpos).attr('y', 30 + i*15)
-            }
-        )
-        return s.node();
-      }
-
     var Types = gTypes.selectAll('.gTypes').data(data)
     Types
         .join(
             function(enter) {
                 var xpos={};
+                var CharBlockLineCount =  {} //{"I": [3,2], "D": [4,5]}
+
                 var gTypeEnter = enter.append('g').attr('class', 'gType');
 
 
                 gTypeEnter
                     .attr('id', d => { return 'Type-' + d.type})
-                    .attr( 'transform', d=>{ //console.log('here'); 
-                        return `translate(${d.cx },${d.cy})`})//.transition(t)
+                    .attr( 'transform', (d,i)=>{ //console.log('here'); 
+                        return `translate(${ i*TYPE.WIDTH},${0})`})//.transition(t)
                 
-                //HEADER
+                var gTypeEnterDummy = gTypeEnter.append('g').attr('class', d=>{
+                   var linecounts=[]
+                    d.characteristics.forEach((c,i) => 
+                        {
+                            linecounts.push(c.value.length);
+                            linecounts[i]=  i==0 ? c.value.length : linecounts[i-1]+ c.value.length
+                            CharBlockLineCount[d.type]=linecounts
+                        }
+                        )
+                        return 'dummy';
+                    })                        
+                //TYPE HEADER
                 var gTypeEnterHeader = gTypeEnter.append('g');
                 var gTypeEnterHeaderRect = 
                     gTypeEnterHeader.append('rect')
@@ -75,21 +77,76 @@ fetch(myRequest, {method: 'GET',
                     .attr('id', d => `Type-${d.type}`)
                     //.attr('width', d=>{console.log(d.name.length); return d.name.length *7 + 40})
                     .attr('height', 30)
-                    .attr('x', (d,i) => {xpos[d.type]= -20 + (i*TYPE.WIDTH);return xpos[d.type]})
-                    .attr('y', (d,i) => - 20)
+                    .attr('x', 0)
+                    .attr('y', 0)
                     ;
                 var gTypeEnterText = 
-                gTypeEnterHeader.append('text')
+                    gTypeEnterHeader.append('text')
                     .attr('class', 'Type')
                     .text(d=>{return `${d.name}`})
                     .attr('fill', 'white')
-                    .attr('dx',(d,i) => -5 + (i*TYPE.WIDTH))
-                    .attr('dy', 5)
+                    .attr('dx',10)
+                    .attr('dy', 20)
                     .attr('text-anchor', 'start');
-
                 gTypeEnterHeaderRect.attr('width', TYPE.WIDTH);
+                gTypeEnter.each(t => {
+                    console.log('t', t,gTypeEnter);
+                    t.characteristics.forEach( c => {
+                        gTypeEnter.append()
+                        console.log('c:', c);
+                    }
+                    )
+                })
+                
+                var TypeCharBlocks= gTypeEnter.selectAll('.gTypeCharBlock').data((d,i)=> {
+                    return d.characteristics
+                });
+
+                    TypeCharBlocks.join(
+                        function (enter)    {
+                            
+                            var gTypeCharBlock = enter.append('g').attr('class','gTypeCharBlock')  ;
+                            var parentType= enter.node()._parent.__data__.type
+                            
+                           
+                            gTypeCharBlock.attr( 'transform', (d,i)=>{
+
+                                var ypos = i==0 ?   CHARBLOCK.TEXTOFFSET.TOP 
+                                                :  ( CharBlockLineCount[parentType][i-1] * CHARBLOCK.LINEHIGHT) + CHARBLOCK.TEXTOFFSET.TOP + CHARBLOCK.LINEHIGHT
+                                console.log('i,cb, ypos', i, CharBlockLineCount, ypos, parentType)
+
+                                return `translate(${ CHARBLOCK.TEXTOFFSET.LEFT},${ypos })`
+                            });
+
+                            var gTypeCharBlockLine = gTypeCharBlock.selectAll('.gTypeCharBlockLine').data(d=>{
+                                var title = d.key;
+                                title= title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()
+
+                                var l=[{"value": title, "type": "title"}]//lines to show, including header (e.g "Kenmerken")
+
+                                d.value.forEach(v=>l.push({"value": v, "type":"line"}))
+                                console.log(l)
+                                return l
+                            });
+                            gTypeCharBlockLine.join(
+                                function (enter) {
+                               
+                                    enter.append('text').text((d,i)=> d.value)
+                                        .attr('y',(d,i)=>{ return (i+1)*CHARBLOCK.LINEHIGHT})
+                                        .attr('class', d=> 'gTypeCharBlockLine'+ ' ' + d.type)
+                                },
+                        function(exit) { exit.remove()}
+                        )
                         
-                var gTypeEnterChars = gTypeEnter.append('g').call((d,i)=>{console.log('d:', d); return TypeCharBlock(gTypeEnter, d,i,xpos[d.type])})
+                        //.append('text').text(d=>d.value).attr('x', 20).attr('y', (d,i)=>i*10)
+
+                    },
+                    function (update)   {},
+                    function (exit)     {exit.remove();}
+
+
+                )
+                        
 
                         
                 Types = gTypeEnter.merge(Types)
