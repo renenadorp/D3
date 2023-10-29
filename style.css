@@ -1,0 +1,12 @@
+body {margin:30px 0 0 30px; background-color: #E9ECED; font-size: 10pt}
+.title {
+  text-align: right;
+  xborder: 1px solid red;
+  margin-bottom: 5px;
+}
+
+
+h1 {
+  text-align: right;
+  color: #6f2a2a
+}

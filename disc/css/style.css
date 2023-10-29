@@ -41,13 +41,29 @@ rect#Type-I {
   stroke-width: 1px;
   fill: rgb(203, 173, 4);
 }
+rect#Type-S {
+  stroke: rgb(11, 158, 70);
+  stroke-width: 1px;
+  fill:  rgb(11, 158, 70);
+}
+
+rect#Type-C {
+  stroke: rgb(16, 11, 158);
+  stroke-width: 1px;
+  fill:  rgb(16, 11, 158);;
+}
 
 g.gTypeCharBlock text.title {
   fill: #0a68c6;
 
-}g.gTypeCharBlock text.line {
+}
+g.gTypeCharBlock text.line {
   fill: #333;
 
 }
-
+line.title-divider {
+  stroke: #0a68c6;
+  stroke-width: 1;
+  stroke-opacity: .7
+}
 

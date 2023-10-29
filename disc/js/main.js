@@ -29,11 +29,18 @@ fetch(myRequest, {method: 'GET',
   .then((response) => response.json())
   .then((data) => {
     // updateIntroduction(data.introduction);
+    data = prepareData(data);
     updateTypes(data.types);
     //updateTypes(updatedData);
     //pdateTypeList(updatedData);
 
   })
+  function prepareData(){
+    data.types.forEach(t=>
+        console.log('t', t)
+    )
+    return;
+  }
 
   function updateTypes(data){
     //console.log('data:', data);
@@ -89,31 +96,22 @@ fetch(myRequest, {method: 'GET',
                     .attr('dy', 20)
                     .attr('text-anchor', 'start');
                 gTypeEnterHeaderRect.attr('width', TYPE.WIDTH);
-                gTypeEnter.each(t => {
-                    console.log('t', t,gTypeEnter);
-                    t.characteristics.forEach( c => {
-                        gTypeEnter.append()
-                        console.log('c:', c);
-                    }
-                    )
-                })
+               
                 
-                var TypeCharBlocks= gTypeEnter.selectAll('.gTypeCharBlock').data((d,i)=> {
-                    return d.characteristics
-                });
-
-                    TypeCharBlocks.join(
-                        function (enter)    {
+                var TypeCharBlocks= gTypeEnter.selectAll('.gTypeCharBlock').data(d=>d.characteristics, d.type);
+                TypeCharBlocks.join(    
+                    function (enter)    {
                             
-                            var gTypeCharBlock = enter.append('g').attr('class','gTypeCharBlock')  ;
-                            var parentType= enter.node()._parent.__data__.type
+                        var gTypeCharBlock = enter.append('g').attr('class','gTypeCharBlock')  ;
+                        
+                        var parentType= enter.node()._parent.__data__.type
+                        console.log('parentType', parentType)
                             
                            
                             gTypeCharBlock.attr( 'transform', (d,i)=>{
 
                                 var ypos = i==0 ?   CHARBLOCK.TEXTOFFSET.TOP 
                                                 :  ( CharBlockLineCount[parentType][i-1] * CHARBLOCK.LINEHIGHT) + CHARBLOCK.TEXTOFFSET.TOP + CHARBLOCK.LINEHIGHT
-                                console.log('i,cb, ypos', i, CharBlockLineCount, ypos, parentType)
 
                                 return `translate(${ CHARBLOCK.TEXTOFFSET.LEFT},${ypos })`
                             });
@@ -142,9 +140,8 @@ fetch(myRequest, {method: 'GET',
 
                     },
                     function (update)   {},
-                    function (exit)     {exit.remove();}
-
-
+                    function (exit)     {exit.remove();
+                }
                 )
                         
 

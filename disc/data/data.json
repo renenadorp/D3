@@ -1,60 +1,327 @@
 { 	
 	"introduction" : [],
 	"types":
-	[	{"type": "D",
+	[	
+		{"type": "D",
 		"name": "Dominant",
 		"characteristics":
 		 [
 			{
-				"key":"kenmerken", 
+				"key":"Wat zie je?", 
 				"value":
 					[
-						"Dominant - kenmerk 1",
-						"Dominant - kenmerk 2"
+						"Toont ambitie en drang om iets te bereiken"
+						,"Denkt dat willen gelijk is aan kunnen"
+						,"Beoordeelt je op jouw bijdrage voor hem/haar"
+						,"Denkt in output"
+						,"Wil succes tonen en is gesteld op complimenten"
+						,"Vraagt 'Wanneer?'"
+						,"Is fel en direct"
+						,"Ongeduldig en ongedurig"
+						,"Doorgaans rap van de tong"
+						,"Voelt aan als anderen uittesten"
+						,"Voelt aan als de baas willen zijn"
 					],
 				"type":"characteristics"
 			},
 			{
-				"key": "herkenning", 
+				"key": "Wat hoor je?", 
 				"value":
 					[
-						"Dominant - herkenning 1",
+					 "Wanneer is het klaar?"
+					,"Je kan dit vast wel voor me doen"
+					,"Ik verwacht dat ..."
+					,"Ik ben het niet eens met ..."
+					,"Ik wil je manager spreken"
+					,"Dat vertel ik je niet"
+					,"Ik heb weinig tijd"
+					,"Daar ben ik het niet mee eens"
+					,"Jouw concurrent bood mij ... aan"
+					,"Ik wil niet teveel betalen"
+					,"Wat ga je nu doen?"
+					]
+			},
+			{
+				"key": "Wat doe je niet?", 
+				"value":
+					[						
+						"Kletspraatjes (kom je niet mee weg)"
+						,"Veel chit-chat"
+						,"Geen focus"
+						,"Twijfelen"
+						,"Met veel details komen"
+						,"Een beetje doorduwen"
+						,"Voor hem/haar beslissen"
+						,"Samenvatten"
+						,"Uitleg van de theorie / het concept"
+						,"Intenties (Ik doe mijn best...)"
+						,"De leiding nemen"
+						,"Kletspraatjes (kom je niet mee weg)"
+		 		]
+			},
 
-						"Dominant - herkenning 9"
+			{
+				"key": "Wat zeg je?", 
+				"value":
+					[
+						"Ik ga u helpen"
+						,"Ik ga meteen aan de slag"
+						,"Dat doe ik voor u"
+						,"Ik ga zoeken naar een oplossing"
+						,"Dat ben ik met u eens, en ..."
+						,"Ik ga u een alternatief aanbieden ..."
+						,"Hiermee bereikt u ..."
+						,"Zullen we het dan maar rondmaken?"
+
+
 					]
 			}
+			
 			]
-		}	
-	
-	,
+		}
+		,
 		{"type": "I",
 		"name": "Interactief",
 		"characteristics":
 		 [
 			{
-				"key":"kenmerken", 
+				"key":"Wat zie je?", 
 				"value":
-					[
-
-						
-						"Interactief - kenmerken 1",
-		
-						"Interactief - kenmerken 9"					
+					[				
+						 "Vraagt 'waarom?'"
+						,"Gaat uitleggen waarom hij/zij iets vindt/doet"
+						,"Compliceert of gaat meedenken!"
+						,"Heeft het over lange termijn, het perspectief"
+						,"Heeft het over de strategie, is creatief"
+						,"Draait er (wat) omheen"
+						,"Je krijgt niet altijd een direct antwoord"
+						,"Blijft altijd vriendelijk"
 					],
 				"type":"characteristics"
 			},
 			{
-				"key": "herkenning", 
+				"key": "Wat hoor je?", 
 				"value":
 					[
-						"Interactief - herkenning 1",
-
-
-						"Interactief - herkenning 9"					
+						 "Ik weet het nog niet helemaal ..."
+						,"Welke ideeën zijn er allemaal?"
+						,"Ben er nog niet uit ..."
+						,"Misschien ..."
+						,"Wat betekent dat op lange termijn?"
+						,"Woorden als: 'fijn, leuk, prachtig'"
 					]
-			}
+			},
+			{"key":"Wat doe je?",
+			"value": 
+			[
+				 "Wees enthousiast en geïnteresseerd"
+				,"Doorvragen en begrijpen"
+				,"Wil de echte problemen op te lossen"
+				,"Wil de echte doelen te bereiken"
+				,"Wat langer over koetjes en kalfjes praten"
+				,"Wees positief"
+				,"Houd de/jouw tijd in gaten – anders loopt het uit"
+				,"Communiceer gepassioneerd"
+				,"Geef hem/haar de ruimte om te ideeën te spuien"
+				,"Houdt zelf ook de grote lijnen in de gaten"
+				,"Vat vaak samen"
 			]
-		}	
-	]
+			
+		},
+		{
+			"key":"Wat doe je niet?",
+			"value":
+			[
+				 "Open deuren intrappen"
+				,"Een betweter zijn"
+				,"Voorspellingen doen"
+				,"Doordrukken, voordat er begrip is"
+				,"Doordraven in details"
+			]
+		},
+		{
+			"key": "Wat zeg je?",
+			"value":[
+				 "Ik begrijp u volledig"
+				,"Vertelt u eens ..."
+				,"Mag ik het als volgt samenvatten"
+				,"Leuk dat u dit zegt ..."
+				,"Dát is een goed idee"
+				,"Ik heb het volgende voorstel ..."
+				,"Zullen we het volgende punt behandelen?"
+				,"Ik zou graag de opdracht willen"
+				,"Zullen we het afronden?"
+			]
+		}
+		]
+		}
+
+
+		,
+		{"type": "S",
+		"name": "Stabiel",
+		"characteristics":
+		 [
+			{
+				"key":"Wat zie je?", 
+				"value":
+					[				
+						"Is geïnteresseerd in jou!"
+						,"Vraagt 'wie'?"
+						,"Luistert, maar wil ook meepraten"
+						,"Is niet altijd even direct"
+						,"Wil jouw mening horen, betrekt je erbij"
+						,"Wil het ook gezellig maken"
+						,"Verwacht zo nu en dan contact"
+					],
+				"type":"characteristics"
+			},
+			{
+				"key": "Wat hoor je?", 
+				"value":
+					[
+						"Ik heb dat gevoel dat ..."
+						,"Zou graag willen dat ..."
+						,"Vind je ook niet dat ..."
+						,"Leuk"
+						,"Zou het fijn vinden als ..."
+						,"Wij"
+						,"Ik ben het met je eens"
+						,"Kan je me helpen met ..."
+						,"Ik ga het overleggen met ..."
+					]
+			},
+			{"key":"Wat doe je?",
+			"value": 
+			[
+				"Communiceer"
+				,"Praat over emoties"
+				,"Laat echte interesse zien"
+				,"Persoonlijke benadering"
+				,"Wees niet te assertief"
+				,"Geef je doel(en) van het gesprek aan"
+				,"Check of je vertrouwen krijgt"
+				,"Gelijkwaardig opstellen"
+				,"Luister veel en goed, neem daar de tijd voor"
+				,"Geef keuzes en de tijd om na te denken"
+				,"Vertel wat over jezelf"
+			]
+			
+		},
+		{
+			"key":"Wat doe je niet?",
+			"value":
+			[
+				 "Te assertief"
+				,"Te snel op je doel af"
+				,"Veel praten in de 'Ik-vorm' "
+				,"Doorduwen"
+				,"Direct met de oplossing komen"
+				,"Manipuleren"
+				,"Arrogantie"
+				,"Dubbele agenda’s"
+				,"Inbreken in het gesprek"
+			]
+		},
+		{
+			"key": "Wat zeg je?",
+			"value":[
+				 "Zullen we hier samen naar kijken ..."
+				,"We, we, we"
+				,"Welke overwegingen heeft u"
+				,"Welke vragen heeft u"
+				,"Ik kan me voorstellen dat u er over wilt nadenken"
+				,"Wat heeft u nog nodig voor een volgende stap?"
+				,"Wat heeft u nodig om voor ons te kiezen?"
+			]
+		}
+		]
+		}
+		,
+		{"type": "C",
+		"name": "Conscientieus",
+		"characteristics":
+		 [
+			{
+				"key":"Wat zie je?", 
+				"value":
+					[				
+						"Zoekt naar het 'hoe'"
+						,"Spreekt in volgordes van hetgeen moet gebeuren"
+						,"Pas flexibel zodra bekend is wat er gaat gebeuren"
+						,"Werkt binnen duidelijke kaders"
+						,"Verwacht betrouwbaarheid"
+						,"Is vaak degelijk en voorspelbaar"
+						,"Wordt geïrriteerd als je afspraken niet nakomt"
+						,"Manieren zijn belangrijk!"
+					],
+				"type":"characteristics"
+			},
+			{
+				"key": "Wat hoor je?", 
+				"value":
+					[
+						 "Hoe gaat dit in zijn werk?"
+						,"Wat moet ik hiervoor doen?"
+						,"Wat zijn de stappen die genomen worden?"
+						,"Ik heb e.e.a. voorbereid en ..."
+						,"Wat worden de bespreekpunten?"
+						,"Wat wordt de agenda?"
+						,"Wat verwacht je van mij?"
+						,"Dank u!"
+						,"Ik zou dat precies willen weten"
+						,"Kunt u mij een overzicht sturen?"
+					
+					]
+			},
+			{"key":"Wat doe je?",
+			"value": 
+			[
+				"Helder, betrouwbaar en duidelijk zijn naar de klant"
+				,"Wees op tijd"
+				,"Wees precies"
+				,"Nauwkeurig"
+				,"Bereid je zeer goed voor"
+				,"Toon je kennis van zaken"
+				,"Gebruik feiten en cijfers"
+				,"Hanteer een logische en stapsgewijze aanpak"
+				,"Heb het over feiten, niet de persoon"
+				,"Vermijd (behalve de hand schudden) aanraking"
+				,"Vat aan het einde puntsgewijs samen"
+			]
+			
+		},
+		{
+			"key":"Wat doe je niet?",
+			"value":
+			[
+				"Zo maar iets doen"
+				,"Blijven praten"
+				,"Van de hak op de tak"
+				,"Continu blijven zoeken naar mogelijkheden"
+				,"Geen structuur in jouw verhaal"
+				,"Te glad zijn"
+				,"Teveel informatie geven"
+				,"Te vaag zijn"
+				,"Losse eindjes"
+			]
+		},
+		{
+			"key": "Wat zeg je?",
+			"value":[
+				 "Samengevat: 1, 2, 3"
+				,"Ik zal het voor u puntsgewijs op papier zetten"
+				,"Ik adviseer u ..."
+				,"Ik zal de volgende stappen nemen.."
+				,"Stappen: tellen, iedere stap een cijfer geven!"
+				,"Dit betekent voor u: a..., b..., c..."
+				,"Als ik ... doe, krijg ik dan de opdracht?"
+			]
+		}
+		]
+		}
+
+
+]
 }
 
