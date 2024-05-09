@@ -1,0 +1,14 @@
+.links {
+    stroke: #6f6f6f;
+    stroke-opacity: 0.6;
+    stroke-width: 1px;
+}
+
+.input-group-text {
+    min-width: 120px;
+}
+
+.custom-input, .custom-select {
+    min-width: 100px;
+    max-width: 150px;
+}

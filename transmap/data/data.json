@@ -1,4 +1,4 @@
-{"years":["1","2","3","4", "5"],
+{"years":["2024","2025","2026","2027", "2028"],
 "dimsPPTD":[
      {"name": "Mens"     , "maturityCurrent": 0, "maturityAmbition":3}
     ,{"name": "Proces"   , "maturityCurrent": 2, "maturityAmbition":3}
@@ -15,15 +15,13 @@
 ]
 ,
 "dims":
-[{"name": "Strategie & Beleid"     , "maturityCurrent": 0, "maturityAmbition":3}
-    ,{"name": "Richtlijnen & Controls"        , "maturityCurrent": 0, "maturityAmbition":3}
-    ,{"name": "Organisatie"    , "maturityCurrent": 1, "maturityAmbition":5}
-    ,{"name": "Modellering"        , "maturityCurrent": 0, "maturityAmbition":3}
-    ,{"name": "Architectuur"       , "maturityCurrent": 0, "maturityAmbition":4}
-    ,{"name": "Kwaliteit"          , "maturityCurrent": 0, "maturityAmbition":2}
-    ,{"name": "Risico Data"            , "maturityCurrent": 0, "maturityAmbition":2}    
-    ,{"name": "Metadata"                , "maturityCurrent": 2, "maturityAmbition":3}
-    ,{"name": "Consumptie"                , "maturityCurrent": 2, "maturityAmbition":3}
+[
+        {"name": "Data Management"     , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Compliance"        , "maturityCurrent": 0, "maturityAmbition":3}
+    ,{"name": "Architecture"       , "maturityCurrent": 0, "maturityAmbition":4}
+    ,{"name": "Analytic Capabilities"       , "maturityCurrent": 0, "maturityAmbition":4}
+    ,{"name": "Technology"       , "maturityCurrent": 0, "maturityAmbition":4}
+
 
 ],
 "yearsMaturity":["0-Absent","1-Initial","2-Managed","3-Defined","4-Measured", "5-Optimizing"]

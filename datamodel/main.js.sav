@@ -1,0 +1,196 @@
+//import * as d3 from "d3"
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/force-directed-graph
+function ForceGraph({
+    nodes, // an iterable of node objects (typically [{id}, …])
+    links // an iterable of link objects (typically [{source, target}, …])
+  }, {
+    nodeId = d => d.id, // given d in nodes, returns a unique identifier (string)
+    nodeGroup, // given d in nodes, returns an (ordinal) value for color
+    nodeGroups,// an array of ordinal values representing the node groups
+    nodeCapacity,
+    nodePercentage,
+    nodeTitle, // given d in nodes, a title string
+    nodeFill = "currentColor", // node stroke fill (if not using a group color encoding)
+    nodeStroke = "#fff", // node stroke color
+    nodeStrokeWidth = 1.5, // node stroke width, in pixels
+    nodeStrokeOpacity = 1, // node stroke opacity
+    nodeRadius = 5, // node radius, in pixels
+    nodeStrength,
+    linkSource = ({source}) => source, // given d in links, returns a node identifier string
+    linkTarget = ({target}) => target, // given d in links, returns a node identifier string
+    linkStroke = "#999", // link stroke color
+    linkStrokeOpacity = 0.6, // link stroke opacity
+    linkStrokeWidth = 1.5, // given d in links, returns a stroke width in pixels
+    linkStrokeLinecap = "round", // link stroke linecap
+    linkStrength,
+    linkPercentage,
+    linkCapacity,
+    colors = d3.schemeTableau10, // an array of color strings, for the node groups
+    width = 840, // outer width, in pixels
+    height = 700, // outer height, in pixels
+    invalidation // when this promise resolves, stop the simulation
+  } = {}) {
+    // Compute values.
+    const N = d3.map(nodes, nodeId).map(intern);
+    const LS = d3.map(links, linkSource).map(intern);
+    const LT = d3.map(links, linkTarget).map(intern);
+    if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
+    const T = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
+    const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
+    const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
+    const L = typeof linkStroke !== "function" ? null : d3.map(links, linkStroke);
+    const NP = typeof nodePercentage !== "function" ? null : d3.map(nodes, nodePercentage);
+    const NC = typeof nodeCapacity !== "function" ? null : d3.map(nodes, nodeCapacity);
+    const LP = typeof linkPercentage !== "function" ? null : d3.map(links, linkPercentage);
+    const LC = typeof linkCapacity !== "function" ? null : d3.map(links, linkCapacity);
+  
+    // Replace the input nodes and links with mutable objects for the simulation.
+    nodes = d3.map(nodes, (_, i) => ({id: N[i]}));
+    links = d3.map(links, (_, i) => ({source: LS[i], target: LT[i]}));
+    // Compute default domains.
+    if (G && nodeGroups === undefined) nodeGroups = d3.sort(G);
+  
+    // Construct the scales.
+    const color = nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, colors);
+  
+    // Construct the forces.
+    const forceNode = d3.forceManyBody();
+    const forceCollide = d3.forceCollide().radius(({index: i}) => (NP[i]*0.05 + 5) + (NC[i]*0.3))
+    const forceLink = d3.forceLink(links).id(({index: i}) => N[i]);
+    if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
+    if (linkStrength !== undefined) forceLink.strength(linkStrength);
+  
+    const simulation = d3.forceSimulation(nodes)
+        .force("link", forceLink)
+        .force("collide", forceCollide)
+        .force("charge", forceNode)
+        .force("center",  d3.forceCenter())
+        .on("tick", ticked);
+    
+    const svg = d3.select("#viz").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [-width / 2, -height / 2, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+  
+  // build the arrow.
+  svg.append("svg:defs").selectAll("marker")
+      .data(["end"])      // Different link/path types can be defined here
+    .enter().append("svg:marker")    // This section adds in the arrows
+      .attr("id", String)
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 25)
+      .attr("refY", -1.8)
+      .attr("markerWidth", 4)
+      .attr("markerHeight", 4)
+      .attr("orient", "auto")
+      .attr("fill", typeof linkStroke !== "function" ? linkStroke : null)
+    .append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5");
+  
+    const link = svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", typeof linkStroke !== "function" ? linkStroke : null)
+        .attr("stroke-opacity", linkStrokeOpacity)
+        .attr("stroke-width", typeof linkStrokeWidth !== "function" ? linkStrokeWidth : null)
+        .attr("stroke-linecap", linkStrokeLinecap)
+      .selectAll("path")
+      .data(links)
+      .join("path");
+      // .attr("marker-end", "url(#end)");
+  
+    const node = svg.append("g")
+        .attr("fill", nodeStroke)
+        .attr("stroke", nodeFill)
+        .attr("stroke-opacity", nodeStrokeOpacity)
+        .attr("stroke-width", nodeStrokeWidth)
+      .selectAll("circle")
+      .data(nodes)
+      .join("circle")
+        .attr("r", nodePercentage)
+        .call(drag(simulation));
+  
+      const label = svg.append("g")
+        .selectAll("text")
+        .data(nodes)
+        .join("text")
+        .attr("font-size", 6)
+        .text(nodeId)
+  
+    if (W) link.attr("stroke-width", ({index: i}) => W[i]);
+    if (LC) link.attr("stroke", ({index: i}) => color(LC[i]));
+    if (G) node.attr("stroke", ({index: i}) => color(G[i]));
+    if (G) node.attr("stroke-width", ({index: i}) => (NC[i]*0.4));
+    if (NP) node.attr("r", ({index: i}) => (NP[i]*0.05 + 2));
+    if (T) node.append("title").text(({index: i}) => T[i]);
+    if (invalidation != null) invalidation.then(() => simulation.stop());
+  
+    function intern(value) {
+      return value !== null && typeof value === "object" ? value.valueOf() : value;
+    }
+  
+    function ticked() {
+      link.attr("d", linkArc);
+      node
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+      label
+        .attr("x", d => d.x + 8)
+        .attr("y", d => d.y + 0.2);
+    }
+  
+    function drag(simulation) {    
+      function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+      }
+      
+      function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+      }
+      
+      function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+      }
+      
+      return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+    }
+  
+    return Object.assign(svg.node(), {scales: {color}});
+  }
+
+function linkArc(d) {
+const r = Math.hypot(d.target.x - d.source.x, d.target.y - d.source.y);
+return `
+    M${d.source.x},${d.source.y}
+    A${r},${r} 0 0,1 ${d.target.x},${d.target.y}
+`;
+}
+//DATA
+const LINK = "data.json"
+d3.json(LINK)
+.then(data => 
+
+    ForceGraph(data, {
+    nodeId: d => d.id,
+    nodeGroup: d => d.group,
+    nodeCapacity: d => d.capacity* 0.5,
+    nodePercentage: d => d.percentage,
+    nodeTitle: d => `${d.id}\n${d.group}`,
+    linkStrokeWidth: l => Math.sqrt(l.value)/2,
+    linkPercentage: l => l.percentage,
+    linkCapacity: l => l.capacity,
+    width: 800,
+    height: 600,
+    // invalidation // a promise to stop the simulation when the cell is re-run
+})
+)

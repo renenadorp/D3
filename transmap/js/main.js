@@ -280,7 +280,7 @@ function updateTMap(data){
 
     gCurrent.append('text')
         .attr('text-anchor', 'middle') 
-        .text('Huidig')
+        .text('Current')
         .attr('class', 'State')
         .attr('dy', 5)
 
@@ -291,7 +291,7 @@ function updateTMap(data){
 
     gFuture.append('text')
         .attr('text-anchor', 'middle') 
-        .text('Toekomst')
+        .text('Future')
         .attr('class', 'State')
         .attr('dy', 5)
 

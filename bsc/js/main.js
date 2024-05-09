@@ -52,7 +52,7 @@ const SCHEMAS  =
   }
 ]
 //const CUSTOMER = 'Inergy';//'DQQuickScan'
-const CUSTOMER = 'DQQuickScan';
+const CUSTOMER = 'Inergy';
 const LINKXLS = `data/bsc${CUSTOMER}.xlsx`
 
 function readExcelFile(){
@@ -200,7 +200,7 @@ function updateScoreCard(data){
   log('updateScoreCard - selectedRelationStrength:', selectedRelationStrength,)
   var fdata = data.boxes.filter(b => b.selected==true);
 
-  log('fdata:', fdata,)
+  // log('fdata:', fdata,)
   updateBoxes(fdata);
   updateGoals(fdata);
   updateGoalRelations(fdata);

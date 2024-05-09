@@ -1,0 +1,216 @@
+:root {
+  --font-color: #668389;
+  --accent-color: #9610ff;
+}
+html {
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 300;
+  font-family: "Bungee", Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3.6em;
+  line-height: 110%;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+strong,
+b {
+  font-weight: 900;
+}
+
+hr {
+  border-top: 1px solid #d8d8d8;
+  border-bottom: none;
+}
+
+body {
+  font-family: "Nunito", -apple-system, system-ui, BlinkMacSystemFont, Helvetica,
+    Arial, sans-serif;
+  line-height: 1.8em;
+  font-size: 1.2em;
+  color: var(--font-color);
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+section {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+svg.viz {
+  width: 100%;
+  background: #f6f7fc;
+  border: 1px solid #d6daea;
+}
+
+svg.types {
+  height: 440px;
+}
+
+svg.types text.title {
+  font-weight: 900;
+  fill: var(--font-color);
+}
+svg.types text.summary {
+  font-size: 0.8em;
+  fill: var(--font-color);
+}
+
+.center {
+  text-align: center;
+}
+
+.types-ui .icon {
+  width: 50px;
+  cursor: pointer;
+}
+
+.types-ui .icon.selected,
+.types-ui img.tiny-icon.selected {
+  border: 1px dotted var(--accent-color);
+}
+
+img.tiny-icon {
+  /* width: 24px; */
+  vertical-align: middle;
+  padding: 4px;
+}
+
+p code,
+li code {
+  font-size: 0.9em;
+  /* color: var(--accent-color); */
+  opacity: 0.6;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.hide-sm {
+  position: fixed;
+  top: 0;
+  height: 61px;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  text-align: center;
+}
+
+.hide-sm img {
+  float: left;
+  margin-left: 5px;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.hide-sm h1 {
+  font-size: 1.5em;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 0px;
+  border-bottom: 1px solid var(--font-color);
+}
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 48em) {
+  .hide-xs {
+    display: none;
+  }
+  .main {
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .hide-sm {
+    display: none;
+  }
+}
+
+#emmys .subject-ring {
+  display: none;
+}
+
+div.title {
+  font-size: 2em;
+  width: 200px;
+  position: absolute;
+  left: 70px;
+  top: 100px;
+  line-height: 1.5em;
+  color: black;
+  font-family: sans-serif;
+}
+
+#emmys .annotation.badge text {
+  font-weight: normal;
+  font-size: 10px;
+}
+
+#emmys .annotation text {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.show-bg .annotation-note-bg {
+  fill: blue;
+  fill-opacity: 0.05;
+}
+
+.annotation.axis .annotation-note-bg {
+  fill: white;
+  stroke: white;
+  stroke-width: 10;
+}
+
+.annotation.axis path {
+  stroke: lightgrey;
+}
+
+.annotation.axis text {
+  fill: lightgrey;
+}
+
+.sticky-menu {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}

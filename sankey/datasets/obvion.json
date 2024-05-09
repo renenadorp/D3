@@ -1,0 +1,1791 @@
+    {
+        "nodes": [
+            {
+                "name": "HTDIV_HANDMATIG_ODW_CODELIJSTOVERIG"
+            },
+            {
+                "name": "HTSHS_ODW_02_LN"
+            },
+            {
+                "name": "HTSHS_ODW_26_LNA"
+            },
+            {
+                "name": "HTSHS_ODW_27_LAS"
+            },
+            {
+                "name": "HTSHS_ODW__56_SAV"
+            },
+            {
+                "name": "HTSHS_ODW__74_SSA"
+            },
+            {
+                "name": "HTSHS_ODW__95_RSS"
+            },
+            {
+                "name": "HVETL_ODW_26_27_AANVRAAG"
+            },
+            {
+                "name": "HVETL_ODW_27_LAS"
+            },
+            {
+                "name": "HTSHS_ODW_109_EOD"
+            },
+            {
+                "name": "HTSHS_ODW__41_AFL"
+            },
+            {
+                "name": "HTSHS_ODW__80_VWD"
+            },
+            {
+                "name": "HTSHS_ODW__86_PTF"
+            },
+            {
+                "name": "HTBG2_NUMMERAANDUIDING"
+            },
+            {
+                "name": "HTBG2_OPENBARE_RUIMTE"
+            },
+            {
+                "name": "HTBG2_VERBLIJFSOBJECT"
+            },
+            {
+                "name": "HTBG2_WOONPLAATS"
+            },
+            {
+                "name": "HTSHS_ODW_05_PRS"
+            },
+            {
+                "name": "HTSHS_ODW_08_ADV"
+            },
+            {
+                "name": "HTSHS_ODW__73_SRB"
+            },
+            {
+                "name": "HTSHS_ODW__85_LND"
+            },
+            {
+                "name": "HTSHS_ODW__92_STP"
+            },
+            {
+                "name": "HVETL_ODW_07_ADR"
+            },
+            {
+                "name": "HVETL_ODW_14_05_TPO_PERS"
+            },
+            {
+                "name": "IVETL_BAG_ADR_ADRES_DIG"
+            },
+            {
+                "name": "HTSHS_ODW_22_AKT"
+            },
+            {
+                "name": "HTSHS_ODW__79_TAK"
+            },
+            {
+                "name": "HTCRM_VW_CONTACT"
+            },
+            {
+                "name": "HTCRM_VW_CRMP_KLANTINTEGRITEITONDERZOEK"
+            },
+            {
+                "name": "HTCRM_VW_TASK"
+            },
+            {
+                "name": "HTCRM_VW_INCIDENT"
+            },
+            {
+                "name": "HTSHS_ODW__81_CPD"
+            },
+            {
+                "name": "HTSHS_ODW__83_GGE"
+            },
+            {
+                "name": "HTSHS_ODW_25_KPI"
+            },
+            {
+                "name": "HVETL_LENING_ONDERPAND_TYPE"
+            },
+            {
+                "name": "HTSHS_ODW_39_INS"
+            },
+            {
+                "name": "HVETL_ODW_21_HYZ"
+            },
+            {
+                "name": "HVETL_ODW_04_KL"
+            },
+            {
+                "name": "HTSHS_ODW_04_KL"
+            },
+            {
+                "name": "HTCRM_VW_CONTACT_EXTEND"
+            },
+            {
+                "name": "HTCRM_VW_FILTEREDSTRINGMAP"
+            },
+            {
+                "name": "HTSHS_ODW_84_HOE"
+            },
+            {
+                "name": "HTSHS_ODW__45_BGS"
+            },
+            {
+                "name": "HTSHS_ODW__51_SAH"
+            },
+            {
+                "name": "HTSHS_ODW__54_STL"
+            },
+            {
+                "name": "HVETL_ODW_25_KPI"
+            },
+            {
+                "name": "IVETL_KLANT_GROEP_PERSOON_LENING"
+            },
+            {
+                "name": "HTBKR_SCORE_OF_SYSTEEM_MELDCODE"
+            },
+            {
+                "name": "HTBKR_TOETSRESULTAAT"
+            },
+            {
+                "name": "HTBKR_TOETSVRAAG"
+            },
+            {
+                "name": "HTDIV_CONFIGURATIE_TABEL"
+            },
+            {
+                "name": "HTSHS_ODW_03_ONL"
+            },
+            {
+                "name": "HTSHS_ODW_102_ERL"
+            },
+            {
+                "name": "HTSHS_ODW_15_ADL"
+            },
+            {
+                "name": "HTTMN_ACCOUNTS"
+            },
+            {
+                "name": "HTTMN_HC_ACCOUNT_STAGE"
+            },
+            {
+                "name": "HTTMN_HC_REF_STAGE"
+            },
+            {
+                "name": "HTTMN_HC_ST_ACCOUNT_DETAIL"
+            },
+            {
+                "name": "HTTMN_HC_TM_ACCOUNT_EPISODE"
+            },
+            {
+                "name": "HVETL_HC_ACCOUNT_STAGE_EPISODE"
+            },
+            {
+                "name": "HVETL_INTERNE_OVERSLUITING_TERUGKERENDE_KLANT"
+            },
+            {
+                "name": "HVETL_ODW_02_01_DTM_ING_LNNG"
+            },
+            {
+                "name": "HVETL_ODW_02_LN_ING_EIND"
+            },
+            {
+                "name": "HTSHS_ODW_01_LD"
+            },
+            {
+                "name": "HTSHS_ODW_100_ERD"
+            },
+            {
+                "name": "HTSHS_ODW_107_HSL"
+            },
+            {
+                "name": "HTSHS_ODW_108_HRL"
+            },
+            {
+                "name": "HTSHS_ODW_16_LDR"
+            },
+            {
+                "name": "HTSHS_ODW_20_LDH"
+            },
+            {
+                "name": "HTSHS_ODW_29_TSD"
+            },
+            {
+                "name": "HTSHS_ODW_40_LDB"
+            },
+            {
+                "name": "HTSHS_ODW__125_BTEE"
+            },
+            {
+                "name": "HTSHS_ODW__126_BTEO"
+            },
+            {
+                "name": "HTSHS_ODW__42_AFP"
+            },
+            {
+                "name": "HTSHS_ODW__46_DLD"
+            },
+            {
+                "name": "HTSHS_ODW__59_SGR"
+            },
+            {
+                "name": "HTSHS_ODW__91_KRA"
+            },
+            {
+                "name": "HVETL_ODW_01_LD"
+            },
+            {
+                "name": "HVETL_ODW_100_ERD"
+            },
+            {
+                "name": "HVETL_ODW_107_HSL"
+            },
+            {
+                "name": "HVETL_ODW_28_PLI_NR_POOL_OMS"
+            },
+            {
+                "name": "RVETL_01_LD_INGANGSDATUM_OORSPR"
+            },
+            {
+                "name": "HTSHS_MUTATIE_STATUS_LENINGDEEL"
+            },
+            {
+                "name": "HTSHS_ODW__55_SAR"
+            },
+            {
+                "name": "HVETL_ODW_27_LAS_LENING"
+            },
+            {
+                "name": "TTDIV_DATE"
+            },
+            {
+                "name": "HVETL_ODW_103_EBL"
+            },
+            {
+                "name": "RTSHS_ODW_103_EBL"
+            },
+            {
+                "name": "ADRES_SHS_BEZOEK_BAG"
+            },
+            {
+                "name": "ADRES_SHS_CORRESPONDENTIE_BAG"
+            },
+            {
+                "name": "HTSHS_ODW_06_OND"
+            },
+            {
+                "name": "HTSHS_ODW_23_TAX"
+            },
+            {
+                "name": "HTSHS_ODW__58_SBO"
+            },
+            {
+                "name": "HTSHS_ODW__64_SON"
+            },
+            {
+                "name": "HTSHS_ODW__90_SSO"
+            },
+            {
+                "name": "HTSHS_OVERBRUGGING_GEOFFREERD_LENINGDEEL"
+            },
+            {
+                "name": "HVETL_OVERBRUGGING_GEOFFREERD_LENINGDEEL"
+            },
+            {
+                "name": "IVETL_BAG_ONL_ADRES_DIG"
+            },
+            {
+                "name": "HTSHS_ODW_21_HYZ"
+            },
+            {
+                "name": "HTCAL_ONDERPAND"
+            },
+            {
+                "name": "HVCAL_ONDERPAND"
+            },
+            {
+                "name": "HTSHS_ODW_105_ERP"
+            },
+            {
+                "name": "HTSHS_ODW_31_LEV"
+            },
+            {
+                "name": "HTSHS_ODW_32_SPR"
+            },
+            {
+                "name": "HTSHS_ODW_30_PSP"
+            },
+            {
+                "name": "ITETL_KLANT_PERSOON"
+            },
+            {
+                "name": "ITETL_LENING_BOEKING_DEBITEUR"
+            },
+            {
+                "name": "ITETL_LENING"
+            },
+            {
+                "name": "ITETL_KLANT_GROEP_PERSOON"
+            },
+            {
+                "name": "ITETL_LENING_AANVRAAG"
+            },
+            {
+                "name": "ITETL_LENINGDEEL"
+            },
+            {
+                "name": "ITETL_INKOMENSTOETS"
+            },
+            {
+                "name": "ITETL_AANVRAAGDEEL"
+            },
+            {
+                "name": "ITETL_LENING_ACHTERSTAND"
+            },
+            {
+                "name": "ITETL_KLANT_PERSOON_BKR"
+            },
+            {
+                "name": "ITETL_ONDERPAND_CALCASA"
+            },
+            {
+                "name": "ITETL_ONDERPAND"
+            },
+            {
+                "name": "ITETL_AANVRAAG_STATUS"
+            },
+            {
+                "name": "ITETL_KLANT_GROEP"
+            },
+            {
+                "name": "ITETL_AANVRAAG"
+            },
+            {
+                "name": "HTBBM_EXTRACT"
+            },
+            {
+                "name": "HTTMN_ACCOUNTACTIVITIES"
+            },
+            {
+                "name": "HTTMN_ACTIVITIES"
+            },
+            {
+                "name": "HTSHS_ODW__68_SPO"
+            },
+            {
+                "name": "HTCBS_INDEXATIE"
+            },
+            {
+                "name": "HTTMN_HC_TM_LOSS_REDUCTION"
+            },
+            {
+                "name": "HTSHS_ODW__87_VMY"
+            },
+            {
+                "name": "HTSHS_ONDERPAND_TAXATIE_ACHTERSTAND"
+            },
+            {
+                "name": "FACILITY"
+            },
+            {
+                "name": "HTIRB_FACILITY_DOD5"
+            },
+            {
+                "name": "HTSHS_ONDERPAND_AANVRAAG_MO"
+            },
+            {
+                "name": "HTSHS_OFFERTE"
+            },
+            {
+                "name": "HTSHS_ONDERPAND_AANVRAAG"
+            },
+            {
+                "name": "HTCAS_IFRS9_PROVISIONS_DOD5"
+            },
+            {
+                "name": "HTSH2_MO_ONDERPANDEN_ONDERPAND"
+            },
+            {
+                "name": "HTCAS_IFRS9_PROVISIONS"
+            },
+            {
+                "name": "HTIRB_FACILITY"
+            },
+            {
+                "name": "ITETL_ADVISEUR"
+            },
+            {
+                "name": "ITETL_AKTE"
+            },
+            {
+                "name": "ITETL_CDD_BASISONDERZOEK"
+            },
+            {
+                "name": "ITETL_CDD_CONTACT"
+            },
+            {
+                "name": "ITETL_CDD_REVIEW"
+            },
+            {
+                "name": "ITETL_CDD_VERVOLGONDERZOEK"
+            },
+            {
+                "name": "ITETL_COMMERCIEEL_PRODUCT"
+            },
+            {
+                "name": "ITETL_GELDGEVER"
+            },
+            {
+                "name": "ITETL_INSCHRIJVING"
+            },
+            {
+                "name": "ITETL_LENINGDEEL_MUTATIE"
+            },
+            {
+                "name": "ITETL_LENINGDEEL_RENTEAFWIJKING"
+            },
+            {
+                "name": "ITETL_NOTARIS"
+            },
+            {
+                "name": "ITETL_NOTARISKANTOOR"
+            },
+            {
+                "name": "ITETL_ONDERPANDAKTE"
+            },
+            {
+                "name": "ITETL_OPGEBOUWDE_WAARDE_LEV"
+            },
+            {
+                "name": "ITETL_OPGEBOUWDE_WAARDE_SPR"
+            },
+            {
+                "name": "ITETL_POLIS_LEV"
+            },
+            {
+                "name": "ITETL_POLIS_SPR"
+            },
+            {
+                "name": "ITETL_TAXATEUR"
+            },
+            {
+                "name": "CUSTOMER"
+            },
+            {
+                "name": "RWA_LOANPART"
+            },
+            {
+                "name": "FACILITY_CUSTOMER"
+            },
+            {
+                "name": "BIV_OBLIGOR"
+            },
+            {
+                "name": "BIV_FACILITY"
+            },
+            {
+                "name": "BIV_COLLATERALITEM_RRE"
+            },
+            {
+                "name": "BIV_PRODUCT"
+            }
+        ]
+    ,
+        "links": [
+            {
+                "source": "HTDIV_HANDMATIG_ODW_CODELIJSTOVERIG",
+                "target": "ITETL_AANVRAAG",
+                "value": 73
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_AANVRAAG",
+                "value": 86
+            },
+            {
+                "source": "HTSHS_ODW_26_LNA",
+                "target": "ITETL_AANVRAAG",
+                "value": 52
+            },
+            {
+                "source": "HTSHS_ODW_27_LAS",
+                "target": "ITETL_AANVRAAG",
+                "value": 40
+            },
+            {
+                "source": "HTSHS_ODW__56_SAV",
+                "target": "ITETL_AANVRAAG",
+                "value": 56
+            },
+            {
+                "source": "HTSHS_ODW__74_SSA",
+                "target": "ITETL_AANVRAAG",
+                "value": 70
+            },
+            {
+                "source": "HTSHS_ODW__95_RSS",
+                "target": "ITETL_AANVRAAG",
+                "value": 15
+            },
+            {
+                "source": "HVETL_ODW_26_27_AANVRAAG",
+                "target": "ITETL_AANVRAAG",
+                "value": 86
+            },
+            {
+                "source": "HVETL_ODW_27_LAS",
+                "target": "ITETL_AANVRAAG",
+                "value": 85
+            },
+            {
+                "source": "HTSHS_ODW_109_EOD",
+                "target": "ITETL_AANVRAAGDEEL",
+                "value": 84
+            },
+            {
+                "source": "HTSHS_ODW_26_LNA",
+                "target": "ITETL_AANVRAAGDEEL",
+                "value": 33
+            },
+            {
+                "source": "HTSHS_ODW__41_AFL",
+                "target": "ITETL_AANVRAAGDEEL",
+                "value": 71
+            },
+            {
+                "source": "HTSHS_ODW__80_VWD",
+                "target": "ITETL_AANVRAAGDEEL",
+                "value": 17
+            },
+            {
+                "source": "HTSHS_ODW__86_PTF",
+                "target": "ITETL_AANVRAAGDEEL",
+                "value": 7
+            },
+            {
+                "source": "HTSHS_ODW_27_LAS",
+                "target": "ITETL_AANVRAAG_STATUS",
+                "value": 21
+            },
+            {
+                "source": "HTBG2_NUMMERAANDUIDING",
+                "target": "ITETL_ADVISEUR",
+                "value": 29
+            },
+            {
+                "source": "HTBG2_OPENBARE_RUIMTE",
+                "target": "ITETL_ADVISEUR",
+                "value": 26
+            },
+            {
+                "source": "HTBG2_VERBLIJFSOBJECT",
+                "target": "ITETL_ADVISEUR",
+                "value": 67
+            },
+            {
+                "source": "HTBG2_WOONPLAATS",
+                "target": "ITETL_ADVISEUR",
+                "value": 89
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_ADVISEUR",
+                "value": 43
+            },
+            {
+                "source": "HTSHS_ODW_08_ADV",
+                "target": "ITETL_ADVISEUR",
+                "value": 57
+            },
+            {
+                "source": "HTSHS_ODW_08_ADV",
+                "target": "ITETL_ADVISEUR",
+                "value": 98
+            },
+            {
+                "source": "HTSHS_ODW__73_SRB",
+                "target": "ITETL_ADVISEUR",
+                "value": 68
+            },
+            {
+                "source": "HTSHS_ODW__85_LND",
+                "target": "ITETL_ADVISEUR",
+                "value": 99
+            },
+            {
+                "source": "HTSHS_ODW__92_STP",
+                "target": "ITETL_ADVISEUR",
+                "value": 41
+            },
+            {
+                "source": "HVETL_ODW_07_ADR",
+                "target": "ITETL_ADVISEUR",
+                "value": 47
+            },
+            {
+                "source": "HVETL_ODW_14_05_TPO_PERS",
+                "target": "ITETL_ADVISEUR",
+                "value": 83
+            },
+            {
+                "source": "IVETL_BAG_ADR_ADRES_DIG",
+                "target": "ITETL_ADVISEUR",
+                "value": 11
+            },
+            {
+                "source": "HTSHS_ODW_22_AKT",
+                "target": "ITETL_AKTE",
+                "value": 21
+            },
+            {
+                "source": "HTSHS_ODW__79_TAK",
+                "target": "ITETL_AKTE",
+                "value": 98
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_CDD_BASISONDERZOEK",
+                "value": 84
+            },
+            {
+                "source": "HTCRM_VW_CRMP_KLANTINTEGRITEITONDERZOEK",
+                "target": "ITETL_CDD_BASISONDERZOEK",
+                "value": 13
+            },
+            {
+                "source": "HTCRM_VW_CRMP_KLANTINTEGRITEITONDERZOEK",
+                "target": "ITETL_CDD_BASISONDERZOEK",
+                "value": 46
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_CDD_CONTACT",
+                "value": 56
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_CDD_REVIEW",
+                "value": 26
+            },
+            {
+                "source": "HTCRM_VW_TASK",
+                "target": "ITETL_CDD_REVIEW",
+                "value": 75
+            },
+            {
+                "source": "HTCRM_VW_TASK",
+                "target": "ITETL_CDD_REVIEW",
+                "value": 97
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_CDD_VERVOLGONDERZOEK",
+                "value": 18
+            },
+            {
+                "source": "HTCRM_VW_INCIDENT",
+                "target": "ITETL_CDD_VERVOLGONDERZOEK",
+                "value": 45
+            },
+            {
+                "source": "HTCRM_VW_INCIDENT",
+                "target": "ITETL_CDD_VERVOLGONDERZOEK",
+                "value": 14
+            },
+            {
+                "source": "HTSHS_ODW__81_CPD",
+                "target": "ITETL_COMMERCIEEL_PRODUCT",
+                "value": 58
+            },
+            {
+                "source": "HTSHS_ODW__83_GGE",
+                "target": "ITETL_GELDGEVER",
+                "value": 8
+            },
+            {
+                "source": "HTSHS_ODW_25_KPI",
+                "target": "ITETL_INKOMENSTOETS",
+                "value": 13
+            },
+            {
+                "source": "HTSHS_ODW_26_LNA",
+                "target": "ITETL_INKOMENSTOETS",
+                "value": 13
+            },
+            {
+                "source": "HVETL_LENING_ONDERPAND_TYPE",
+                "target": "ITETL_INKOMENSTOETS",
+                "value": 6
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_INSCHRIJVING",
+                "value": 46
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_INSCHRIJVING",
+                "value": 50
+            },
+            {
+                "source": "HTSHS_ODW_39_INS",
+                "target": "ITETL_INSCHRIJVING",
+                "value": 24
+            },
+            {
+                "source": "HVETL_ODW_21_HYZ",
+                "target": "ITETL_INSCHRIJVING",
+                "value": 68
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_KLANT_GROEP",
+                "value": 84
+            },
+            {
+                "source": "HVETL_ODW_04_KL",
+                "target": "ITETL_KLANT_GROEP",
+                "value": 83
+            },
+            {
+                "source": "HTSHS_ODW_04_KL",
+                "target": "ITETL_KLANT_GROEP_PERSOON",
+                "value": 46
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_KLANT_GROEP_PERSOON",
+                "value": 37
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_KLANT_GROEP_PERSOON",
+                "value": 100
+            },
+            {
+                "source": "HTBG2_NUMMERAANDUIDING",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 12
+            },
+            {
+                "source": "HTBG2_OPENBARE_RUIMTE",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 17
+            },
+            {
+                "source": "HTBG2_VERBLIJFSOBJECT",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 48
+            },
+            {
+                "source": "HTBG2_WOONPLAATS",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 100
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 29
+            },
+            {
+                "source": "HTCRM_VW_CONTACT",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 55
+            },
+            {
+                "source": "HTCRM_VW_CONTACT_EXTEND",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 67
+            },
+            {
+                "source": "HTCRM_VW_CONTACT_EXTEND",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 35
+            },
+            {
+                "source": "HTCRM_VW_FILTEREDSTRINGMAP",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 36
+            },
+            {
+                "source": "HTDIV_HANDMATIG_ODW_CODELIJSTOVERIG",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 16
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 36
+            },
+            {
+                "source": "HTSHS_ODW_84_HOE",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 49
+            },
+            {
+                "source": "HTSHS_ODW__45_BGS",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 47
+            },
+            {
+                "source": "HTSHS_ODW__51_SAH",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 10
+            },
+            {
+                "source": "HTSHS_ODW__54_STL",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 91
+            },
+            {
+                "source": "HTSHS_ODW__85_LND",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 32
+            },
+            {
+                "source": "HTSHS_ODW__85_LND",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 82
+            },
+            {
+                "source": "HVETL_ODW_07_ADR",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 20
+            },
+            {
+                "source": "HVETL_ODW_25_KPI",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 64
+            },
+            {
+                "source": "IVETL_BAG_ADR_ADRES_DIG",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 19
+            },
+            {
+                "source": "IVETL_KLANT_GROEP_PERSOON_LENING",
+                "target": "ITETL_KLANT_PERSOON",
+                "value": 29
+            },
+            {
+                "source": "HTBKR_SCORE_OF_SYSTEEM_MELDCODE",
+                "target": "ITETL_KLANT_PERSOON_BKR",
+                "value": 1
+            },
+            {
+                "source": "HTBKR_TOETSRESULTAAT",
+                "target": "ITETL_KLANT_PERSOON_BKR",
+                "value": 56
+            },
+            {
+                "source": "HTBKR_TOETSVRAAG",
+                "target": "ITETL_KLANT_PERSOON_BKR",
+                "value": 50
+            },
+            {
+                "source": "HTDIV_CONFIGURATIE_TABEL",
+                "target": "ITETL_LENING",
+                "value": 8
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_LENING",
+                "value": 46
+            },
+            {
+                "source": "HTSHS_ODW_03_ONL",
+                "target": "ITETL_LENING",
+                "value": 41
+            },
+            {
+                "source": "HTSHS_ODW_102_ERL",
+                "target": "ITETL_LENING",
+                "value": 25
+            },
+            {
+                "source": "HTSHS_ODW_15_ADL",
+                "target": "ITETL_LENING",
+                "value": 93
+            },
+            {
+                "source": "HTSHS_ODW__80_VWD",
+                "target": "ITETL_LENING",
+                "value": 79
+            },
+            {
+                "source": "HTTMN_ACCOUNTS",
+                "target": "ITETL_LENING",
+                "value": 74
+            },
+            {
+                "source": "HTTMN_HC_ACCOUNT_STAGE",
+                "target": "ITETL_LENING",
+                "value": 54
+            },
+            {
+                "source": "HTTMN_HC_REF_STAGE",
+                "target": "ITETL_LENING",
+                "value": 75
+            },
+            {
+                "source": "HTTMN_HC_ST_ACCOUNT_DETAIL",
+                "target": "ITETL_LENING",
+                "value": 84
+            },
+            {
+                "source": "HTTMN_HC_TM_ACCOUNT_EPISODE",
+                "target": "ITETL_LENING",
+                "value": 63
+            },
+            {
+                "source": "HVETL_HC_ACCOUNT_STAGE_EPISODE",
+                "target": "ITETL_LENING",
+                "value": 18
+            },
+            {
+                "source": "HVETL_INTERNE_OVERSLUITING_TERUGKERENDE_KLANT",
+                "target": "ITETL_LENING",
+                "value": 83
+            },
+            {
+                "source": "HVETL_LENING_ONDERPAND_TYPE",
+                "target": "ITETL_LENING",
+                "value": 21
+            },
+            {
+                "source": "HVETL_ODW_02_01_DTM_ING_LNNG",
+                "target": "ITETL_LENING",
+                "value": 51
+            },
+            {
+                "source": "HVETL_ODW_02_LN_ING_EIND",
+                "target": "ITETL_LENING",
+                "value": 90
+            },
+            {
+                "source": "HTDIV_CONFIGURATIE_TABEL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 84
+            },
+            {
+                "source": "HTDIV_HANDMATIG_ODW_CODELIJSTOVERIG",
+                "target": "ITETL_LENINGDEEL",
+                "value": 13
+            },
+            {
+                "source": "HTSHS_ODW_01_LD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 11
+            },
+            {
+                "source": "HTSHS_ODW_01_LD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 30
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_LENINGDEEL",
+                "value": 12
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_LENINGDEEL",
+                "value": 40
+            },
+            {
+                "source": "HTSHS_ODW_04_KL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 42
+            },
+            {
+                "source": "HTSHS_ODW_100_ERD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 34
+            },
+            {
+                "source": "HTSHS_ODW_107_HSL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 69
+            },
+            {
+                "source": "HTSHS_ODW_108_HRL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 94
+            },
+            {
+                "source": "HTSHS_ODW_108_HRL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 35
+            },
+            {
+                "source": "HTSHS_ODW_15_ADL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 16
+            },
+            {
+                "source": "HTSHS_ODW_16_LDR",
+                "target": "ITETL_LENINGDEEL",
+                "value": 35
+            },
+            {
+                "source": "HTSHS_ODW_20_LDH",
+                "target": "ITETL_LENINGDEEL",
+                "value": 21
+            },
+            {
+                "source": "HTSHS_ODW_29_TSD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 89
+            },
+            {
+                "source": "HTSHS_ODW_40_LDB",
+                "target": "ITETL_LENINGDEEL",
+                "value": 28
+            },
+            {
+                "source": "HTSHS_ODW__125_BTEE",
+                "target": "ITETL_LENINGDEEL",
+                "value": 54
+            },
+            {
+                "source": "HTSHS_ODW__126_BTEO",
+                "target": "ITETL_LENINGDEEL",
+                "value": 69
+            },
+            {
+                "source": "HTSHS_ODW__41_AFL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 40
+            },
+            {
+                "source": "HTSHS_ODW__42_AFP",
+                "target": "ITETL_LENINGDEEL",
+                "value": 56
+            },
+            {
+                "source": "HTSHS_ODW__46_DLD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 60
+            },
+            {
+                "source": "HTSHS_ODW__59_SGR",
+                "target": "ITETL_LENINGDEEL",
+                "value": 95
+            },
+            {
+                "source": "HTSHS_ODW__86_PTF",
+                "target": "ITETL_LENINGDEEL",
+                "value": 64
+            },
+            {
+                "source": "HTSHS_ODW__91_KRA",
+                "target": "ITETL_LENINGDEEL",
+                "value": 97
+            },
+            {
+                "source": "HVETL_LENING_ONDERPAND_TYPE",
+                "target": "ITETL_LENINGDEEL",
+                "value": 25
+            },
+            {
+                "source": "HVETL_ODW_01_LD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 85
+            },
+            {
+                "source": "HVETL_ODW_02_01_DTM_ING_LNNG",
+                "target": "ITETL_LENINGDEEL",
+                "value": 7
+            },
+            {
+                "source": "HVETL_ODW_100_ERD",
+                "target": "ITETL_LENINGDEEL",
+                "value": 74
+            },
+            {
+                "source": "HVETL_ODW_107_HSL",
+                "target": "ITETL_LENINGDEEL",
+                "value": 18
+            },
+            {
+                "source": "HVETL_ODW_28_PLI_NR_POOL_OMS",
+                "target": "ITETL_LENINGDEEL",
+                "value": 65
+            },
+            {
+                "source": "RVETL_01_LD_INGANGSDATUM_OORSPR",
+                "target": "ITETL_LENINGDEEL",
+                "value": 24
+            },
+            {
+                "source": "HTSHS_MUTATIE_STATUS_LENINGDEEL",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 28
+            },
+            {
+                "source": "HTSHS_ODW_01_LD",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 90
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 51
+            },
+            {
+                "source": "HTSHS_ODW_15_ADL",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 95
+            },
+            {
+                "source": "HTSHS_ODW__86_PTF",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 99
+            },
+            {
+                "source": "HVETL_LENING_ONDERPAND_TYPE",
+                "target": "ITETL_LENINGDEEL_MUTATIE",
+                "value": 30
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_LENINGDEEL_RENTEAFWIJKING",
+                "value": 35
+            },
+            {
+                "source": "HTSHS_ODW_108_HRL",
+                "target": "ITETL_LENINGDEEL_RENTEAFWIJKING",
+                "value": 8
+            },
+            {
+                "source": "HTSHS_ODW_15_ADL",
+                "target": "ITETL_LENINGDEEL_RENTEAFWIJKING",
+                "value": 33
+            },
+            {
+                "source": "HTSHS_ODW__55_SAR",
+                "target": "ITETL_LENINGDEEL_RENTEAFWIJKING",
+                "value": 41
+            },
+            {
+                "source": "HVETL_ODW_27_LAS_LENING",
+                "target": "ITETL_LENING_AANVRAAG",
+                "value": 70
+            },
+            {
+                "source": "TTDIV_DATE",
+                "target": "ITETL_LENING_ACHTERSTAND",
+                "value": 96
+            },
+            {
+                "source": "HVETL_ODW_103_EBL",
+                "target": "ITETL_LENING_BOEKING_DEBITEUR",
+                "value": 57
+            },
+            {
+                "source": "RTSHS_ODW_103_EBL",
+                "target": "ITETL_LENING_BOEKING_DEBITEUR",
+                "value": 81
+            },
+            {
+                "source": "ADRES_SHS_BEZOEK_BAG",
+                "target": "ITETL_NOTARIS",
+                "value": 73
+            },
+            {
+                "source": "ADRES_SHS_CORRESPONDENTIE_BAG",
+                "target": "ITETL_NOTARIS",
+                "value": 64
+            },
+            {
+                "source": "HTBG2_NUMMERAANDUIDING",
+                "target": "ITETL_NOTARIS",
+                "value": 4
+            },
+            {
+                "source": "HTBG2_OPENBARE_RUIMTE",
+                "target": "ITETL_NOTARIS",
+                "value": 60
+            },
+            {
+                "source": "HTBG2_VERBLIJFSOBJECT",
+                "target": "ITETL_NOTARIS",
+                "value": 60
+            },
+            {
+                "source": "HTBG2_WOONPLAATS",
+                "target": "ITETL_NOTARIS",
+                "value": 18
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_NOTARIS",
+                "value": 23
+            },
+            {
+                "source": "HTSHS_ODW_84_HOE",
+                "target": "ITETL_NOTARIS",
+                "value": 68
+            },
+            {
+                "source": "HTSHS_ODW__54_STL",
+                "target": "ITETL_NOTARIS",
+                "value": 56
+            },
+            {
+                "source": "ADRES_SHS_BEZOEK_BAG",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 71
+            },
+            {
+                "source": "ADRES_SHS_CORRESPONDENTIE_BAG",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 71
+            },
+            {
+                "source": "HTBG2_NUMMERAANDUIDING",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 33
+            },
+            {
+                "source": "HTBG2_OPENBARE_RUIMTE",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 90
+            },
+            {
+                "source": "HTBG2_VERBLIJFSOBJECT",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 10
+            },
+            {
+                "source": "HTBG2_WOONPLAATS",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 17
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 73
+            },
+            {
+                "source": "HTSHS_ODW_84_HOE",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 9
+            },
+            {
+                "source": "HTSHS_ODW__54_STL",
+                "target": "ITETL_NOTARISKANTOOR",
+                "value": 4
+            },
+            {
+                "source": "HTBG2_NUMMERAANDUIDING",
+                "target": "ITETL_ONDERPAND",
+                "value": 2
+            },
+            {
+                "source": "HTBG2_OPENBARE_RUIMTE",
+                "target": "ITETL_ONDERPAND",
+                "value": 91
+            },
+            {
+                "source": "HTBG2_VERBLIJFSOBJECT",
+                "target": "ITETL_ONDERPAND",
+                "value": 24
+            },
+            {
+                "source": "HTBG2_WOONPLAATS",
+                "target": "ITETL_ONDERPAND",
+                "value": 32
+            },
+            {
+                "source": "HTDIV_HANDMATIG_ODW_CODELIJSTOVERIG",
+                "target": "ITETL_ONDERPAND",
+                "value": 33
+            },
+            {
+                "source": "HTSHS_ODW_02_LN",
+                "target": "ITETL_ONDERPAND",
+                "value": 19
+            },
+            {
+                "source": "HTSHS_ODW_03_ONL",
+                "target": "ITETL_ONDERPAND",
+                "value": 6
+            },
+            {
+                "source": "HTSHS_ODW_03_ONL",
+                "target": "ITETL_ONDERPAND",
+                "value": 39
+            },
+            {
+                "source": "HTSHS_ODW_06_OND",
+                "target": "ITETL_ONDERPAND",
+                "value": 44
+            },
+            {
+                "source": "HTSHS_ODW_15_ADL",
+                "target": "ITETL_ONDERPAND",
+                "value": 65
+            },
+            {
+                "source": "HTSHS_ODW_23_TAX",
+                "target": "ITETL_ONDERPAND",
+                "value": 54
+            },
+            {
+                "source": "HTSHS_ODW__58_SBO",
+                "target": "ITETL_ONDERPAND",
+                "value": 66
+            },
+            {
+                "source": "HTSHS_ODW__64_SON",
+                "target": "ITETL_ONDERPAND",
+                "value": 77
+            },
+            {
+                "source": "HTSHS_ODW__85_LND",
+                "target": "ITETL_ONDERPAND",
+                "value": 27
+            },
+            {
+                "source": "HTSHS_ODW__90_SSO",
+                "target": "ITETL_ONDERPAND",
+                "value": 65
+            },
+            {
+                "source": "HTSHS_OVERBRUGGING_GEOFFREERD_LENINGDEEL",
+                "target": "ITETL_ONDERPAND",
+                "value": 3
+            },
+            {
+                "source": "HVETL_OVERBRUGGING_GEOFFREERD_LENINGDEEL",
+                "target": "ITETL_ONDERPAND",
+                "value": 85
+            },
+            {
+                "source": "IVETL_BAG_ONL_ADRES_DIG",
+                "target": "ITETL_ONDERPAND",
+                "value": 35
+            },
+            {
+                "source": "HTSHS_ODW_03_ONL",
+                "target": "ITETL_ONDERPANDAKTE",
+                "value": 29
+            },
+            {
+                "source": "HTSHS_ODW_21_HYZ",
+                "target": "ITETL_ONDERPANDAKTE",
+                "value": 65
+            },
+            {
+                "source": "HTSHS_ODW_22_AKT",
+                "target": "ITETL_ONDERPANDAKTE",
+                "value": 83
+            },
+            {
+                "source": "HTCAL_ONDERPAND",
+                "target": "ITETL_ONDERPAND_CALCASA",
+                "value": 31
+            },
+            {
+                "source": "HVCAL_ONDERPAND",
+                "target": "ITETL_ONDERPAND_CALCASA",
+                "value": 69
+            },
+            {
+                "source": "HTSHS_ODW_105_ERP",
+                "target": "ITETL_OPGEBOUWDE_WAARDE_LEV",
+                "value": 13
+            },
+            {
+                "source": "HTSHS_ODW_31_LEV",
+                "target": "ITETL_OPGEBOUWDE_WAARDE_LEV",
+                "value": 16
+            },
+            {
+                "source": "HTSHS_ODW_105_ERP",
+                "target": "ITETL_OPGEBOUWDE_WAARDE_SPR",
+                "value": 67
+            },
+            {
+                "source": "HTSHS_ODW_32_SPR",
+                "target": "ITETL_OPGEBOUWDE_WAARDE_SPR",
+                "value": 73
+            },
+            {
+                "source": "HTSHS_ODW_30_PSP",
+                "target": "ITETL_POLIS_LEV",
+                "value": 98
+            },
+            {
+                "source": "HTSHS_ODW_31_LEV",
+                "target": "ITETL_POLIS_LEV",
+                "value": 1
+            },
+            {
+                "source": "HTSHS_ODW_30_PSP",
+                "target": "ITETL_POLIS_SPR",
+                "value": 90
+            },
+            {
+                "source": "HTSHS_ODW_32_SPR",
+                "target": "ITETL_POLIS_SPR",
+                "value": 6
+            },
+            {
+                "source": "HTSHS_ODW_05_PRS",
+                "target": "ITETL_TAXATEUR",
+                "value": 55
+            },
+            {
+                "source": "HTSHS_ODW_84_HOE",
+                "target": "ITETL_TAXATEUR",
+                "value": 92
+            },
+            {
+                "source": "ITETL_KLANT_PERSOON",
+                "target": "CUSTOMER",
+                "value": 47
+            },
+            {
+                "source": "ITETL_LENING_BOEKING_DEBITEUR",
+                "target": "FACILITY",
+                "value": 44
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "RWA_LOANPART",
+                "value": 3
+            },
+            {
+                "source": "ITETL_KLANT_GROEP_PERSOON",
+                "target": "FACILITY",
+                "value": 15
+            },
+            {
+                "source": "ITETL_KLANT_PERSOON",
+                "target": "FACILITY",
+                "value": 14
+            },
+            {
+                "source": "ITETL_LENING_AANVRAAG",
+                "target": "FACILITY",
+                "value": 61
+            },
+            {
+                "source": "ITETL_LENINGDEEL",
+                "target": "FACILITY",
+                "value": 88
+            },
+            {
+                "source": "ITETL_INKOMENSTOETS",
+                "target": "FACILITY",
+                "value": 12
+            },
+            {
+                "source": "ITETL_KLANT_GROEP_PERSOON",
+                "target": "FACILITY_CUSTOMER",
+                "value": 25
+            },
+            {
+                "source": "ITETL_AANVRAAGDEEL",
+                "target": "FACILITY",
+                "value": 32
+            },
+            {
+                "source": "ITETL_LENING_ACHTERSTAND",
+                "target": "FACILITY",
+                "value": 35
+            },
+            {
+                "source": "ITETL_KLANT_PERSOON_BKR",
+                "target": "CUSTOMER",
+                "value": 32
+            },
+            {
+                "source": "ITETL_ONDERPAND_CALCASA",
+                "target": "FACILITY",
+                "value": 20
+            },
+            {
+                "source": "ITETL_ONDERPAND",
+                "target": "FACILITY",
+                "value": 28
+            },
+            {
+                "source": "ITETL_AANVRAAG_STATUS",
+                "target": "FACILITY",
+                "value": 86
+            },
+            {
+                "source": "ITETL_KLANT_GROEP",
+                "target": "FACILITY_CUSTOMER",
+                "value": 31
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "FACILITY_CUSTOMER",
+                "value": 37
+            },
+            {
+                "source": "ITETL_KLANT_GROEP",
+                "target": "FACILITY",
+                "value": 90
+            },
+            {
+                "source": "ITETL_LENINGDEEL",
+                "target": "RWA_LOANPART",
+                "value": 36
+            },
+            {
+                "source": "ITETL_AANVRAAG",
+                "target": "FACILITY",
+                "value": 76
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "FACILITY",
+                "value": 14
+            },
+            {
+                "source": "HTBBM_EXTRACT",
+                "target": "FACILITY",
+                "value": 74
+            },
+            {
+                "source": "TTDIV_DATE",
+                "target": "FACILITY",
+                "value": 42
+            },
+            {
+                "source": "HTSHS_ODW_30_PSP",
+                "target": "FACILITY",
+                "value": 86
+            },
+            {
+                "source": "HTSHS_ODW_01_LD",
+                "target": "FACILITY",
+                "value": 94
+            },
+            {
+                "source": "HTTMN_ACCOUNTACTIVITIES",
+                "target": "FACILITY",
+                "value": 35
+            },
+            {
+                "source": "HTTMN_ACCOUNTS",
+                "target": "FACILITY",
+                "value": 5
+            },
+            {
+                "source": "HTTMN_ACTIVITIES",
+                "target": "FACILITY",
+                "value": 47
+            },
+            {
+                "source": "HTTMN_HC_TM_ACCOUNT_EPISODE",
+                "target": "FACILITY",
+                "value": 69
+            },
+            {
+                "source": "HTSHS_ODW__68_SPO",
+                "target": "FACILITY",
+                "value": 86
+            },
+            {
+                "source": "HTTMN_HC_ST_ACCOUNT_DETAIL",
+                "target": "FACILITY",
+                "value": 77
+            },
+            {
+                "source": "HTSHS_OVERBRUGGING_GEOFFREERD_LENINGDEEL",
+                "target": "FACILITY",
+                "value": 76
+            },
+            {
+                "source": "HTSHS_ODW_20_LDH",
+                "target": "FACILITY",
+                "value": 15
+            },
+            {
+                "source": "HTSHS_ODW_31_LEV",
+                "target": "FACILITY",
+                "value": 75
+            },
+            {
+                "source": "HTCBS_INDEXATIE",
+                "target": "FACILITY",
+                "value": 97
+            },
+            {
+                "source": "HTTMN_HC_TM_LOSS_REDUCTION",
+                "target": "FACILITY",
+                "value": 44
+            },
+            {
+                "source": "HTSHS_ODW_32_SPR",
+                "target": "FACILITY",
+                "value": 87
+            },
+            {
+                "source": "HTSHS_ODW__87_VMY",
+                "target": "FACILITY",
+                "value": 56
+            },
+            {
+                "source": "HTSHS_ONDERPAND_TAXATIE_ACHTERSTAND",
+                "target": "FACILITY",
+                "value": 13
+            },
+            {
+                "source": "HTSHS_ODW_105_ERP",
+                "target": "FACILITY",
+                "value": 33
+            },
+            {
+                "source": "FACILITY",
+                "target": "BIV_OBLIGOR",
+                "value": 43
+            },
+            {
+                "source": "FACILITY",
+                "target": "BIV_FACILITY",
+                "value": 33
+            },
+            {
+                "source": "FACILITY",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 70
+            },
+            {
+                "source": "FACILITY",
+                "target": "BIV_PRODUCT",
+                "value": 35
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "BIV_PRODUCT",
+                "value": 54
+            },
+            {
+                "source": "ITETL_AANVRAAGDEEL",
+                "target": "BIV_PRODUCT",
+                "value": 21
+            },
+            {
+                "source": "ITETL_ONDERPAND",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 17
+            },
+            {
+                "source": "ITETL_AANVRAAG",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 12
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "BIV_OBLIGOR",
+                "value": 55
+            },
+            {
+                "source": "ITETL_LENINGDEEL",
+                "target": "BIV_PRODUCT",
+                "value": 68
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 63
+            },
+            {
+                "source": "ITETL_LENINGDEEL",
+                "target": "BIV_OBLIGOR",
+                "value": 96
+            },
+            {
+                "source": "ITETL_AANVRAAG",
+                "target": "BIV_PRODUCT",
+                "value": 67
+            },
+            {
+                "source": "ITETL_LENINGDEEL",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 85
+            },
+            {
+                "source": "ITETL_ONDERPAND",
+                "target": "BIV_OBLIGOR",
+                "value": 37
+            },
+            {
+                "source": "ITETL_KLANT_GROEP",
+                "target": "BIV_OBLIGOR",
+                "value": 46
+            },
+            {
+                "source": "ITETL_LENING",
+                "target": "BIV_FACILITY",
+                "value": 70
+            },
+            {
+                "source": "ITETL_KLANT_PERSOON",
+                "target": "BIV_OBLIGOR",
+                "value": 97
+            },
+            {
+                "source": "HTIRB_FACILITY_DOD5",
+                "target": "BIV_PRODUCT",
+                "value": 31
+            },
+            {
+                "source": "HTSHS_ONDERPAND_AANVRAAG_MO",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 72
+            },
+            {
+                "source": "HTSHS_ODW_102_ERL",
+                "target": "BIV_PRODUCT",
+                "value": 88
+            },
+            {
+                "source": "HTSHS_OFFERTE",
+                "target": "BIV_PRODUCT",
+                "value": 27
+            },
+            {
+                "source": "HTSHS_ONDERPAND_AANVRAAG",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 16
+            },
+            {
+                "source": "HTSHS_ODW_26_LNA",
+                "target": "BIV_FACILITY",
+                "value": 5
+            },
+            {
+                "source": "HTCAS_IFRS9_PROVISIONS_DOD5",
+                "target": "BIV_PRODUCT",
+                "value": 48
+            },
+            {
+                "source": "HTSH2_MO_ONDERPANDEN_ONDERPAND",
+                "target": "BIV_OBLIGOR",
+                "value": 75
+            },
+            {
+                "source": "HTCAS_IFRS9_PROVISIONS",
+                "target": "BIV_PRODUCT",
+                "value": 24
+            },
+            {
+                "source": "HTSH2_MO_ONDERPANDEN_ONDERPAND",
+                "target": "BIV_COLLATERALITEM_RRE",
+                "value": 36
+            },
+            {
+                "source": "HTIRB_FACILITY",
+                "target": "BIV_PRODUCT",
+                "value": 74
+            }
+        ]
+    }

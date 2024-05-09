@@ -1,0 +1,2246 @@
+{
+    "nodes": [
+        {
+            "id": "Myriel",
+            "group": 1,
+            "percentage": 25,
+            "capacity": 34
+        },
+        {
+            "id": "Napoleon",
+            "group": 1,
+            "percentage": 94,
+            "capacity": 18
+        },
+        {
+            "id": "Mlle.Baptistine",
+            "group": 1,
+            "percentage": 82,
+            "capacity": 46
+        },
+        {
+            "id": "Mme.Magloire",
+            "group": 1,
+            "percentage": 35,
+            "capacity": 25
+        },
+        {
+            "id": "CountessdeLo",
+            "group": 1,
+            "percentage": 31,
+            "capacity": 43
+        },
+        {
+            "id": "Geborand",
+            "group": 1,
+            "percentage": 71,
+            "capacity": 20
+        },
+        {
+            "id": "Champtercier",
+            "group": 1,
+            "percentage": 8,
+            "capacity": 29
+        },
+        {
+            "id": "Cravatte",
+            "group": 1,
+            "percentage": 43,
+            "capacity": 19
+        },
+        {
+            "id": "Count",
+            "group": 1,
+            "percentage": 55,
+            "capacity": 23
+        },
+        {
+            "id": "OldMan",
+            "group": 1,
+            "percentage": 83,
+            "capacity": 28
+        },
+        {
+            "id": "Labarre",
+            "group": 2,
+            "percentage": 98,
+            "capacity": 10
+        },
+        {
+            "id": "Valjean",
+            "group": 2,
+            "percentage": 25,
+            "capacity": 47
+        },
+        {
+            "id": "Marguerite",
+            "group": 3,
+            "percentage": 3,
+            "capacity": 10
+        },
+        {
+            "id": "Mme.deR",
+            "group": 2,
+            "percentage": 34,
+            "capacity": 38
+        },
+        {
+            "id": "Isabeau",
+            "group": 2,
+            "percentage": 48,
+            "capacity": 32
+        },
+        {
+            "id": "Gervais",
+            "group": 2,
+            "percentage": 18,
+            "capacity": 46
+        },
+        {
+            "id": "Tholomyes",
+            "group": 3,
+            "percentage": 51,
+            "capacity": 32
+        },
+        {
+            "id": "Listolier",
+            "group": 3,
+            "percentage": 33,
+            "capacity": 24
+        },
+        {
+            "id": "Fameuil",
+            "group": 3,
+            "percentage": 45,
+            "capacity": 13
+        },
+        {
+            "id": "Blacheville",
+            "group": 3,
+            "percentage": 88,
+            "capacity": 35
+        },
+        {
+            "id": "Favourite",
+            "group": 3,
+            "percentage": 76,
+            "capacity": 39
+        },
+        {
+            "id": "Dahlia",
+            "group": 3,
+            "percentage": 70,
+            "capacity": 46
+        },
+        {
+            "id": "Zephine",
+            "group": 3,
+            "percentage": 71,
+            "capacity": 17
+        },
+        {
+            "id": "Fantine",
+            "group": 3,
+            "percentage": 69,
+            "capacity": 29
+        },
+        {
+            "id": "Mme.Thenardier",
+            "group": 4,
+            "percentage": 6,
+            "capacity": 33
+        },
+        {
+            "id": "Thenardier",
+            "group": 4,
+            "percentage": 25,
+            "capacity": 36
+        },
+        {
+            "id": "Cosette",
+            "group": 5,
+            "percentage": 76,
+            "capacity": 22
+        },
+        {
+            "id": "Javert",
+            "group": 4,
+            "percentage": 55,
+            "capacity": 15
+        },
+        {
+            "id": "Fauchelevent",
+            "group": 0,
+            "percentage": 28,
+            "capacity": 45
+        },
+        {
+            "id": "Bamatabois",
+            "group": 2,
+            "percentage": 63,
+            "capacity": 14
+        },
+        {
+            "id": "Perpetue",
+            "group": 3,
+            "percentage": 5,
+            "capacity": 20
+        },
+        {
+            "id": "Simplice",
+            "group": 2,
+            "percentage": 3,
+            "capacity": 13
+        },
+        {
+            "id": "Scaufflaire",
+            "group": 2,
+            "percentage": 5,
+            "capacity": 10
+        },
+        {
+            "id": "Woman1",
+            "group": 2,
+            "percentage": 86,
+            "capacity": 15
+        },
+        {
+            "id": "Judge",
+            "group": 2,
+            "percentage": 38,
+            "capacity": 22
+        },
+        {
+            "id": "Champmathieu",
+            "group": 2,
+            "percentage": 48,
+            "capacity": 47
+        },
+        {
+            "id": "Brevet",
+            "group": 2,
+            "percentage": 16,
+            "capacity": 25
+        },
+        {
+            "id": "Chenildieu",
+            "group": 2,
+            "percentage": 58,
+            "capacity": 15
+        },
+        {
+            "id": "Cochepaille",
+            "group": 2,
+            "percentage": 3,
+            "capacity": 44
+        },
+        {
+            "id": "Pontmercy",
+            "group": 4,
+            "percentage": 42,
+            "capacity": 49
+        },
+        {
+            "id": "Boulatruelle",
+            "group": 6,
+            "percentage": 3,
+            "capacity": 39
+        },
+        {
+            "id": "Eponine",
+            "group": 4,
+            "percentage": 59,
+            "capacity": 14
+        },
+        {
+            "id": "Anzelma",
+            "group": 4,
+            "percentage": 85,
+            "capacity": 37
+        },
+        {
+            "id": "Woman2",
+            "group": 5,
+            "percentage": 43,
+            "capacity": 41
+        },
+        {
+            "id": "MotherInnocent",
+            "group": 0,
+            "percentage": 14,
+            "capacity": 40
+        },
+        {
+            "id": "Gribier",
+            "group": 0,
+            "percentage": 85,
+            "capacity": 42
+        },
+        {
+            "id": "Jondrette",
+            "group": 7,
+            "percentage": 49,
+            "capacity": 10
+        },
+        {
+            "id": "Mme.Burgon",
+            "group": 7,
+            "percentage": 58,
+            "capacity": 11
+        },
+        {
+            "id": "Gavroche",
+            "group": 8,
+            "percentage": 43,
+            "capacity": 23
+        },
+        {
+            "id": "Gillenormand",
+            "group": 5,
+            "percentage": 58,
+            "capacity": 49
+        },
+        {
+            "id": "Magnon",
+            "group": 5,
+            "percentage": 32,
+            "capacity": 40
+        },
+        {
+            "id": "Mlle.Gillenormand",
+            "group": 5,
+            "percentage": 90,
+            "capacity": 31
+        },
+        {
+            "id": "Mme.Pontmercy",
+            "group": 5,
+            "percentage": 53,
+            "capacity": 23
+        },
+        {
+            "id": "Mlle.Vaubois",
+            "group": 5,
+            "percentage": 42,
+            "capacity": 22
+        },
+        {
+            "id": "Lt.Gillenormand",
+            "group": 5,
+            "percentage": 34,
+            "capacity": 27
+        },
+        {
+            "id": "Marius",
+            "group": 8,
+            "percentage": 95,
+            "capacity": 32
+        },
+        {
+            "id": "BaronessT",
+            "group": 5,
+            "percentage": 88,
+            "capacity": 29
+        },
+        {
+            "id": "Mabeuf",
+            "group": 8,
+            "percentage": 21,
+            "capacity": 44
+        },
+        {
+            "id": "Enjolras",
+            "group": 8,
+            "percentage": 51,
+            "capacity": 18
+        },
+        {
+            "id": "Combeferre",
+            "group": 8,
+            "percentage": 61,
+            "capacity": 46
+        },
+        {
+            "id": "Prouvaire",
+            "group": 8,
+            "percentage": 41,
+            "capacity": 10
+        },
+        {
+            "id": "Feuilly",
+            "group": 8,
+            "percentage": 53,
+            "capacity": 14
+        },
+        {
+            "id": "Courfeyrac",
+            "group": 8,
+            "percentage": 28,
+            "capacity": 33
+        },
+        {
+            "id": "Bahorel",
+            "group": 8,
+            "percentage": 21,
+            "capacity": 14
+        },
+        {
+            "id": "Bossuet",
+            "group": 8,
+            "percentage": 93,
+            "capacity": 33
+        },
+        {
+            "id": "Joly",
+            "group": 8,
+            "percentage": 48,
+            "capacity": 18
+        },
+        {
+            "id": "Grantaire",
+            "group": 8,
+            "percentage": 26,
+            "capacity": 38
+        },
+        {
+            "id": "MotherPlutarch",
+            "group": 9,
+            "percentage": 45,
+            "capacity": 25
+        },
+        {
+            "id": "Gueulemer",
+            "group": 4,
+            "percentage": 91,
+            "capacity": 20
+        },
+        {
+            "id": "Babet",
+            "group": 4,
+            "percentage": 27,
+            "capacity": 40
+        },
+        {
+            "id": "Claquesous",
+            "group": 4,
+            "percentage": 34,
+            "capacity": 24
+        },
+        {
+            "id": "Montparnasse",
+            "group": 4,
+            "percentage": 3,
+            "capacity": 22
+        },
+        {
+            "id": "Toussaint",
+            "group": 5,
+            "percentage": 28,
+            "capacity": 27
+        },
+        {
+            "id": "Child1",
+            "group": 10,
+            "percentage": 17,
+            "capacity": 18
+        },
+        {
+            "id": "Child2",
+            "group": 10,
+            "percentage": 5,
+            "capacity": 26
+        },
+        {
+            "id": "Brujon",
+            "group": 4,
+            "percentage": 62,
+            "capacity": 38
+        },
+        {
+            "id": "Mme.Hucheloup",
+            "group": 8,
+            "percentage": 58,
+            "capacity": 41
+        }
+    ],
+    "links": [
+        {
+            "source": "Napoleon",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 32,
+            "capacity": 41
+        },
+        {
+            "source": "Mlle.Baptistine",
+            "target": "Myriel",
+            "value": 8,
+            "percentage": 8,
+            "capacity": 20
+        },
+        {
+            "source": "Mme.Magloire",
+            "target": "Myriel",
+            "value": 10,
+            "percentage": 70,
+            "capacity": 19
+        },
+        {
+            "source": "Mme.Magloire",
+            "target": "Mlle.Baptistine",
+            "value": 6,
+            "percentage": 13,
+            "capacity": 34
+        },
+        {
+            "source": "CountessdeLo",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 93,
+            "capacity": 30
+        },
+        {
+            "source": "Geborand",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 93,
+            "capacity": 18
+        },
+        {
+            "source": "Champtercier",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 29,
+            "capacity": 30
+        },
+        {
+            "source": "Cravatte",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 98,
+            "capacity": 39
+        },
+        {
+            "source": "Count",
+            "target": "Myriel",
+            "value": 2,
+            "percentage": 39,
+            "capacity": 27
+        },
+        {
+            "source": "OldMan",
+            "target": "Myriel",
+            "value": 1,
+            "percentage": 10,
+            "capacity": 41
+        },
+        {
+            "source": "Valjean",
+            "target": "Labarre",
+            "value": 1,
+            "percentage": 81,
+            "capacity": 42
+        },
+        {
+            "source": "Valjean",
+            "target": "Mme.Magloire",
+            "value": 3,
+            "percentage": 44,
+            "capacity": 44
+        },
+        {
+            "source": "Valjean",
+            "target": "Mlle.Baptistine",
+            "value": 3,
+            "percentage": 72,
+            "capacity": 14
+        },
+        {
+            "source": "Valjean",
+            "target": "Myriel",
+            "value": 5,
+            "percentage": 7,
+            "capacity": 47
+        },
+        {
+            "source": "Marguerite",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 7,
+            "capacity": 18
+        },
+        {
+            "source": "Mme.deR",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 48,
+            "capacity": 47
+        },
+        {
+            "source": "Isabeau",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 64,
+            "capacity": 41
+        },
+        {
+            "source": "Gervais",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 13,
+            "capacity": 47
+        },
+        {
+            "source": "Listolier",
+            "target": "Tholomyes",
+            "value": 4,
+            "percentage": 4,
+            "capacity": 16
+        },
+        {
+            "source": "Fameuil",
+            "target": "Tholomyes",
+            "value": 4,
+            "percentage": 52,
+            "capacity": 46
+        },
+        {
+            "source": "Fameuil",
+            "target": "Listolier",
+            "value": 4,
+            "percentage": 97,
+            "capacity": 15
+        },
+        {
+            "source": "Blacheville",
+            "target": "Tholomyes",
+            "value": 4,
+            "percentage": 34,
+            "capacity": 36
+        },
+        {
+            "source": "Blacheville",
+            "target": "Listolier",
+            "value": 4,
+            "percentage": 74,
+            "capacity": 24
+        },
+        {
+            "source": "Blacheville",
+            "target": "Fameuil",
+            "value": 4,
+            "percentage": 75,
+            "capacity": 40
+        },
+        {
+            "source": "Favourite",
+            "target": "Tholomyes",
+            "value": 3,
+            "percentage": 96,
+            "capacity": 45
+        },
+        {
+            "source": "Favourite",
+            "target": "Listolier",
+            "value": 3,
+            "percentage": 44,
+            "capacity": 14
+        },
+        {
+            "source": "Favourite",
+            "target": "Fameuil",
+            "value": 3,
+            "percentage": 94,
+            "capacity": 47
+        },
+        {
+            "source": "Favourite",
+            "target": "Blacheville",
+            "value": 4,
+            "percentage": 53,
+            "capacity": 46
+        },
+        {
+            "source": "Dahlia",
+            "target": "Tholomyes",
+            "value": 3,
+            "percentage": 34,
+            "capacity": 24
+        },
+        {
+            "source": "Dahlia",
+            "target": "Listolier",
+            "value": 3,
+            "percentage": 64,
+            "capacity": 41
+        },
+        {
+            "source": "Dahlia",
+            "target": "Fameuil",
+            "value": 3,
+            "percentage": 7,
+            "capacity": 10
+        },
+        {
+            "source": "Dahlia",
+            "target": "Blacheville",
+            "value": 3,
+            "percentage": 41,
+            "capacity": 19
+        },
+        {
+            "source": "Dahlia",
+            "target": "Favourite",
+            "value": 5,
+            "percentage": 50,
+            "capacity": 18
+        },
+        {
+            "source": "Zephine",
+            "target": "Tholomyes",
+            "value": 3,
+            "percentage": 56,
+            "capacity": 25
+        },
+        {
+            "source": "Zephine",
+            "target": "Listolier",
+            "value": 3,
+            "percentage": 41,
+            "capacity": 27
+        },
+        {
+            "source": "Zephine",
+            "target": "Fameuil",
+            "value": 3,
+            "percentage": 52,
+            "capacity": 29
+        },
+        {
+            "source": "Zephine",
+            "target": "Blacheville",
+            "value": 3,
+            "percentage": 87,
+            "capacity": 41
+        },
+        {
+            "source": "Zephine",
+            "target": "Favourite",
+            "value": 4,
+            "percentage": 8,
+            "capacity": 47
+        },
+        {
+            "source": "Zephine",
+            "target": "Dahlia",
+            "value": 4,
+            "percentage": 66,
+            "capacity": 31
+        },
+        {
+            "source": "Fantine",
+            "target": "Tholomyes",
+            "value": 3,
+            "percentage": 98,
+            "capacity": 48
+        },
+        {
+            "source": "Fantine",
+            "target": "Listolier",
+            "value": 3,
+            "percentage": 75,
+            "capacity": 11
+        },
+        {
+            "source": "Fantine",
+            "target": "Fameuil",
+            "value": 3,
+            "percentage": 12,
+            "capacity": 38
+        },
+        {
+            "source": "Fantine",
+            "target": "Blacheville",
+            "value": 3,
+            "percentage": 62,
+            "capacity": 22
+        },
+        {
+            "source": "Fantine",
+            "target": "Favourite",
+            "value": 4,
+            "percentage": 12,
+            "capacity": 10
+        },
+        {
+            "source": "Fantine",
+            "target": "Dahlia",
+            "value": 4,
+            "percentage": 86,
+            "capacity": 35
+        },
+        {
+            "source": "Fantine",
+            "target": "Zephine",
+            "value": 4,
+            "percentage": 76,
+            "capacity": 18
+        },
+        {
+            "source": "Fantine",
+            "target": "Marguerite",
+            "value": 2,
+            "percentage": 33,
+            "capacity": 20
+        },
+        {
+            "source": "Fantine",
+            "target": "Valjean",
+            "value": 9,
+            "percentage": 62,
+            "capacity": 35
+        },
+        {
+            "source": "Mme.Thenardier",
+            "target": "Fantine",
+            "value": 2,
+            "percentage": 52,
+            "capacity": 45
+        },
+        {
+            "source": "Mme.Thenardier",
+            "target": "Valjean",
+            "value": 7,
+            "percentage": 74,
+            "capacity": 19
+        },
+        {
+            "source": "Thenardier",
+            "target": "Mme.Thenardier",
+            "value": 13,
+            "percentage": 5,
+            "capacity": 15
+        },
+        {
+            "source": "Thenardier",
+            "target": "Fantine",
+            "value": 1,
+            "percentage": 1,
+            "capacity": 29
+        },
+        {
+            "source": "Thenardier",
+            "target": "Valjean",
+            "value": 12,
+            "percentage": 34,
+            "capacity": 13
+        },
+        {
+            "source": "Cosette",
+            "target": "Mme.Thenardier",
+            "value": 4,
+            "percentage": 93,
+            "capacity": 30
+        },
+        {
+            "source": "Cosette",
+            "target": "Valjean",
+            "value": 31,
+            "percentage": 84,
+            "capacity": 45
+        },
+        {
+            "source": "Cosette",
+            "target": "Tholomyes",
+            "value": 1,
+            "percentage": 96,
+            "capacity": 26
+        },
+        {
+            "source": "Cosette",
+            "target": "Thenardier",
+            "value": 1,
+            "percentage": 84,
+            "capacity": 41
+        },
+        {
+            "source": "Javert",
+            "target": "Valjean",
+            "value": 17,
+            "percentage": 94,
+            "capacity": 11
+        },
+        {
+            "source": "Javert",
+            "target": "Fantine",
+            "value": 5,
+            "percentage": 66,
+            "capacity": 33
+        },
+        {
+            "source": "Javert",
+            "target": "Thenardier",
+            "value": 5,
+            "percentage": 96,
+            "capacity": 38
+        },
+        {
+            "source": "Javert",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 77,
+            "capacity": 15
+        },
+        {
+            "source": "Javert",
+            "target": "Cosette",
+            "value": 1,
+            "percentage": 45,
+            "capacity": 10
+        },
+        {
+            "source": "Fauchelevent",
+            "target": "Valjean",
+            "value": 8,
+            "percentage": 88,
+            "capacity": 31
+        },
+        {
+            "source": "Fauchelevent",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 50,
+            "capacity": 19
+        },
+        {
+            "source": "Bamatabois",
+            "target": "Fantine",
+            "value": 1,
+            "percentage": 19,
+            "capacity": 32
+        },
+        {
+            "source": "Bamatabois",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 48,
+            "capacity": 32
+        },
+        {
+            "source": "Bamatabois",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 44,
+            "capacity": 42
+        },
+        {
+            "source": "Perpetue",
+            "target": "Fantine",
+            "value": 1,
+            "percentage": 3,
+            "capacity": 35
+        },
+        {
+            "source": "Simplice",
+            "target": "Perpetue",
+            "value": 2,
+            "percentage": 18,
+            "capacity": 36
+        },
+        {
+            "source": "Simplice",
+            "target": "Valjean",
+            "value": 3,
+            "percentage": 73,
+            "capacity": 29
+        },
+        {
+            "source": "Simplice",
+            "target": "Fantine",
+            "value": 2,
+            "percentage": 60,
+            "capacity": 27
+        },
+        {
+            "source": "Simplice",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 34,
+            "capacity": 25
+        },
+        {
+            "source": "Scaufflaire",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 74,
+            "capacity": 16
+        },
+        {
+            "source": "Woman1",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 68,
+            "capacity": 23
+        },
+        {
+            "source": "Woman1",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 50,
+            "capacity": 21
+        },
+        {
+            "source": "Judge",
+            "target": "Valjean",
+            "value": 3,
+            "percentage": 64,
+            "capacity": 26
+        },
+        {
+            "source": "Judge",
+            "target": "Bamatabois",
+            "value": 2,
+            "percentage": 61,
+            "capacity": 28
+        },
+        {
+            "source": "Champmathieu",
+            "target": "Valjean",
+            "value": 3,
+            "percentage": 47,
+            "capacity": 48
+        },
+        {
+            "source": "Champmathieu",
+            "target": "Judge",
+            "value": 3,
+            "percentage": 48,
+            "capacity": 18
+        },
+        {
+            "source": "Champmathieu",
+            "target": "Bamatabois",
+            "value": 2,
+            "percentage": 52,
+            "capacity": 28
+        },
+        {
+            "source": "Brevet",
+            "target": "Judge",
+            "value": 2,
+            "percentage": 16,
+            "capacity": 13
+        },
+        {
+            "source": "Brevet",
+            "target": "Champmathieu",
+            "value": 2,
+            "percentage": 68,
+            "capacity": 20
+        },
+        {
+            "source": "Brevet",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 21,
+            "capacity": 30
+        },
+        {
+            "source": "Brevet",
+            "target": "Bamatabois",
+            "value": 1,
+            "percentage": 89,
+            "capacity": 17
+        },
+        {
+            "source": "Chenildieu",
+            "target": "Judge",
+            "value": 2,
+            "percentage": 29,
+            "capacity": 35
+        },
+        {
+            "source": "Chenildieu",
+            "target": "Champmathieu",
+            "value": 2,
+            "percentage": 79,
+            "capacity": 35
+        },
+        {
+            "source": "Chenildieu",
+            "target": "Brevet",
+            "value": 2,
+            "percentage": 37,
+            "capacity": 24
+        },
+        {
+            "source": "Chenildieu",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 3,
+            "capacity": 18
+        },
+        {
+            "source": "Chenildieu",
+            "target": "Bamatabois",
+            "value": 1,
+            "percentage": 99,
+            "capacity": 26
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Judge",
+            "value": 2,
+            "percentage": 61,
+            "capacity": 25
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Champmathieu",
+            "value": 2,
+            "percentage": 73,
+            "capacity": 22
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Brevet",
+            "value": 2,
+            "percentage": 24,
+            "capacity": 21
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Chenildieu",
+            "value": 2,
+            "percentage": 17,
+            "capacity": 11
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 99,
+            "capacity": 14
+        },
+        {
+            "source": "Cochepaille",
+            "target": "Bamatabois",
+            "value": 1,
+            "percentage": 92,
+            "capacity": 45
+        },
+        {
+            "source": "Pontmercy",
+            "target": "Thenardier",
+            "value": 1,
+            "percentage": 15,
+            "capacity": 10
+        },
+        {
+            "source": "Boulatruelle",
+            "target": "Thenardier",
+            "value": 1,
+            "percentage": 18,
+            "capacity": 12
+        },
+        {
+            "source": "Eponine",
+            "target": "Mme.Thenardier",
+            "value": 2,
+            "percentage": 55,
+            "capacity": 40
+        },
+        {
+            "source": "Eponine",
+            "target": "Thenardier",
+            "value": 3,
+            "percentage": 92,
+            "capacity": 17
+        },
+        {
+            "source": "Anzelma",
+            "target": "Eponine",
+            "value": 2,
+            "percentage": 24,
+            "capacity": 13
+        },
+        {
+            "source": "Anzelma",
+            "target": "Thenardier",
+            "value": 2,
+            "percentage": 1,
+            "capacity": 26
+        },
+        {
+            "source": "Anzelma",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 21,
+            "capacity": 18
+        },
+        {
+            "source": "Woman2",
+            "target": "Valjean",
+            "value": 3,
+            "percentage": 29,
+            "capacity": 42
+        },
+        {
+            "source": "Woman2",
+            "target": "Cosette",
+            "value": 1,
+            "percentage": 6,
+            "capacity": 45
+        },
+        {
+            "source": "Woman2",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 65,
+            "capacity": 46
+        },
+        {
+            "source": "MotherInnocent",
+            "target": "Fauchelevent",
+            "value": 3,
+            "percentage": 75,
+            "capacity": 34
+        },
+        {
+            "source": "MotherInnocent",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 77,
+            "capacity": 34
+        },
+        {
+            "source": "Gribier",
+            "target": "Fauchelevent",
+            "value": 2,
+            "percentage": 61,
+            "capacity": 11
+        },
+        {
+            "source": "Mme.Burgon",
+            "target": "Jondrette",
+            "value": 1,
+            "percentage": 33,
+            "capacity": 22
+        },
+        {
+            "source": "Gavroche",
+            "target": "Mme.Burgon",
+            "value": 2,
+            "percentage": 72,
+            "capacity": 35
+        },
+        {
+            "source": "Gavroche",
+            "target": "Thenardier",
+            "value": 1,
+            "percentage": 52,
+            "capacity": 22
+        },
+        {
+            "source": "Gavroche",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 65,
+            "capacity": 17
+        },
+        {
+            "source": "Gavroche",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 83,
+            "capacity": 11
+        },
+        {
+            "source": "Gillenormand",
+            "target": "Cosette",
+            "value": 3,
+            "percentage": 26,
+            "capacity": 33
+        },
+        {
+            "source": "Gillenormand",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 29,
+            "capacity": 40
+        },
+        {
+            "source": "Magnon",
+            "target": "Gillenormand",
+            "value": 1,
+            "percentage": 7,
+            "capacity": 25
+        },
+        {
+            "source": "Magnon",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 28,
+            "capacity": 43
+        },
+        {
+            "source": "Mlle.Gillenormand",
+            "target": "Gillenormand",
+            "value": 9,
+            "percentage": 44,
+            "capacity": 49
+        },
+        {
+            "source": "Mlle.Gillenormand",
+            "target": "Cosette",
+            "value": 2,
+            "percentage": 4,
+            "capacity": 27
+        },
+        {
+            "source": "Mlle.Gillenormand",
+            "target": "Valjean",
+            "value": 2,
+            "percentage": 37,
+            "capacity": 48
+        },
+        {
+            "source": "Mme.Pontmercy",
+            "target": "Mlle.Gillenormand",
+            "value": 1,
+            "percentage": 66,
+            "capacity": 37
+        },
+        {
+            "source": "Mme.Pontmercy",
+            "target": "Pontmercy",
+            "value": 1,
+            "percentage": 49,
+            "capacity": 37
+        },
+        {
+            "source": "Mlle.Vaubois",
+            "target": "Mlle.Gillenormand",
+            "value": 1,
+            "percentage": 94,
+            "capacity": 17
+        },
+        {
+            "source": "Lt.Gillenormand",
+            "target": "Mlle.Gillenormand",
+            "value": 2,
+            "percentage": 28,
+            "capacity": 22
+        },
+        {
+            "source": "Lt.Gillenormand",
+            "target": "Gillenormand",
+            "value": 1,
+            "percentage": 84,
+            "capacity": 49
+        },
+        {
+            "source": "Lt.Gillenormand",
+            "target": "Cosette",
+            "value": 1,
+            "percentage": 37,
+            "capacity": 36
+        },
+        {
+            "source": "Marius",
+            "target": "Mlle.Gillenormand",
+            "value": 6,
+            "percentage": 17,
+            "capacity": 31
+        },
+        {
+            "source": "Marius",
+            "target": "Gillenormand",
+            "value": 12,
+            "percentage": 91,
+            "capacity": 25
+        },
+        {
+            "source": "Marius",
+            "target": "Pontmercy",
+            "value": 1,
+            "percentage": 17,
+            "capacity": 43
+        },
+        {
+            "source": "Marius",
+            "target": "Lt.Gillenormand",
+            "value": 1,
+            "percentage": 83,
+            "capacity": 20
+        },
+        {
+            "source": "Marius",
+            "target": "Cosette",
+            "value": 21,
+            "percentage": 57,
+            "capacity": 32
+        },
+        {
+            "source": "Marius",
+            "target": "Valjean",
+            "value": 19,
+            "percentage": 55,
+            "capacity": 25
+        },
+        {
+            "source": "Marius",
+            "target": "Tholomyes",
+            "value": 1,
+            "percentage": 58,
+            "capacity": 38
+        },
+        {
+            "source": "Marius",
+            "target": "Thenardier",
+            "value": 2,
+            "percentage": 84,
+            "capacity": 37
+        },
+        {
+            "source": "Marius",
+            "target": "Eponine",
+            "value": 5,
+            "percentage": 54,
+            "capacity": 47
+        },
+        {
+            "source": "Marius",
+            "target": "Gavroche",
+            "value": 4,
+            "percentage": 7,
+            "capacity": 15
+        },
+        {
+            "source": "BaronessT",
+            "target": "Gillenormand",
+            "value": 1,
+            "percentage": 36,
+            "capacity": 43
+        },
+        {
+            "source": "BaronessT",
+            "target": "Marius",
+            "value": 1,
+            "percentage": 1,
+            "capacity": 42
+        },
+        {
+            "source": "Mabeuf",
+            "target": "Marius",
+            "value": 1,
+            "percentage": 82,
+            "capacity": 34
+        },
+        {
+            "source": "Mabeuf",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 13,
+            "capacity": 29
+        },
+        {
+            "source": "Mabeuf",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 87,
+            "capacity": 28
+        },
+        {
+            "source": "Enjolras",
+            "target": "Marius",
+            "value": 7,
+            "percentage": 20,
+            "capacity": 15
+        },
+        {
+            "source": "Enjolras",
+            "target": "Gavroche",
+            "value": 7,
+            "percentage": 98,
+            "capacity": 49
+        },
+        {
+            "source": "Enjolras",
+            "target": "Javert",
+            "value": 6,
+            "percentage": 32,
+            "capacity": 28
+        },
+        {
+            "source": "Enjolras",
+            "target": "Mabeuf",
+            "value": 1,
+            "percentage": 45,
+            "capacity": 37
+        },
+        {
+            "source": "Enjolras",
+            "target": "Valjean",
+            "value": 4,
+            "percentage": 56,
+            "capacity": 11
+        },
+        {
+            "source": "Combeferre",
+            "target": "Enjolras",
+            "value": 15,
+            "percentage": 15,
+            "capacity": 30
+        },
+        {
+            "source": "Combeferre",
+            "target": "Marius",
+            "value": 5,
+            "percentage": 11,
+            "capacity": 10
+        },
+        {
+            "source": "Combeferre",
+            "target": "Gavroche",
+            "value": 6,
+            "percentage": 24,
+            "capacity": 25
+        },
+        {
+            "source": "Combeferre",
+            "target": "Mabeuf",
+            "value": 2,
+            "percentage": 94,
+            "capacity": 11
+        },
+        {
+            "source": "Prouvaire",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 1,
+            "capacity": 41
+        },
+        {
+            "source": "Prouvaire",
+            "target": "Enjolras",
+            "value": 4,
+            "percentage": 7,
+            "capacity": 27
+        },
+        {
+            "source": "Prouvaire",
+            "target": "Combeferre",
+            "value": 2,
+            "percentage": 82,
+            "capacity": 40
+        },
+        {
+            "source": "Feuilly",
+            "target": "Gavroche",
+            "value": 2,
+            "percentage": 43,
+            "capacity": 24
+        },
+        {
+            "source": "Feuilly",
+            "target": "Enjolras",
+            "value": 6,
+            "percentage": 26,
+            "capacity": 40
+        },
+        {
+            "source": "Feuilly",
+            "target": "Prouvaire",
+            "value": 2,
+            "percentage": 71,
+            "capacity": 37
+        },
+        {
+            "source": "Feuilly",
+            "target": "Combeferre",
+            "value": 5,
+            "percentage": 32,
+            "capacity": 27
+        },
+        {
+            "source": "Feuilly",
+            "target": "Mabeuf",
+            "value": 1,
+            "percentage": 24,
+            "capacity": 13
+        },
+        {
+            "source": "Feuilly",
+            "target": "Marius",
+            "value": 1,
+            "percentage": 79,
+            "capacity": 22
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Marius",
+            "value": 9,
+            "percentage": 95,
+            "capacity": 24
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Enjolras",
+            "value": 17,
+            "percentage": 65,
+            "capacity": 47
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Combeferre",
+            "value": 13,
+            "percentage": 81,
+            "capacity": 36
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Gavroche",
+            "value": 7,
+            "percentage": 46,
+            "capacity": 21
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Mabeuf",
+            "value": 2,
+            "percentage": 48,
+            "capacity": 20
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 24,
+            "capacity": 11
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Feuilly",
+            "value": 6,
+            "percentage": 34,
+            "capacity": 39
+        },
+        {
+            "source": "Courfeyrac",
+            "target": "Prouvaire",
+            "value": 3,
+            "percentage": 64,
+            "capacity": 25
+        },
+        {
+            "source": "Bahorel",
+            "target": "Combeferre",
+            "value": 5,
+            "percentage": 81,
+            "capacity": 49
+        },
+        {
+            "source": "Bahorel",
+            "target": "Gavroche",
+            "value": 5,
+            "percentage": 68,
+            "capacity": 16
+        },
+        {
+            "source": "Bahorel",
+            "target": "Courfeyrac",
+            "value": 6,
+            "percentage": 2,
+            "capacity": 44
+        },
+        {
+            "source": "Bahorel",
+            "target": "Mabeuf",
+            "value": 2,
+            "percentage": 58,
+            "capacity": 32
+        },
+        {
+            "source": "Bahorel",
+            "target": "Enjolras",
+            "value": 4,
+            "percentage": 68,
+            "capacity": 23
+        },
+        {
+            "source": "Bahorel",
+            "target": "Feuilly",
+            "value": 3,
+            "percentage": 66,
+            "capacity": 37
+        },
+        {
+            "source": "Bahorel",
+            "target": "Prouvaire",
+            "value": 2,
+            "percentage": 60,
+            "capacity": 21
+        },
+        {
+            "source": "Bahorel",
+            "target": "Marius",
+            "value": 1,
+            "percentage": 73,
+            "capacity": 44
+        },
+        {
+            "source": "Bossuet",
+            "target": "Marius",
+            "value": 5,
+            "percentage": 85,
+            "capacity": 39
+        },
+        {
+            "source": "Bossuet",
+            "target": "Courfeyrac",
+            "value": 12,
+            "percentage": 20,
+            "capacity": 34
+        },
+        {
+            "source": "Bossuet",
+            "target": "Gavroche",
+            "value": 5,
+            "percentage": 79,
+            "capacity": 37
+        },
+        {
+            "source": "Bossuet",
+            "target": "Bahorel",
+            "value": 4,
+            "percentage": 43,
+            "capacity": 25
+        },
+        {
+            "source": "Bossuet",
+            "target": "Enjolras",
+            "value": 10,
+            "percentage": 70,
+            "capacity": 45
+        },
+        {
+            "source": "Bossuet",
+            "target": "Feuilly",
+            "value": 6,
+            "percentage": 20,
+            "capacity": 13
+        },
+        {
+            "source": "Bossuet",
+            "target": "Prouvaire",
+            "value": 2,
+            "percentage": 27,
+            "capacity": 27
+        },
+        {
+            "source": "Bossuet",
+            "target": "Combeferre",
+            "value": 9,
+            "percentage": 21,
+            "capacity": 32
+        },
+        {
+            "source": "Bossuet",
+            "target": "Mabeuf",
+            "value": 1,
+            "percentage": 87,
+            "capacity": 46
+        },
+        {
+            "source": "Bossuet",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 20,
+            "capacity": 41
+        },
+        {
+            "source": "Joly",
+            "target": "Bahorel",
+            "value": 5,
+            "percentage": 83,
+            "capacity": 12
+        },
+        {
+            "source": "Joly",
+            "target": "Bossuet",
+            "value": 7,
+            "percentage": 95,
+            "capacity": 18
+        },
+        {
+            "source": "Joly",
+            "target": "Gavroche",
+            "value": 3,
+            "percentage": 83,
+            "capacity": 37
+        },
+        {
+            "source": "Joly",
+            "target": "Courfeyrac",
+            "value": 5,
+            "percentage": 35,
+            "capacity": 47
+        },
+        {
+            "source": "Joly",
+            "target": "Enjolras",
+            "value": 5,
+            "percentage": 18,
+            "capacity": 34
+        },
+        {
+            "source": "Joly",
+            "target": "Feuilly",
+            "value": 5,
+            "percentage": 26,
+            "capacity": 47
+        },
+        {
+            "source": "Joly",
+            "target": "Prouvaire",
+            "value": 2,
+            "percentage": 53,
+            "capacity": 28
+        },
+        {
+            "source": "Joly",
+            "target": "Combeferre",
+            "value": 5,
+            "percentage": 69,
+            "capacity": 15
+        },
+        {
+            "source": "Joly",
+            "target": "Mabeuf",
+            "value": 1,
+            "percentage": 6,
+            "capacity": 20
+        },
+        {
+            "source": "Joly",
+            "target": "Marius",
+            "value": 2,
+            "percentage": 6,
+            "capacity": 27
+        },
+        {
+            "source": "Grantaire",
+            "target": "Bossuet",
+            "value": 3,
+            "percentage": 49,
+            "capacity": 45
+        },
+        {
+            "source": "Grantaire",
+            "target": "Enjolras",
+            "value": 3,
+            "percentage": 93,
+            "capacity": 20
+        },
+        {
+            "source": "Grantaire",
+            "target": "Combeferre",
+            "value": 1,
+            "percentage": 59,
+            "capacity": 13
+        },
+        {
+            "source": "Grantaire",
+            "target": "Courfeyrac",
+            "value": 2,
+            "percentage": 65,
+            "capacity": 44
+        },
+        {
+            "source": "Grantaire",
+            "target": "Joly",
+            "value": 2,
+            "percentage": 12,
+            "capacity": 28
+        },
+        {
+            "source": "Grantaire",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 15,
+            "capacity": 28
+        },
+        {
+            "source": "Grantaire",
+            "target": "Bahorel",
+            "value": 1,
+            "percentage": 15,
+            "capacity": 25
+        },
+        {
+            "source": "Grantaire",
+            "target": "Feuilly",
+            "value": 1,
+            "percentage": 73,
+            "capacity": 45
+        },
+        {
+            "source": "Grantaire",
+            "target": "Prouvaire",
+            "value": 1,
+            "percentage": 30,
+            "capacity": 44
+        },
+        {
+            "source": "MotherPlutarch",
+            "target": "Mabeuf",
+            "value": 3,
+            "percentage": 81,
+            "capacity": 44
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Thenardier",
+            "value": 5,
+            "percentage": 6,
+            "capacity": 39
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 1,
+            "capacity": 42
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 38,
+            "capacity": 33
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 70,
+            "capacity": 45
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 47,
+            "capacity": 28
+        },
+        {
+            "source": "Gueulemer",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 63,
+            "capacity": 19
+        },
+        {
+            "source": "Babet",
+            "target": "Thenardier",
+            "value": 6,
+            "percentage": 19,
+            "capacity": 25
+        },
+        {
+            "source": "Babet",
+            "target": "Gueulemer",
+            "value": 6,
+            "percentage": 77,
+            "capacity": 30
+        },
+        {
+            "source": "Babet",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 40,
+            "capacity": 47
+        },
+        {
+            "source": "Babet",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 30,
+            "capacity": 10
+        },
+        {
+            "source": "Babet",
+            "target": "Javert",
+            "value": 2,
+            "percentage": 7,
+            "capacity": 29
+        },
+        {
+            "source": "Babet",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 61,
+            "capacity": 43
+        },
+        {
+            "source": "Babet",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 48,
+            "capacity": 17
+        },
+        {
+            "source": "Claquesous",
+            "target": "Thenardier",
+            "value": 4,
+            "percentage": 69,
+            "capacity": 28
+        },
+        {
+            "source": "Claquesous",
+            "target": "Babet",
+            "value": 4,
+            "percentage": 12,
+            "capacity": 16
+        },
+        {
+            "source": "Claquesous",
+            "target": "Gueulemer",
+            "value": 4,
+            "percentage": 98,
+            "capacity": 38
+        },
+        {
+            "source": "Claquesous",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 52,
+            "capacity": 24
+        },
+        {
+            "source": "Claquesous",
+            "target": "Mme.Thenardier",
+            "value": 1,
+            "percentage": 16,
+            "capacity": 42
+        },
+        {
+            "source": "Claquesous",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 15,
+            "capacity": 19
+        },
+        {
+            "source": "Claquesous",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 28,
+            "capacity": 48
+        },
+        {
+            "source": "Claquesous",
+            "target": "Enjolras",
+            "value": 1,
+            "percentage": 3,
+            "capacity": 16
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 54,
+            "capacity": 25
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Babet",
+            "value": 2,
+            "percentage": 20,
+            "capacity": 16
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Gueulemer",
+            "value": 2,
+            "percentage": 95,
+            "capacity": 35
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Claquesous",
+            "value": 2,
+            "percentage": 88,
+            "capacity": 37
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 44,
+            "capacity": 36
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 13,
+            "capacity": 47
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 31,
+            "capacity": 24
+        },
+        {
+            "source": "Montparnasse",
+            "target": "Thenardier",
+            "value": 1,
+            "percentage": 10,
+            "capacity": 46
+        },
+        {
+            "source": "Toussaint",
+            "target": "Cosette",
+            "value": 2,
+            "percentage": 39,
+            "capacity": 19
+        },
+        {
+            "source": "Toussaint",
+            "target": "Javert",
+            "value": 1,
+            "percentage": 38,
+            "capacity": 27
+        },
+        {
+            "source": "Toussaint",
+            "target": "Valjean",
+            "value": 1,
+            "percentage": 91,
+            "capacity": 44
+        },
+        {
+            "source": "Child1",
+            "target": "Gavroche",
+            "value": 2,
+            "percentage": 12,
+            "capacity": 14
+        },
+        {
+            "source": "Child2",
+            "target": "Gavroche",
+            "value": 2,
+            "percentage": 55,
+            "capacity": 21
+        },
+        {
+            "source": "Child2",
+            "target": "Child1",
+            "value": 3,
+            "percentage": 81,
+            "capacity": 48
+        },
+        {
+            "source": "Brujon",
+            "target": "Babet",
+            "value": 3,
+            "percentage": 79,
+            "capacity": 37
+        },
+        {
+            "source": "Brujon",
+            "target": "Gueulemer",
+            "value": 3,
+            "percentage": 17,
+            "capacity": 19
+        },
+        {
+            "source": "Brujon",
+            "target": "Thenardier",
+            "value": 3,
+            "percentage": 81,
+            "capacity": 32
+        },
+        {
+            "source": "Brujon",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 42,
+            "capacity": 48
+        },
+        {
+            "source": "Brujon",
+            "target": "Eponine",
+            "value": 1,
+            "percentage": 41,
+            "capacity": 37
+        },
+        {
+            "source": "Brujon",
+            "target": "Claquesous",
+            "value": 1,
+            "percentage": 16,
+            "capacity": 38
+        },
+        {
+            "source": "Brujon",
+            "target": "Montparnasse",
+            "value": 1,
+            "percentage": 83,
+            "capacity": 10
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Bossuet",
+            "value": 1,
+            "percentage": 93,
+            "capacity": 32
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Joly",
+            "value": 1,
+            "percentage": 32,
+            "capacity": 43
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Grantaire",
+            "value": 1,
+            "percentage": 59,
+            "capacity": 40
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Bahorel",
+            "value": 1,
+            "percentage": 74,
+            "capacity": 17
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Courfeyrac",
+            "value": 1,
+            "percentage": 10,
+            "capacity": 35
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Gavroche",
+            "value": 1,
+            "percentage": 51,
+            "capacity": 47
+        },
+        {
+            "source": "Mme.Hucheloup",
+            "target": "Enjolras",
+            "value": 1,
+            "percentage": 56,
+            "capacity": 21
+        }
+    ]
+}

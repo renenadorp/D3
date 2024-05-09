@@ -1,55 +1,203 @@
-// code based on https://observablehq.com/@sjengle/java-11-api-hierarchy-visualization
+
+// Set the dimensions and margins of the diagram
+var margin = {top: 0, right: 0, bottom: 0, left: 80},
+    width = 1500 - margin.left - margin.right,
+    height = 800 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("#viz").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")");
+
+var i = 0,
+    duration = 750,
+    root,
+    searchText;
+;
+const activeOnly = 0;
+// declares a tree layout and assigns the size
+var treemap = d3.tree().size([height, width]);
 
 
-LINK ="https://docs.google.com/spreadsheets/d/e/2PACX-1vS-WMdDjr9hcAJrhiiJlpCybwNUKqWwbWVd125xH6z-Eamzp_DuQllP9dtKcbhXR2SD3rElX3dSoNdm/pub?gid=0&single=true&output=csv";
+// Collapse the node and all it's children
+function collapse(d) {
+  if(d.children) {
+    d._children = d.children
+    d._children.forEach(collapse)
+    d.children = null
+  }
+}
 
-//MARGIN CONVENTION
-var MARGIN = {  LEFT  : 1, RIGHT: 1, TOP: 1, BOTTOM: 1 }
-var CANVAS = {  WIDTH : 50000  - MARGIN.LEFT - MARGIN.RIGHT,
-                HEIGHT: 400  - MARGIN.TOP  - MARGIN.BOTTOM}
+function update(source) {
 
-const STATE   = { RX: 50, RY: 50 }
-const NODE 	  = {HEIGHT: 20, WIDTH:200, PAD: {LEFT: 1700, TOP: 10}}
-const svg     = d3.select("#viz-area").append("svg")
-  					.attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
-  					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
-const svgCanvas = svg.append("g")
-  					.attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
+  // Assigns the x and y position for the nodes
+  var treeData = treemap(root);
 
-const r = 5;
-//TIP
-/*
-var tip = d3.tip().attr('class', 'd3-tip').html(d=>{ 
-                let text =`
-                
-                <div class="container">
-                <div class="row"><div class="col-sm"> ${d.dim}</div></div>
-                <div class="row"><div class="col-sm"> ${d.number}.${d.name}</div></div>
-                <div class="row"><div class="col-sm"> ${d.descr}</div></div>
-                </div>                        
-                        
-                        `
-                
-                return text;      })
-svgCanvas.call(tip)
-*/
-//DATA.then(
+  // Compute the new tree layout.
+  var nodes = treeData.descendants(),
+      links = treeData.descendants().slice(1);
 
-const myRequest = new Request(LINK);
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d){ d.y = d.depth * 180});
 
-d3.csv(LINK)
-.then(raw => update(raw));
+  // ****************** Nodes section ***************************
 
-	
-function update (raw){  
-	const raw_active = raw.filter(link => link.Active==='1')
+  // Update the nodes...
+  var node = svg.selectAll('g.node')
+      .data(nodes, function(d) {return d.id || (d.id = ++i); });
 
-	// Returns
-	pc_root=[];
-	pc_tab=[];
-	pc_group=[];
-	pc_link=[];
-	raw_active.map((row, i)=>{
+  // Enter any new modes at the parent's previous position.
+  var nodeEnter = node.enter().append('g')
+      .attr('class', 'node')
+      .attr("transform", function(d) {
+        return "translate(" + source.y0 + "," + source.x0 + ")";
+    })
+    .on('click', click);
+
+  // Add Circle for the nodes
+  nodeEnter.append('circle')
+      .attr('class', 'node')
+      .attr('r', 1e-6)
+      .style("fill", function(d) {
+          return d._children ? "lightsteelblue" : "#fff";
+      });
+
+  // Add labels for the nodes
+  nodeEnter.append('text')
+      .attr("dy", ".35em")
+      .attr("x", function(d) {
+          return d.children || d._children ? -13 : 13;
+      })
+      .attr("text-anchor", function(d) {
+          return d.children || d._children ? "end" : "start";
+      })
+      .text(function(d) { return d.data.data.cName; });
+
+  // UPDATE
+  var nodeUpdate = nodeEnter.merge(node);
+
+  // Transition to the proper position for the node
+  nodeUpdate.transition()
+    .duration(duration)
+    .attr("transform", function(d) { 
+        return "translate(" + d.y + "," + d.x + ")";
+     });
+
+  // Update the node attributes and style
+  nodeUpdate.select('circle.node')
+    .attr('r', 10)
+    .style("fill", function(d) {
+        return d._children ? "lightsteelblue" : "#fff";
+    })
+    .attr('cursor', 'pointer');
+
+
+  // Remove any exiting nodes
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) {
+          return "translate(" + source.y + "," + source.x + ")";
+      })
+      .remove();
+
+  // On exit reduce the node circles size to 0
+  nodeExit.select('circle')
+    .attr('r', 1e-6);
+
+  // On exit reduce the opacity of text labels
+  nodeExit.select('text')
+    .style('fill-opacity', 1e-6);
+
+  // ****************** links section ***************************
+
+  // Update the links...
+  var link = svg.selectAll('path.link')
+      .data(links, function(d) { return d.id; });
+
+  // Enter any new links at the parent's previous position.
+  var linkEnter = link.enter().insert('path', "g")
+      .attr("class", "link")
+      .attr('d', function(d){
+        var o = {x: source.x0, y: source.y0}
+        return diagonal(o, o)
+      });
+
+  // UPDATE
+  var linkUpdate = linkEnter.merge(link);
+
+  // Transition back to the parent element position
+  linkUpdate.transition()
+      .duration(duration)
+      .attr('d', function(d){ return diagonal(d, d.parent) });
+
+  // Remove any exiting links
+  var linkExit = link.exit().transition()
+      .duration(duration)
+      .attr('d', function(d) {
+        var o = {x: source.x, y: source.y}
+        return diagonal(o, o)
+      })
+      .remove();
+
+  // Store the old positions for transition.
+  nodes.forEach(function(d){
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+
+  // Creates a curved (diagonal) path from parent to the child nodes
+  function diagonal(s, d) {
+
+    path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+    return path
+  }
+
+  // Toggle children on click.
+  function click(event, d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+    update(d);
+    handleNodeClick( d);
+  }
+  function handleNodeClick(d){
+    // console.log('handleNodeClick d:', d)
+
+  if (d.data.data.Level === "Link" && d.data.data.cUrl.length > 0){
+    window.open(
+      d.data.data.cUrl,
+      '_blank' 
+    );
+}
+return;
+}
+
+}
+
+  
+function createBaseData(data){  
+    // Input    : baseData
+    // Purpose  : Transform data into desired structure
+	// Returns  :
+
+	let pc_root=[];
+	let pc_tab=[];
+	let pc_group=[];
+	let pc_link=[];
+	data.map((row, i)=>{
 	//Clear arrays
 	if (i==0) {
 	  pc_root.length=0;
@@ -57,10 +205,10 @@ function update (raw){
 	  pc_group.length=0;
 	  pc_link.length=0;
 	}
-	const r ={Level: "Root", pId: undefined, cId: "Root", pName: undefined, cName: "Root"} //root
-	const t ={Level: "Tab", pId: "Root", cId: row.TabKey, pName: "Root", cName: row.Tab}; //tab
-	const g ={Level: "Group", pId: row.TabKey, cId: row.GroupKey, pName: row.Tab, cName: row.Group}; //group
-	const l ={Level: "Link", pId: row.GroupKey, cId: row.LinkKey, pName: row.Group, cName: row.Link, cUrl: row.Url}; //link
+	const r ={Level: "Root", pId: undefined, cId: "Root", pName: undefined, cName: "Root", name: "Root", title:"Root", Active: "1"} //root
+	const t ={Level: "Tab", pId: "Root", cId: row.TabKey, pName: "Root", cName: row.Tab, name: row.Tab, title: row.Tab, Active: row.Active}; //tab
+	const g ={Level: "Group", pId: row.TabKey, cId: row.GroupKey, pName: row.Tab, cName: row.Group, name: row.Group, title: row.Group, Active: row.Active}; //group
+	const l ={Level: "Link", pId: row.GroupKey, cId: row.LinkKey, pName: row.Group, cName: row.Link, name: row.Link, title: row.Link, cUrl: row.Url, Active: row.Active}; //link
   
 	//Root
 	const r_found = pc_root.find(el => { if (el.cId == r.cId) return true; return false;})
@@ -70,232 +218,145 @@ function update (raw){
 	}
 	//console.log(s.cId);
 	//Tab
-	const t_found = pc_tab.find(el => { if (el.cId == t.cId) return true; return false;})
+	const t_found = pc_tab.find(el => { if (el.cId == t.cId )  return true; return false;})
 	if (!t_found) {
 	  pc_tab.push(t);
-	  //console.log('found');
+	//   console.log('found:', t);
 	}
   
 	//Group
-	const g_found = pc_group.find(el => { if (el.cId == g.cId) return true; return false;})
+	const g_found = pc_group.find(el => { if (el.cId == g.cId ) return true; return false;})
 	if (!g_found) {
 	  pc_group.push(g);
 	  //console.log('found');
 	}
 	//Link
-	const l_found = pc_link.find(el => { if (el.cId == l.cId) return true; return false;})
+	const l_found = pc_link.find(el => { if (el.cId == l.cId )  return true; return false;})
 	if (!l_found) {
 	  pc_link.push(l);
 	  //console.log('found');
 	}
   
   });
+  let resultData = null;
+  let flatData =  [...pc_root, ...pc_tab, ...pc_group, ...pc_link];
+  if (activeOnly)
+    resultData = flatData.filter(f => f.Active=='1' );
+  else resultData = flatData;
+    let TabSearchResult = {Level: "Tab", pId: "Root", cId: "SearchResult", pName: "Root", cName: "SearchResult", name: "SearchResult", title: "SearchResult", Active: "1"}
+    resultData.push(TabSearchResult); 
+  return resultData;
+}
+
+function searchData (data)  {
+    // If there is no search text, then return original data;
+    if (!(typeof searchText === "string"    && searchText.length > 0  )) return data;
+    console.log('searchText', searchText)
+    //find data 
+    var foundData = [];
+    function addFound(foundData, row) {
+       let addRow = false;
+       if (!foundData.find(r => (r.cId == row.cId && row.Level !== 'Root' )))
+              addRow = true;
+        //console.log( 'addRow: ', addRow); 
+        return addRow;
+    }
+    data.map(row => {
+      if  (    typeof searchText == "string" 
+            && searchText.length > 0 
+            && row.Level == 'Link'
+            && row.name.toUpperCase().includes(searchText.toUpperCase())
+          )
+          {          
+            if (addFound(foundData, row))
+              
+                foundData.push(row);
+            //console.log('addedFound row: ',foundData);
+          }
+    });
+    //console.log('foundData: ',foundData);
+    // Add parent data
+    var parentData = [];
   
-  pc=  [...pc_root, ...pc_tab, ...pc_group, ...pc_link];
+    if (1==2){
+    foundData.forEach(child => {
+      let cId = child.cId;
+      let pId = child.pId;
+      let searchObject = data.find(parent => (parent.cId == pId && parent.Level !== 'Root'))
+      while (searchObject !== undefined){
+          if (parentData.find(r => (r.cId == searchObject.cId)) == undefined)
+            parentData.push(searchObject);
+          pId = searchObject.pId;
+          searchObject = data.find(parent => parent.cId == pId && parent.Level !== 'Root')
+            //console.log(searchObject);
   
-  root = d3.stratify()
-    .id(function(row) { return row.cId; })
-    .parentId(function(row) {
-      return row.pId;
-    })
-    (pc);
-	console.log('pc:',pc)
-	console.log('root:',root)
+    }});
+    }
+    if (1==1){
   
-	color = d3.scaleSequential([10, root.height], d3.interpolateBlues) //)interpolateBlues)//interpolateViridis)
-	let data = root;//findModule();
-	
-	data.sort(function(a, b) { 
-	  return b.height - a.height || b.count - a.count; 
-	});
-	let width = pc_link.length * NODE.WIDTH + (NODE.PAD.LEFT);
-	let layout = d3.tree().size([width , CANVAS.HEIGHT - 2 * NODE.PAD.TOP]);
-	//console.log(data)
-	layout(data);
-	
-	let plot = svgCanvas.append("g")
-	  .attr("id", "plot")
-	  .attr("transform", translate(MARGIN.LEFT, MARGIN.TOP));
-	
-	drawLinks(plot.append("g"), data.links(), curvedLine());
-	drawNodes(plot.append("g"), data.descendants(), 'rect',true);
-	
-	return svg.node();
+      foundData.forEach(d=>{d.pId="SearchResult"});
+    }
+    // Add Search Result Node
+        let TabSearchResult = {Level: "Tab", pId: "Root", cId: "SearchResult", pName: "Root", cName: "SearchResult", name: "SearchResult", title: "SearchResult", Active: "1"}
+      foundData.push(TabSearchResult); 
+    //Add Root to result
+    parentData.push(data.find(root => ( root.Level == 'Root')));
+    return foundData.concat(parentData);                 
+  };
+  
+function updateChart () {
+        // console.log('searchText', searchText)
+        const data = baseData;
+
+        var filterData = searchData(data);
+        var stratData  = stratifyData(filterData)
+
+
+        // Assigns parent, children, height, depth
+        root = d3.hierarchy(stratData, function(d) { return d.children; });
+        
+        
+        root.x0 = height / 2;
+        root.y0 = 0;
+
+        // Collapse after the second level
+        root.children.forEach(collapse);
+
+        update(root);
+
+    return;    
+}
+
+const childColumn = "cId"
+const parentColumn = "pId";
+
+stratify = d3
+  .stratify()
+  .id(d => d[childColumn])
+  .parentId(d => d[parentColumn])
+
+
+function stratifyData (data) {
+    return stratify(data).each((d) => {
+      d.name = d.id;
+      d.size = 1;
+      });
+    
   }
+// MAIN
+SOURCE_FILE ="https://docs.google.com/spreadsheets/d/e/2PACX-1vS-WMdDjr9hcAJrhiiJlpCybwNUKqWwbWVd125xH6z-Eamzp_DuQllP9dtKcbhXR2SD3rElX3dSoNdm/pub?gid=0&single=true&output=csv";
 
-  //console.log(root)
-function drawLinks(g, links, generator) {
-	let paths = g.selectAll('path')
-		.data(links)
-		.enter()
-		.append('path')
-		.attr('d', generator)
-		.attr('class', 'link');
-}
-function drawNodes(g, nodes, type, raise) {
-//console.log('drawNodes/nodes:', nodes, 'drawnodes/g:',g);
+function main(){
+    d3.csv(SOURCE_FILE)
+    .then((rawData ) => {
+        
+        baseData = createBaseData(rawData);
+        baseData.filter(r => {if (r.Level=="Tab") return r} ); //Not sure why this filtering is needed....
 
-	let g_nodes = g.selectAll(type)
-		.data(nodes, node => {//console.log(node.data); 
-			return node.data})
-		.enter().append('g');
-	let svg_nodes = g_nodes
-		.append(type)
-		.attr('r',  r)
-		.attr('cx', d => d.x)
-		.attr('cy', d => d.y)
-		.attr('x', d => d.x - (NODE.WIDTH/2))
-		.attr('y', d => d.y)
-		.attr('width', NODE.WIDTH)
-		.attr('height', NODE.HEIGHT)
-		.attr('id', d => d.data.cName)
-		.attr('class', 'node')
-		.style('fill', d => color(d.depth))
-	g_nodes
-		.append('a')
-			.attr('xlink:href',d=>{ //console.log('href:',d); 
-			return d.data.cUrl;})
-			.attr('target', '_blank')
-		.append('text')
-			.text(d=>d.data.cName)
-			.attr('x', d => d.x)
-			.attr('y', d => d.y)			
-			.attr('dy', (NODE.HEIGHT/2) + 5)
-			.attr('class', 'nodetext')
-			.attr('text-anchor', 'middle')
-	//g_nodes.attr('transform', `translate(${d.x},${d.y})`)
+        updateChart()
 
-setupEvents(g, g_nodes, raise);
-}  	  
-function setupEvents(g, selection, raise) {
-//console.log('setupEvents', selection, g);
-selection.on('mouseover.highlight', function(d) {
-	// https://github.com/d3/d3-hierarchy#node_path
-	// returns path from d3.select(this) node to selection.data()[0] root node
-	let path = d3.select(this).datum().path(selection.data()[0]);
-	
-	// select all of the nodes on the shortest path
-	let update = selection.data(path, node => node.data.name);
-
-	// highlight the selected nodes
-	update.classed('selected', true);
-	
-	if (raise) {
-	update.raise();
-	}
-});
-
-selection.on('mouseout.highlight', function(d) {
-	let path = d3.select(this).datum().path(selection.data()[0]);
-	let update = selection.data(path, node => node.data.name);
-	update.classed('selected', false);
-});
-
-// show tooltip text on mouseover (hover)
-selection.on('mouseover.tooltip', function(d) {
-	showTooltip(g, d3.select(this));
-
-
-});
-
-// remove tooltip text on mouseout
-selection.on('mouseout.tooltip', function(d) {
-	g.select("#tooltip").remove();
-}); 
-}
-function showTooltip(g, node) {
-let gbox = g.node().getBBox();     // get bounding box of group BEFORE adding text
-let nbox = node.node().getBBox();  // get bounding box of node
-
-// calculate shift amount
-let dx = nbox.width / 2;
-let dy = nbox.height / 2;
-
-// retrieve node attributes (calculate middle point)
-let x = nbox.x + dx;
-let y = nbox.y + dy;
-
-// get data for node
-let datum = node.datum();
-//console.log('Datum',datum);
-
-// remove "java.base." from the node name
-let name = datum.data.cName;
-
-// use node name and total size as tooltip text
-let text = `${name} (${datum.data.pName})`;
-
-// create tooltip
-let tooltip = g.append('text')
-	.text(text)
-	.attr('x', x)
-	.attr('y', y)
-	.attr('dy', -dy - 4) // shift upward above circle
-	.attr('text-anchor', 'middle') // anchor in the middle
-	.attr('id', 'tooltip');
-
-// it is possible the tooltip will fall off the edge of the
-// plot area. we can detect when this happens, and set the
-// text anchor appropriately
-
-// get bounding box for the text
-let tbox = tooltip.node().getBBox();
-
-// if text will fall off left side, anchor at start
-if (tbox.x < gbox.x) {
-	tooltip.attr('text-anchor', 'start');
-	tooltip.attr('dx', -dx); // nudge text over from center
-}
-// if text will fall off right side, anchor at end
-else if ((tbox.x + tbox.width) > (gbox.x + gbox.width)) {
-	tooltip.attr('text-anchor', 'end');
-	tooltip.attr('dx', dx);
+    }
+    );
 }
 
-// if text will fall off top side, place below circle instead
-if (tbox.y < gbox.y) {
-	tooltip.attr('dy', dy + tbox.height);
-}
-}	  
-function straightLine()  {
-let line = d3.line()
-	.curve(d3.curveLinear)
-	.x(d => d.x)
-	.y(d => d.y);
-
-let generator = function(node) {
-	return line([node.source, node.target]);
-}
-
-return generator;
-}
-function curvedLine()  {
-	let generator = d3.linkVertical()
-	.x(d => d.x)
-	.y(d => d.y);
-
-	return generator;
-}
-function radialLine () {
-	let generator = d3.linkRadial()
-		.angle(d => d.theta + Math.PI / 2) // rotate, 0 angle is mapped differently here
-		.radius(d => d.radial);
-
-	return generator;
-}
-function translate(x, y) {
-	return 'translate(' + String(x) + ',' + String(y) + ')';
-}
-	numberFormat = d3.format(".2~s");
-	// viewof r = slider({
-	// 	min: 1,
-	// 	max: 100,
-	// 	step: 1,
-	// 	value: 5,
-	// 	title: 'r',
-	// 	description: 'radius of circles'
-	//   })	
-	  //import {table} from "@tmcw/tables@513"
-	  //import {slider,select} from "@jashkenas/inputs"
-
-	  	  	  	  			
+main()

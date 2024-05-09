@@ -1,0 +1,114 @@
+body{
+   background-color: whitesmoke;
+   font-family: 'Lato';
+
+}
+
+:root {
+ --accent-color: #0f7834;
+}
+
+svg {
+   background-color: white;
+   font-family: 'Lato';
+   font-size: 10px;
+}
+
+g.tick line{
+   opacity: 0.5;
+   stroke: rgb(91, 91, 91);
+   stroke-opacity: 0.2;
+}
+
+path.line {
+   fill: none;
+   stroke: rgb(197, 195, 195);
+   /* stroke: var(--accent-color); */
+   stroke-linecap: round;
+   stroke-width: 10px;
+ }
+ path.domain  {
+   stroke: #ababab;
+   stroke-opacity: 0.4;
+}
+.annotation path {
+ xstroke: rgb(71, 71, 71);
+ fill: none;
+}
+
+.annotation path.note-line{
+   xfill: red;
+   stroke-width: 2px;
+ /* fill: var(--accent-color); */
+}
+
+.annotation path.connector-arrow{
+   fill: white;
+ /* fill: var(--accent-color); */
+}
+
+.annotation path.connector-dot{
+ xfill: rgb(29, 28, 28);
+ stroke: white;
+ stroke-width: 1px;
+
+}
+
+.annotation text {
+ xfill: var(--accent-color);
+}
+
+.annotation-note-title {
+ font-weight: bold;
+}
+
+.annotation.xythreshold {
+ cursor: move;
+}
+
+.annotation.xythreshold .annotation-subject{
+ stroke-width: 3px;
+}
+
+.annotation.badge path.subject-pointer, .annotation.badge path.subject {
+ fill: var(--accent-color);
+ stroke-width: 3px;
+ stroke-linecap: round;
+} 
+
+.annotation.badge path.subject-ring {
+ fill: white;
+ stroke-width: 3px;
+}
+
+.annotation.badge .badge-text {
+ fill: white;
+ font-size: .7em;
+}
+   
+rect.annotation-note-bg {
+ xfill: rgba(255, 255, 255, 0);
+}
+
+text.hover {
+ font-size: .7em;
+}
+
+
+div#timeLineToolTip {
+   color: rgb(85, 85, 85);
+   background-color: white;
+   opacity: 0.2;
+   border: 1px solid grey;
+   border-radius: 5px;
+   padding: 5px;
+}
+
+
+div#timeLineToolTip .tipBox{
+   max-width: 250px;
+   min-width: 250px;
+}
+div#timeLineToolTip .tipTitle{
+   font-weight: bold;
+}
