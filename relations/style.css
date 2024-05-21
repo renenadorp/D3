@@ -13,7 +13,6 @@ body{
 }
 
 
-
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
@@ -48,6 +47,26 @@ body{
   background: #04AA6D; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+
+
+div#ToolTip {
+  color: rgb(85, 85, 85);
+  background-color: white;
+  opacity: 0.2;
+  border: 1px solid grey;
+  padding: 5px;
+
+  left : 300px;
+  top:  20px;
+
+  border-radius:5px;
+
+}
+
+div#ToolTip tr th {
+  min-width: 130px;
+}
+
   /* .controls {
   flex-basis: 200px;
   padding: 0 5px;

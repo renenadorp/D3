@@ -1,5 +1,6 @@
 
-const SOURCE_FILE 	= "datasets/caldic.xlsx";
+var sourceFile=`caldic.xlsx`;
+const sourceFolder = 'datasets';
 const SCHEMAS  = 
 [
     //Sheet 1: Nodes
@@ -48,7 +49,7 @@ const SCHEMAS  =
         type: String
         }		
     },
-]
+  ]
 
 const NODESIZE = 5;
 const STRENGTHVALUE = 10;
@@ -62,36 +63,67 @@ const HEIGHT  				= 1200;
 const MARGIN          = { LEFT  : 50, RIGHT: 1, TOP: 0, BOTTOM: 1 }
 const CANVAS          = { WIDTH : WIDTH  - MARGIN.LEFT - MARGIN.RIGHT,
                           HEIGHT: HEIGHT - MARGIN.TOP  - MARGIN.BOTTOM}
-var selectedRegion, searchValue
+var selectedRegion = 'ALL';
+var searchValue;
 var selectedNodeColor = 'NodeType' //Default node coloring by Region
 
-colorScale = d3.scaleOrdinal(d3.schemeCategory10);//schemeAccent schemeCategory10  schemePastel1 schemeObservable10 schemeTableau10
+colorScale = d3.scaleOrdinal(d3.schemeObservable10);//schemeAccent schemeCategory10  schemePastel1 schemeObservable10 schemeTableau10
 
-d3.select('body').append('div').attr('id', 'tooltip').attr('style', 'position: absolute; opacity: 0;');     
+d3.select('body').append('div').attr('id', 'ToolTip')
+      .attr('style', 'position: absolute; opacity: 0;');     
+
+var viz     = d3.select("#viz");
+var svgMain = viz.append("svg")
+                      .attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
+                      .attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
+                      .attr("id", "viz")
+                      .style("overflow", "visible")
+        
+                      // .attr("transform", `scale(${SCALE})`)
+                      .attr("viewBox", `-${WIDTH/2}  -${HEIGHT/3}  ${WIDTH} ${HEIGHT}`)
+                        ;
+          
+        
+          vizLegend = d3.select("#vizLegend");
+          svgLegendMain = vizLegend.append("svg")
+                      // .attr("width" , 300)
+                      // .attr("height", 400)
+                      .attr("id", "viz")
+                      .style("overflow", "visible")
+        
+                      .attr("transform", `scale(${SCALE})`)
+                      .append('g').attr('transform', `translate (70, 10)`)
+                      // .attr("viewBox", `-${WIDTH/2}  -${HEIGHT/3}  ${WIDTH} ${HEIGHT}`)
+                      ;
+        
+          svgLegend = svgLegendMain.append('g').attr('id', 'svgLegend')
+        
+
+
 
 drag = simulation => {
   
-function dragstarted(e,d) {
-      if (!e.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
-    }
-    
-function dragged(e,d) {
-      d.fx = e.x;
-      d.fy = e.y;
-    }
-    
-function dragended(e,d) {
-      if (!e.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
-    }
-    
-return d3.drag()
-        .on("start", dragstarted)
-        .on("drag" , dragged)
-        .on("end"  , dragended);
+  function dragstarted(e,d) {
+        if (!e.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+      
+  function dragged(e,d) {
+        d.fx = e.x;
+        d.fy = e.y;
+      }
+      
+  function dragended(e,d) {
+        if (!e.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+      
+  return d3.drag()
+          .on("start", dragstarted)
+          .on("drag" , dragged)
+          .on("end"  , dragended);
   }
 
 link_width = function(label){
@@ -117,32 +149,44 @@ function filterGraphData(graphdata, ...filters){
   // // Reset
   //   nodes = dataUnfiltered.nodes
   //   links = dataUnfiltered.links
-  nodes = graphdata.nodes;
+  console.log('graphdata', graphdata)
 
-  nodes = nodes.filter(r => {return r.Region == selectedRegion || selectedRegion == 'ALL'  || selectedRegion == undefined});
+  // Filter nodes by Region
+  nodes = graphdata.nodes.filter(r => {return r.Region == selectedRegion || selectedRegion == 'ALL'  || selectedRegion == undefined});
+
+  // Filter nodes by Search Value
   if (searchValue)
     nodes = nodes.filter(r => {return r.id.toUpperCase().includes(searchValue.toUpperCase()) || searchValue    == undefined});
 
+  // Get links to nodes (idea being to include first level linked nodes )
   links = graphdata.links.filter((link) => {
+    console.log('filtered graphdata.link:' , link)
     return nodes.some((node) => {
-      return node.id === link.source.id || node.id === link.target.id;
+      return node.id === link.source || node.id === link.target;
     })
   })
 
-  //Add nodes from links
+  
+  //Add nodes from links (the linked nodes need to exist in the node list)
   links.map(link => {
-    link_target = graphdata.nodes.find(node => node.id === link.target.id)
-    link_source = graphdata.nodes.find(node => node.id === link.source.id)
+    link_target = graphdata.nodes.find(node => node.id === link.target)
+    link_source = graphdata.nodes.find(node => node.id === link.source)
+    
+    // console.log('link_source', link_source)
+    // console.log('link_target', link_target)
+    
 
     if (nodes.find(node => node.id == link_source.id) === undefined) nodes.push(link_source)
     if (nodes.find(node => node.id == link_target.id) === undefined) nodes.push(link_target)
 
   })
-
   const return_nodes_links = {'nodes': nodes, 'links': links}
+  console.log('return_nodes_links', return_nodes_links)
   return return_nodes_links
 }    
+
 function updateChart() {
+  
   if (selectedRegion || searchValue)  data = filterGraphData(dataUnfiltered, {selectedRegion: selectedRegion, searchValue: searchValue})
   else data = dataUnfiltered;
     // svg.selectAll('circle').forEach(n =>  n.remove()); 
@@ -173,9 +217,10 @@ function chart () {
   const links = data.links;
                 
   var connected = [];
-
   const simulation = d3
     .forceSimulation(nodes)
+
+
     .force(
       "link",
       d3
@@ -195,8 +240,8 @@ function chart () {
       "center",
       d3
         .forceCenter()
-        .x(50)
-        .y(150)
+        .x(CANVAS.WIDTH / 3)
+        .y(CANVAS.HEIGHT / 5)
     );
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -287,7 +332,7 @@ function chart () {
     d3.selectAll('line').attr('stroke-opacity', d => reset_link_opacity(d));
     d3.selectAll('.labels').style('opacity', 1);
 
-    d3.select('#tooltip').style('opacity', 0)
+    d3.select('#ToolTip').style('opacity', 0)
     };
 
   const hide_all_light = function() {
@@ -404,43 +449,31 @@ function chart () {
 //RN
    
 
-    var tooltip = d3.select('#tooltip');
-    var styleCell='border: 1px solid white; font-size: 12pt; color: #212529; padding: 1px; vertical-align: top'
+    var tooltip = d3.select('#ToolTip');
+    var styleCell='xborder: 1px solid white; font-size: 12pt; color: #212529; padding: 1px; vertical-align: top'
     var styleRow='padding-left: 10px; margin-right: 10px'
-    tooltip.transition().duration(200)
-      .style('opacity', 1)
-      .style("left", "0px")// (e.pageX + 10) + "px")
-      .style("top", "380px")//(e.pageY - 15) + "px")
-      .style('background', '#e9ecef')
-      .style('opacity', 0.7)
-      .style('padding', '5px')
-      .style('border-radius', '3px')
+    tooltip.transition().duration(1000)
+      .style('opacity', .7)
+      ;
     
     nodeColor = colorScale(d[selectedNodeColor])
     // console.log('nodeColor:', nodeColor, d, selectedNodeColor)
     tooltip
       .html(`
-        <div class='hoverbox' style='padding: 10px; border: 1px solid grey; max-width: 300px'>
+        <div class='hoverbox' style='padding: 5px; xborder: 1px solid grey;max-width: 350px'>
         <span style='font-size: 17pt; color: ${nodeColor}; font-weight: bold;'>${d.id} </span>
         <table>
-        <tr style='${styleRow}'><td style='${styleCell}'>Node Type</td><td style='${styleCell}'>${d.NodeType} </td></tr>
-        <tr style='${styleRow}'><td style='${styleCell}'>Region</td><td style='${styleCell}'>${d.Region} </td></tr>
-        <tr style='${styleRow}'><td style='${styleCell}'>Organisation</td><td style='${styleCell}'>${d.Organisation}</td></tr>
-        <tr style='${styleRow}'><td style='${styleCell}'>Role</td><td style='${styleCell}'>${d.Role}</td></tr>
-        <tr style='${styleRow}'><td style='${styleCell}'>Description</td><td style='${styleCell}'>${d.Description}</td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Node Type</td><td style='${styleCell}'>${d.NodeType} </td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Region</td><td style='${styleCell}'>${d.Region} </td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Organisation</td><td style='${styleCell}'>${d.Organisation}</td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Role</td><td style='${styleCell}'>${d.Role}</td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Description</td><td style='${styleCell}'>${d.Description}</td></tr>
+        <tr style='${styleRow}'><th style='${styleCell}'>Department</td><td style='${styleCell}'>${d.Department}</td></tr>
         </table>
         </div>
         `)
       
-
-
-
-
 //RN
-
-
-
-
 
 
 
@@ -565,7 +598,6 @@ function legend() {
   return
 }
 
-
 let zoom = d3.zoom()
   .on('zoom', handleZoom);
 
@@ -578,36 +610,10 @@ function initZoom(element) {
     .call(zoom);
 }
 
-
-
 //////////// MAIN //////////// 
 function main(){
-  viz     = d3.select("#viz");
-  svgMain = viz.append("svg")
-              .attr("width" , CANVAS.WIDTH  + MARGIN.LEFT + MARGIN.RIGHT)
-              .attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM)
-              .attr("id", "viz")
-              .style("overflow", "visible")
+  var SOURCE_FILE = `${sourceFolder}/${sourceFile}`;
 
-              // .attr("transform", `scale(${SCALE})`)
-              .attr("viewBox", `-${WIDTH/2}  -${HEIGHT/3}  ${WIDTH} ${HEIGHT}`)
-                ;
-  svg = svgMain.append('g').attr('id', 'svg');
-  
-
-  vizLegend = d3.select("#vizLegend");
-  svgLegendMain = vizLegend.append("svg")
-              // .attr("width" , 300)
-              // .attr("height", 400)
-              .attr("id", "viz")
-              .style("overflow", "visible")
-
-              .attr("transform", `scale(${SCALE})`)
-              .append('g').attr('transform', `translate (70, 10)`)
-              // .attr("viewBox", `-${WIDTH/2}  -${HEIGHT/3}  ${WIDTH} ${HEIGHT}`)
-              ;
-
-  svgLegend = svgLegendMain.append('g').attr('id', 'svgLegend')
 
 
 	//log('LINK:', LINK)
@@ -624,7 +630,11 @@ function main(){
         dataUnfiltered = data;
         const dataJSON = JSON.stringify(data);
         // console.log(dataJSON)
-        // console.log('data',data)
+        console.log('data',data, dataUnfiltered)
+        svgMain.select("#svgContainer").remove()
+        svg = svgMain.append('g')
+                .attr('id', 'svgContainer');
+
         updateChart();
       }) 
     )
@@ -632,189 +642,3 @@ function main(){
 
 main();
 
-
-
-/*
-//////////// FORCE SIMULATION //////////// 
-
-// force simulator
-var simulation = d3.forceSimulation();
-
-// set up the simulation and event to update locations after each tick
-function initializeSimulation() {
-  simulation.nodes(graph.nodes);
-  initializeForces();
-  simulation.on("tick", ticked);
-}
-
-// values for all forces
-forceProperties = {
-    center: {
-        x: 0.5,
-        y: 0.5
-    },
-    charge: {
-        enabled: true,
-        strength: -30,
-        distanceMin: 1,
-        distanceMax: 2000
-    },
-    collide: {
-        enabled: true,
-        strength: .7,
-        iterations: 1,
-        radius: 5
-    },
-    forceX: {
-        enabled: false,
-        strength: .1,
-        x: .5
-    },
-    forceY: {
-        enabled: false,
-        strength: .1,
-        y: .5
-    },
-    link: {
-        enabled: true,
-        distance: 30,
-        iterations: 1
-    }
-}
-
-// add forces to the simulation
-function initializeForces() {
-    // add forces and associate each with a name
-    simulation
-        .force("link", d3.forceLink())
-        .force("charge", d3.forceManyBody())
-        .force("collide", d3.forceCollide())
-        .force("center", d3.forceCenter())
-        .force("forceX", d3.forceX())
-        .force("forceY", d3.forceY());
-    // apply properties to each of the forces
-    updateForces();
-}
-
-// apply new force properties
-function updateForces() {
-    // get each force by name and update the properties
-    simulation.force("center")
-        .x(width * forceProperties.center.x)
-        .y(height * forceProperties.center.y);
-    simulation.force("charge")
-        .strength(forceProperties.charge.strength * forceProperties.charge.enabled)
-        .distanceMin(forceProperties.charge.distanceMin)
-        .distanceMax(forceProperties.charge.distanceMax);
-    simulation.force("collide")
-        .strength(forceProperties.collide.strength * forceProperties.collide.enabled)
-        .radius(forceProperties.collide.radius)
-        .iterations(forceProperties.collide.iterations);
-    simulation.force("forceX")
-        .strength(forceProperties.forceX.strength * forceProperties.forceX.enabled)
-        .x(width * forceProperties.forceX.x);
-    simulation.force("forceY")
-        .strength(forceProperties.forceY.strength * forceProperties.forceY.enabled)
-        .y(height * forceProperties.forceY.y);
-    simulation.force("link")
-        .id(function(d) {return d.id;})
-        .distance(forceProperties.link.distance)
-        .iterations(forceProperties.link.iterations)
-        .links(forceProperties.link.enabled ? graph.links : []);
-
-    // updates ignored until this is run
-    // restarts the simulation (important if simulation has already slowed down)
-    simulation.alpha(1).restart();
-}
-
-
-
-//////////// DISPLAY ////////////
-
-// generate the svg objects and force simulation
-function initializeDisplay() {
-  // set the data and properties of link lines
-  link = svg.append("g")
-        .attr("class", "links")
-    .selectAll("line")
-    .data(graph.links)
-    .enter().append("line");
-
-  // set the data and properties of node circles
-  node = svg.append("g")
-        .attr("class", "nodes")
-    .selectAll("circle")
-    .data(graph.nodes)
-    .enter().append("circle")
-        .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended));
-
-  // node tooltip
-  node.append("title")
-      .text(function(d) {console.log (d); return d.id; });
-  // visualize the graph
-  updateDisplay();
-}
-
-// update the display based on the forces (but not positions)
-function updateDisplay() {
-    node
-        .attr("r", forceProperties.collide.radius)
-        .attr("stroke", forceProperties.charge.strength > 0 ? "blue" : "red")
-        .attr("stroke-width", forceProperties.charge.enabled==false ? 0 : Math.abs(forceProperties.charge.strength)/15);
-
-    link
-        .attr("stroke-width", forceProperties.link.enabled ? 1 : .5)
-        .attr("opacity", forceProperties.link.enabled ? 1 : 0);
-}
-
-// update the display positions after each simulation tick
-function ticked() {
-    link
-        .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-    node
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-    d3.select('#alpha_value').style('flex-basis', (simulation.alpha()*100) + '%');
-}
-
-
-
-//////////// UI EVENTS ////////////
-
-function dragstarted(d) {
-  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-  d.fx = d.x;
-  d.fy = d.y;
-}
-
-function dragged(d) {
-  d.fx = d3.event.x;
-  d.fy = d3.event.y;
-}
-
-function dragended(d) {
-  if (!d3.event.active) simulation.alphaTarget(0.0001);
-  d.fx = null;
-  d.fy = null;
-}
-
-// update size-related forces
-d3.select(window).on("resize", function(){
-    width = +svg.node().getBoundingClientRect().width;
-    height = +svg.node().getBoundingClientRect().height;
-    updateForces();
-});
-
-// convenience function to update everything (run after UI input)
-function updateAll() {
-    updateForces();
-    updateDisplay();
-}
-*/

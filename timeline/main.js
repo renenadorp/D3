@@ -1,11 +1,15 @@
-
-//console.log('main.js')
+var sourceFile=`Philosophy.xlsx`;
+var colorBy = 'TimeLineId';
 
 const VERTICAL_TICKS = 16;
-const TIMELINE_GAP = 90;
-var margin    = { top: 20, right: 180, bottom: 100, left: 50 },
-    height    = 1200 - margin.top - margin.bottom;
-var maxWidth  = 1500 - margin.left - margin.right;
+const TODAY_MARKER_Y = -40;
+const TODAY_LINE_Y   = -10;
+
+const TIMELINE_GAP = 50;
+const TIMELINE_OFFSET = 300;
+var margin    = { top: 50, right: 180, bottom: 100, left: 50 }
+var  height    = ((sourceFile == "Philosophy.xlsx") ? 4200 : 1200) - margin.top - margin.bottom;
+var maxWidth  = 2000 - margin.left - margin.right;
 var width     = maxWidth - margin.left - margin.right;
 
 // var parseTime = d3.timeParse("%ddd %mmm %Y HH:MM:SS"); // Tue May 01 2012 02:00:00 GMT+0200 (Central European Summer Time)
@@ -15,10 +19,16 @@ var timeFormat = d3.timeFormat("%d-%b-%Y");
 var _x = d3.scaleTime().range([0, width]);
 var _y = d3.scaleLinear().range([height, 0]);
 
-var svg = d3.select("body").append("svg").attr("width", maxWidth).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var svgMain = d3.select("body")
+          .append("svg")
+                .attr("width", maxWidth)
+                .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+          ;
+
 var tip = d3.select("body").append("div").attr('id', 'timeLineToolTip').attr('style', 'position: absolute; opacity: 0; z-index: 100');
 
-const LINKXLS = `CaldicRoadmap.xlsx`
 
 const SCHEMAS  = 
 [
@@ -28,21 +38,28 @@ const SCHEMAS  =
     'Year'            : {	prop: 'Year',           type: Number,   required: false	  } ,
     'Month'           : {	prop: 'Month',          type: Number,   required: false	  } ,
     'Day'             : {	prop: 'Day',            type: Number,   required: false	  } ,
-    'Name'            : {	prop: 'Name',	  type: String,		required: false	  } ,
-    'AnnTitle'        : { prop: 'AnnTitle',          type: String,		required: false	  } ,
-    'AnnLabel'        : {	prop: 'AnnLabel',	    type: String,		required: false	  } ,
-    'Description'     : {	prop: 'Description',	    type: String,		required: false	  } ,
-    'AnnDX'           : {	prop: 'AnnDX',	type: Number,		required: false	  } ,
-    'AnnDY'           : {	prop: 'AnnDY',	type: Number,		required: false	  } ,
-    'AnnType'         : {	prop: 'AnnType',	type: String,		required: false	  } ,
-    'AnnConnectorEnd' : {	prop: 'AnnConnectorEnd',	type: String,		required: false	  } ,
-    'AnnLineType'     : {	prop: 'AnnLineType',    	type: String,		required: false	  } ,
-    
+    'Name'            : {	prop: 'Name',	          type: String,		required: false	  } ,
+    'AnnTitle'        : { prop: 'AnnTitle',       type: String,		required: false	  } ,
+    'AnnLabel'        : {	prop: 'AnnLabel',	      type: String,		required: false	  } ,
+    'Description'     : {	prop: 'Description',	  type: String,		required: false	  } ,
+    'AnnDX'           : {	prop: 'AnnDX',	        type: Number,		required: false	  } ,
+    'AnnDY'           : {	prop: 'AnnDY',	        type: Number,		required: false	  } ,
+    'AnnType'         : {	prop: 'AnnType',	      type: String,		required: false	  } ,
+    'AnnConnectorEnd' : {	prop: 'AnnConnectorEnd',type: String,		required: false	  } ,
+    'AnnLineType'     : {	prop: 'AnnLineType',    type: String,		required: false	  } ,
+    'Central Ideas'   : {	prop: 'Central Ideas',    	  type: String,		required: false	  } ,
+    'Stream'          : {	prop: 'Stream',    	    type: String,		required: false	  } ,
+    'Publications'    : {	prop: 'Publications',   type: String,		required: false	  } ,
+    'Country'         : {	prop: 'Country',        type: String,		required: false	  } ,
+    'DateOfBirth'     : {	prop: 'DateOfBirth',    type: String,		required: false	  } ,
+    'DateOfDeath'     : {	prop: 'DateOfDeath',    type: String,		required: false	  } ,
+    'urlBase'     : {	prop: 'urlBase',    type: String,		required: false	  } ,
+    'urlPage'     : {	prop: 'urlPage',    type: String,		required: false	  } ,
   }
 
 ]
 
-const TimeLineColor = d3.scaleOrdinal(d3.schemeSet1); // schemeCategory10,schemeAccent, schemeDark2, schemeSet1
+const TimeLineColor = d3.scaleOrdinal(d3.schemeTableau10);// schemeSet1 // schemeCategory10,schemeAccent, schemeDark2, schemeSet1
 
 var data;
 var labels, labelData;
@@ -51,24 +68,31 @@ function getLabelData(rows) {
     return (row.hasOwnProperty("AnnTitle"))
   }
   );
-  console.log('label_data',label_data)
+  // console.log('label_data',label_data)
   return label_data;
 }
 function handleTimeLineTipMouseOver (e, item) {
-  var t = function(s) {
-    if (s == undefined)
-      return "?";
-    else return s
+  var t = function(tipList) {
+    var tipBox ='';
+    const tipBoxHeader = `<table class= 'tipBox'>`;
+    const tipBoxFooter = `</table>`;
+    tipList.map(l => { 
+                      return l.Value ? tipBox+=`<tr><td class='tipTitle'>${l.Key}</td><td class='tipContent'>${l.Value}</td></tr>`:null; 
+                    })
+    return tipBoxHeader + tipBox + tipBoxFooter;
   }
 
   var tipData = item[0];
   // console.log('tipData:', tipData)
-  var tipBox ="";
-  tipBox+= "<div class='tipBox'>";
-  tipBox+="<div class='tipTitle'>"+t(tipData.Name)+"</div>";
-  tipBox+= "<div>"+t(tipData.Description)+"</div>";
-  tipBox+="</div>";
-  //console.log("TIP IN", e, item)
+  var tipList = [
+                {"Key"        : "Name",         "Value"   : tipData.Name}, 
+                {"Key"        : "Country",      "Value"   : tipData.Country}, 
+                {"Key"        : "Stream",       "Value"   : tipData.Stream}, 
+                {"Key"        : "Publications", "Value"   : tipData.Publications},
+                {"Key"        : "Central Ideas","Value"   : tipData["Central Ideas"]},
+                {"Key"        : "Description",  "Value"   : tipData.Description},
+              ]
+  var tipBox = t(tipList);
     tip
     // .transition()		
     // .duration(200)		
@@ -87,22 +111,33 @@ function handleTimeLineTipMouseOut (e, item) {
 //      tip.remove();
 }
 
-function createTimeline(e, item ) {
-  var timeLine =   e.append("path");
+function handleTimeLineClick(e, d) {
+    if (d[0].urlBase)
+    window.open(
+      `${d[0].urlBase}/${d[0].urlPage}`,
+      '_blank' 
+    );
+}
+
+function createTimeline(e, item, index, colorBy ) {
+  var timeLine =   e.append("path").attr("class", "TimeLine");
   timeLine
   .data([data.filter(r => {return (r.TimeLineId == item)})])
   // .attr("class", "line")
-  .attr("style", "stroke-width: 10; stroke: "+ TimeLineColor(item)+";    stroke-linecap: round; ")
+  .attr("style", d=> {
+    return `stroke-width: 8; stroke: ${TimeLineColor(d[0][colorBy])}; stroke-linecap: round; `})
   .attr("d", d3.line()
         .x(function(d) { return _x(d.Date) })
         .y(function(d) { return _y(d.Value) }) //_y(d.Value)
         ) 
   .on("mouseover", function(e,d){return handleTimeLineTipMouseOver(e, d)})
-  .on("mouseout", (e,d)=>handleTimeLineTipMouseOut(e,d))    
+  .on("mouseout", (e,d)=>handleTimeLineTipMouseOut(e,d))
+  .on("click", (e,d)=>handleTimeLineClick(e,d))    
     
 }
 
 function main(){
+  LINKXLS = sourceFile;
 	fetch(LINKXLS)
 		.then(response => response.blob())
 		.then(blob => 
@@ -112,7 +147,7 @@ function main(){
       .then((rows ) => {
         data   = rows[0].rows;
 
-        console.log('data:', data)
+        // console.log('data:', data)
         
         labelData = getLabelData(data);
         
@@ -127,7 +162,7 @@ function main(){
           //console.log(d.Date)
           //d.Date = d.Date;
           //d.Value = +d.Value;
-          d.Value = height - (+d.TimeLineId * TIMELINE_GAP +160);
+          d.Value = height - (+d.TimeLineId * TIMELINE_GAP + TIMELINE_OFFSET);
         });
         
       
@@ -138,11 +173,16 @@ function main(){
       
         _y.domain([150, d3.max(data, function (d) {
           return d.Value;
-          })+100]);         
-        
-        svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(_x).tickSize(-height)
-          .ticks(VERTICAL_TICKS))
+          })+100]);      
+             
+        svgMain.select("#svgContainer").remove()
+        svg = svgMain.append('g')
+                .attr('id', 'svgContainer');
+
+        svg.append("g").attr("class", "x-axis").attr("transform", "translate(0,0)") //"translate(0," + height + ")")
+        // .call(d3.axisBottom(_x).tickSize(-height)
+        .call(d3.axisTop(_x).tickSize(-height)
+        .ticks(VERTICAL_TICKS))
           .selectAll("text") 
           .style("text-anchor", "end")
           .attr("dx", "-.8em")
@@ -154,7 +194,7 @@ function main(){
         // TIMELINES
         const Timelines = Array.from(new Set(data.map((item) => item.TimeLineId)));
         Timelines          
-          .forEach((item,index) => createTimeline(svg, item, index))
+          .forEach((item,index) => createTimeline(svg, item, index, colorBy))
        
         // ANNOTATIONS
         const annotation_types = {'elbow'     : d3.annotationCalloutElbow,
@@ -165,8 +205,8 @@ function main(){
                                 }
         // console.log('labelData', labelData)
         var labels = labelData.map(r => {
-          return {  data: {Date:r.Date, Value: r.Value, Annotation: r.AnnTitle, Label: r.AnnLabel},
-                    color: TimeLineColor(r.TimeLineId ),
+          return {  data: {Date:r.Date, Value: r.Value, Annotation: r.AnnTitle +`${r.urlBase? ' 🔗':''}`, Label: r.AnnLabel, url: r.urlBase ? `${r.urlBase}/${r.urlPage}`:undefined},
+                    color: TimeLineColor(r[colorBy] ),
                     dy: r.AnnDY ? r.AnnDY : -5,
                     dx: r.AnnDX ? r.AnnDX : 0,
                     type:  d3.annotationCustomType(annotation_types[r.AnnType],//d3.annotationCalloutElbow, //d3.annotationCalloutCircle
@@ -180,7 +220,7 @@ function main(){
                   }
         }).map(function (l) {
           // console.log('l', l)
-            l.note = Object.assign({}, l.note, { title:  l.data.Annotation, label: l.data.Label
+            l.note = Object.assign({}, l.note, { title:  l.data.Annotation , url:l.data.url//, label: l.data.Label
               //label: timeFormat(l.data.Date) 
             });
             return l;
@@ -224,7 +264,7 @@ function main(){
         var gToday = svg.append('g').attr('id', 'gToday')
         gToday.append("line")
           .attr("x1", _x(today))  //<<== change your code here
-          .attr("y1", 20)
+          .attr("y1", TODAY_LINE_Y)
           .attr("x2", _x(today))  //<<== and here
           .attr("y2", height)
           .style("stroke-width", .6)
@@ -232,7 +272,7 @@ function main(){
           .style("fill", "none");
           gToday.append('rect')
           .attr('x', _x(today) - 25)
-          .attr('y', 0)
+          .attr('y', TODAY_MARKER_Y)
           .attr('width', 50)
           .attr('height', 30)
           .attr('stroke', 'red')
@@ -243,14 +283,14 @@ function main(){
           
           gToday.append('text')
           .attr('x', _x(today) - 13 )
-          .attr('y', 13)
+          .attr('y', TODAY_MARKER_Y + 10)
           .text('Today')
           .attr('stroke', 'white')
           .attr('fill', 'white')
           
           gToday.append('text')
           .attr('x', _x(today) - 13 )
-          .attr('y', 23)
+          .attr('y',  TODAY_MARKER_Y + 20)
           .text(today.getDate()  + "-" + (today.getMonth()+1) + "-" + today.getFullYear())
           .attr('stroke', 'white')
           .attr('fill', 'white')

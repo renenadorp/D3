@@ -1,6 +1,7 @@
 body{
    background-color: whitesmoke;
    font-family: 'Lato';
+   margin: 10px;
 
 }
 
@@ -12,6 +13,7 @@ svg {
    background-color: white;
    font-family: 'Lato';
    font-size: 10px;
+   font-weight: 10;
 }
 
 g.tick line{
@@ -59,7 +61,8 @@ path.line {
 }
 
 .annotation-note-title {
- font-weight: bold;
+   font-size: 1em;
+ font-weight: 600;
 }
 
 .annotation.xythreshold {
@@ -103,12 +106,41 @@ div#timeLineToolTip {
    border-radius: 5px;
    padding: 5px;
 }
-
+/* 
 
 div#timeLineToolTip .tipBox{
+   max-width: 350px;
+   min-width: 350px;
+   text-align: left;
+
+}
+ */
+
+div#timeLineToolTip td.tipTitle{
+   font-weight: bold;
+   vertical-align: top;
+   text-align: left;
+   max-width: 100px;
+   xborder: 1px solid red;
+
+}
+div#timeLineToolTip td.tipContent{
+   font-weight: normal;
+   vertical-align: top;
+   text-align: left;
+   xborder: 1px solid red;
    max-width: 250px;
    min-width: 250px;
+
 }
-div#timeLineToolTip .tipTitle{
-   font-weight: bold;
+
+path.TimeLine {
+   cursor: pointer;
+}
+
+.custom-select {
+   max-width: 300px;
+}
+.container {
+   text-align: left;
 }

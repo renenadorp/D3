@@ -3,14 +3,55 @@
 <head>
     <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link href='style.css' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
-    <div class="row">	
-        <div class="header col-sm-1" style="text-align: left"><h2>GDP Projects</h2></div>	
-    
+      <div class="header" style="text-align: left"><h1>Timelines</h1></div>	
+      <div class="pull-left">
+      <div class="container">
+        <div class="row">
+
+              <div class="input-group mb-4 col-sm-4  " >
+                    <label class="input-group-text" for="inputGroupSelect01">Dataset</label>
+
+                  <select class="custom-select" id="inputGroupSelect01" oninput="sourceFile=value; main();" >
+                    <!-- <option value="energy.json">Energy Flow</option> -->
+                    <option value="CaldicRoadmap.xlsx" >CaldicRoadmap</option>
+                    <option value="Philosophy.xlsx" selected >Philosophers</option>
+                    <option value="ObvionRoadmap.xlsx"  >Obvion Roadmap</option>
+                  </select>
+              </div>
+              <div class="input-group mb-4 col-sm-4" >
+                  <label class="input-group-text" for="inputGroupSelect02">Colors By</label>
+                  <select class="custom-select" id="inputGroupSelect02" oninput="colorBy=value; main();" >
+                  
+                      <option value='TimeLineId'    selected >TimeLine     </option>
+                      <option value='Year'           >Year           </option>
+                      <option value='Month'          >Month          </option>
+                      <option value='Day'            >Day            </option>
+                      <option value='Name'           >Name           </option>
+                      <option value='AnnTitle'       >AnnTitle       </option>
+                      <option value='AnnLabel'       >AnnLabel       </option>
+                      <option value='Description'    >Description    </option>
+                      <option value='AnnType'        >AnnType        </option>
+                      <option value='AnnConnectorEnd'>AnnConnectorEnd</option>
+                      <option value='AnnLineType'    >AnnLineType    </option>
+                      <option value='Stream'         >Stream         </option>
+                      <option value='Country'        >Country        </option>
+
+                </select>
+            </div>
+        </div>
+      </div>
+          
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
     <script src="https://d3js.org/d3.v7.js"></script>
     <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
