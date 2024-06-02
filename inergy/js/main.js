@@ -233,7 +233,6 @@ function chart(ds) {
   					.attr("height", CANVAS.HEIGHT + MARGIN.TOP  + MARGIN.BOTTOM);
 
 	dataFiltered 	= ds; //Currently no data filtering.
-	
 	dataStratified 	= stratify(dataFiltered)
 	data 			= partition(dataStratified)	
 	const root 		= data;

@@ -1,31 +1,67 @@
-var sourceFile=`Philosophy.xlsx`;
-var colorBy = 'TimeLineId';
+var sourceFile    =`CaldicRoadmap.xlsx`;
+var colorBy       = 'TimeLineId';
+var colorScheme   = 'schemeTableau10';
 
-const VERTICAL_TICKS = 16;
+const sourceFileSettings = [
+      {sourceFile: "Football_EC_2024.xlsx", 
+          colorByList: [
+                  {  value: 'TimeLineId', name: 'TimeLine'},
+                  {  value: 'Country', name: 'Country'},
+                ],
+                svgHeight: 500,
+                XaxisPadding: {left: 15, right:2 } //Number of days to add left/right to the x-axis
+      },
+      {sourceFile: "CaldicRoadmap.xlsx", colorByList: [
+                  {  value: 'TimeLineId', name: 'TimeLine'},
+                  {  value: 'Stream', name: 'Stream'},
+                ],
+                svgHeight: 1150,
+                XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
+              },
+      {sourceFile: "ObvionRoadmap.xlsx", colorByList: [
+                  {  value: 'TimeLineId', name: 'TimeLine'},
+                  {  value: 'Stream', name: 'Stream'},
+                ],
+                svgHeight: 550,
+                XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
+              },
+      {sourceFile: "Philosophy.xlsx", colorByList: [
+                  {  value: 'TimeLineId', name: 'TimeLine'},
+                  {  value: 'Stream', name: 'Stream'},
+                  {  value: 'Country', name: 'Country'},
+                  {  value: 'DateOfBirth', name: 'DateOfBirth'},
+                ],
+                svgHeight: 2500,
+                XaxisPadding: {left: 10, right:5000 } //Number of days to add left/right to the x-axis
+              }
+]
+const colorSchemeList = [
+  {name: "schemeSet1"       , scheme: d3.schemeSet1  },
+  {name: "schemeCategory10" , scheme: d3.schemeCategory10  },
+  {name: "schemeAccent"     , scheme: d3.schemeAccent  },
+  {name: "schemeDark2"      , scheme: d3.schemeDark2  },
+  {name: "schemeTableau10"  , scheme: d3.schemeTableau10  },
+  {name: "schemeCustom1"    , scheme: d3.scaleOrdinal().range([`#383867`, `#584c77`, `#33431e`, `#a36629`, `#92462f`, `#b63e36`, `#b74a70`, `#946943`])  }
+  
+  
+]
+
+const VERTICAL_TICKS =  16;
 const TODAY_MARKER_Y = -40;
 const TODAY_LINE_Y   = -10;
 
-const TIMELINE_GAP = 50;
-const TIMELINE_OFFSET = 300;
-var margin    = { top: 50, right: 180, bottom: 100, left: 50 }
-var  height    = ((sourceFile == "Philosophy.xlsx") ? 4200 : 1200) - margin.top - margin.bottom;
-var maxWidth  = 2000 - margin.left - margin.right;
-var width     = maxWidth - margin.left - margin.right;
-
+const TIMELINE_GAP    = 30;
+const TIMELINE_OFFSET = 90;
+var   margin       = { top: 50, right: 180, bottom: 100, left: 150 }
+var   maxWidth     = 3000 - margin.left - margin.right;
+var   width        = maxWidth - margin.left - margin.right;
+var   svgMain;
 // var parseTime = d3.timeParse("%ddd %mmm %Y HH:MM:SS"); // Tue May 01 2012 02:00:00 GMT+0200 (Central European Summer Time)
 var parseTime = d3.timeFormat("%d-%b-%Y"); 
-var timeFormat = d3.timeFormat("%d-%b-%Y");
+var timeFormat = d3.timeFormat(" [%d-%b-%Y ]");
 
-var _x = d3.scaleTime().range([0, width]);
-var _y = d3.scaleLinear().range([height, 0]);
+var _x, _y, height, TimeLineColor;
 
-var svgMain = d3.select("body")
-          .append("svg")
-                .attr("width", maxWidth)
-                .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-          ;
 
 var tip = d3.select("body").append("div").attr('id', 'timeLineToolTip').attr('style', 'position: absolute; opacity: 0; z-index: 100');
 
@@ -47,7 +83,7 @@ const SCHEMAS  =
     'AnnType'         : {	prop: 'AnnType',	      type: String,		required: false	  } ,
     'AnnConnectorEnd' : {	prop: 'AnnConnectorEnd',type: String,		required: false	  } ,
     'AnnLineType'     : {	prop: 'AnnLineType',    type: String,		required: false	  } ,
-    'Central Ideas'   : {	prop: 'Central Ideas',    	  type: String,		required: false	  } ,
+    'Central Ideas'   : {	prop: 'Central Ideas',  type: String,		required: false	  } ,
     'Stream'          : {	prop: 'Stream',    	    type: String,		required: false	  } ,
     'Publications'    : {	prop: 'Publications',   type: String,		required: false	  } ,
     'Country'         : {	prop: 'Country',        type: String,		required: false	  } ,
@@ -59,7 +95,7 @@ const SCHEMAS  =
 
 ]
 
-const TimeLineColor = d3.scaleOrdinal(d3.schemeTableau10);// schemeSet1 // schemeCategory10,schemeAccent, schemeDark2, schemeSet1
+
 
 var data;
 var labels, labelData;
@@ -128,7 +164,7 @@ function createTimeline(e, item, index, colorBy ) {
     return `stroke-width: 8; stroke: ${TimeLineColor(d[0][colorBy])}; stroke-linecap: round; `})
   .attr("d", d3.line()
         .x(function(d) { return _x(d.Date) })
-        .y(function(d) { return _y(d.Value) }) //_y(d.Value)
+        .y(function(d) { return _y(d.Value)}) //_y(d.Value)
         ) 
   .on("mouseover", function(e,d){return handleTimeLineTipMouseOver(e, d)})
   .on("mouseout", (e,d)=>handleTimeLineTipMouseOut(e,d))
@@ -137,6 +173,24 @@ function createTimeline(e, item, index, colorBy ) {
 }
 
 function main(){
+  //Fill Option List for ColorBY
+  var domColorByOptionList = d3.select('#colorByOptionList');
+  var htmlColorByOptionList="";
+  
+  var settings = sourceFileSettings.find(row => row.sourceFile === sourceFile);
+  settings.colorByList.map(option => {
+      htmlColorByOptionList += `<option value ="${option.value}" ${option.value === colorBy ? "selected" : ''}>${option.name}</option> \n`;
+  })
+  domColorByOptionList.html(htmlColorByOptionList);
+  selectedScheme = colorSchemeList.find(scheme => {return scheme.name === colorScheme })
+  TimeLineColor  = d3.scaleOrdinal(selectedScheme.scheme);
+  
+  height    = settings.svgHeight ;
+  var canvasHeight = settings.svgHeight - margin.bottom - margin.top ;
+  console.log(height, canvasHeight)
+  _x = d3.scaleTime().range([0, width]);
+  _y = d3.scaleLinear().range([0, canvasHeight   ]);
+
   LINKXLS = sourceFile;
 	fetch(LINKXLS)
 		.then(response => response.blob())
@@ -145,9 +199,10 @@ function main(){
         readXlsxFile(blob, {sheet:1, schema: SCHEMAS[0] }),
       ] )
       .then((rows ) => {
+
         data   = rows[0].rows;
 
-        // console.log('data:', data)
+        // console.log('data:', data, rows)
         
         labelData = getLabelData(data);
         
@@ -162,33 +217,68 @@ function main(){
           //console.log(d.Date)
           //d.Date = d.Date;
           //d.Value = +d.Value;
-          d.Value = height - (+d.TimeLineId * TIMELINE_GAP + TIMELINE_OFFSET);
+
+          d.Value = d.TimeLineId ;
         });
         
       
         // AXES
-        _x.domain(d3.extent(data, function (d) {
+        function addDays(date, days) {
+          var result = new Date(date);
+          result.setDate(result.getDate() + days);
+          return result;
+        }
+        xDomainExtent = d3.extent(data, function (d) {
           return d.Date;
-        }));
-      
-        _y.domain([150, d3.max(data, function (d) {
-          return d.Value;
-          })+100]);      
-             
-        svgMain.select("#svgContainer").remove()
-        svg = svgMain.append('g')
-                .attr('id', 'svgContainer');
+        });
+        console.log(xDomainExtent)
+        // date.addDays(5)
+        xDomainExtent[0] = addDays( xDomainExtent[0], -settings.XaxisPadding.left);
+        xDomainExtent[1] = addDays( xDomainExtent[1], settings.XaxisPadding.right);
+        console.log(xDomainExtent)
+        
 
-        svg.append("g").attr("class", "x-axis").attr("transform", "translate(0,0)") //"translate(0," + height + ")")
-        // .call(d3.axisBottom(_x).tickSize(-height)
-        .call(d3.axisTop(_x).tickSize(-height)
+        _x.domain(xDomainExtent);
+      
+        _y.domain([-1, d3.max(data, function (d) {
+          return d.Value;
+          }) + 2]);      
+
+        
+        d3.select('body').select("#svgContainer").remove();
+        svg = d3.select('body')
+                .append('div').attr('id', 'svgContainer')
+                .append("svg")
+                .attr("width",  maxWidth)
+                .attr("height", height)
+                .append('g')
+                .attr("transform", `translate(${margin.left} , ${margin.top})`)
+                ;
+
+        svgAxisX1 = svg.append("g").attr("class", "x-axis").attr("transform", "translate(0,0)");
+        svgAxisX1
+        .call(d3.axisTop(_x).tickSize(-canvasHeight )
         .ticks(VERTICAL_TICKS))
+        .selectAll("text") 
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-90)")
+          ;
+          
+          svgAxisX2 = svg.append("g").attr("class", "x-axis").attr("transform", `translate(0,${canvasHeight})`);
+          svgAxisX2
+          .call(d3.axisBottom(_x).tickSize(0 )
+          .ticks(VERTICAL_TICKS))
           .selectAll("text") 
           .style("text-anchor", "end")
           .attr("dx", "-.8em")
           .attr("dy", ".15em")
           .attr("transform", "rotate(-90)")
-          ;
+            ;
+            
+                  
+
         svg.append("g").call(d3.axisLeft(_y).tickValues([]));
         
         // TIMELINES
@@ -205,7 +295,7 @@ function main(){
                                 }
         // console.log('labelData', labelData)
         var labels = labelData.map(r => {
-          return {  data: {Date:r.Date, Value: r.Value, Annotation: r.AnnTitle +`${r.urlBase? ' 🔗':''}`, Label: r.AnnLabel, url: r.urlBase ? `${r.urlBase}/${r.urlPage}`:undefined},
+          return {  data: {Date:r.Date, Value: r.Value, Annotation: r.AnnTitle +`${r.urlBase? ' ⤴':''}`, Label: r.AnnLabel, url: r.urlBase ? `${r.urlBase}/${r.urlPage}`:undefined},
                     color: TimeLineColor(r[colorBy] ),
                     dy: r.AnnDY ? r.AnnDY : -5,
                     dx: r.AnnDX ? r.AnnDX : 0,
@@ -220,8 +310,7 @@ function main(){
                   }
         }).map(function (l) {
           // console.log('l', l)
-            l.note = Object.assign({}, l.note, { title:  l.data.Annotation , url:l.data.url//, label: l.data.Label
-              //label: timeFormat(l.data.Date) 
+            l.note = Object.assign({}, l.note, { title:  l.data.Annotation , url:l.data.url, label: l.data.Label + timeFormat(l.data.Date) 
             });
             return l;
           });
@@ -266,7 +355,7 @@ function main(){
           .attr("x1", _x(today))  //<<== change your code here
           .attr("y1", TODAY_LINE_Y)
           .attr("x2", _x(today))  //<<== and here
-          .attr("y2", height)
+          .attr("y2", canvasHeight)
           .style("stroke-width", .6)
           .style("stroke", "red")
           .style("fill", "none");

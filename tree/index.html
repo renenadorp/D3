@@ -16,26 +16,14 @@
         </div>
         <select class="custom-select" id="inputGroupSelect00" oninput="sourceFile=value; main();"  style="width:120px">
 
-          <option value="caldic.xlsx">Caldic</option>
-          <option value="nfrs.xlsx">NFRs</option>
+          <option value="ldm.xlsx" selected>LDM</option>
+          <option value="ISO-IEC25010-2023.xlsx">ISO 25010:2023</option>
+          <option value="d3.json">D3</option>
 
         </select>
       </div>
   
 
-      <div class="input-group mb-4">
-        <div class="input-group-prepend"  style="width: 120px">
-          <label class="input-group-text" for="inputGroupSelect01">Region</label>
-        </div>
-        <select class="custom-select" id="inputGroupSelect01" oninput="selectedRegion=value; main();"  style="width:120px">
-          <option value="ALL" selected>All</option>
-
-          <option value="Global">Global</option>
-          <option value="Latam">Latin America</option>
-          <option value="Apac">Asia Pacific</option>
-          <option value="NorthAm">North America</option>
-        </select>
-      </div>
   
       <div class="input-group mb-4" >
         <div class="input-group-prepend"  style="width: 120px">
@@ -77,6 +65,7 @@
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+
 <script src="main.js"></script>
 </body>
 </html>

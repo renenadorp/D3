@@ -49,8 +49,12 @@ const SCHEMAS  =
         type: String
         }		
     },
-  ]
+  ];
+var selectedRegion = 'ALL';
+var  searchValue;
+var  selectedNodeColor = 'NodeType' //Default node coloring by Region
 
+  
 const NODESIZE = 5;
 const STRENGTHVALUE = 10;
 
@@ -63,9 +67,6 @@ const HEIGHT  				= 1200;
 const MARGIN          = { LEFT  : 50, RIGHT: 1, TOP: 0, BOTTOM: 1 }
 const CANVAS          = { WIDTH : WIDTH  - MARGIN.LEFT - MARGIN.RIGHT,
                           HEIGHT: HEIGHT - MARGIN.TOP  - MARGIN.BOTTOM}
-var selectedRegion = 'ALL';
-var searchValue;
-var selectedNodeColor = 'NodeType' //Default node coloring by Region
 
 colorScale = d3.scaleOrdinal(d3.schemeObservable10);//schemeAccent schemeCategory10  schemePastel1 schemeObservable10 schemeTableau10
 
@@ -149,7 +150,6 @@ function filterGraphData(graphdata, ...filters){
   // // Reset
   //   nodes = dataUnfiltered.nodes
   //   links = dataUnfiltered.links
-  console.log('graphdata', graphdata)
 
   // Filter nodes by Region
   nodes = graphdata.nodes.filter(r => {return r.Region == selectedRegion || selectedRegion == 'ALL'  || selectedRegion == undefined});
@@ -160,7 +160,7 @@ function filterGraphData(graphdata, ...filters){
 
   // Get links to nodes (idea being to include first level linked nodes )
   links = graphdata.links.filter((link) => {
-    console.log('filtered graphdata.link:' , link)
+    // console.log('filtered graphdata.link:' , link)
     return nodes.some((node) => {
       return node.id === link.source || node.id === link.target;
     })
@@ -186,9 +186,10 @@ function filterGraphData(graphdata, ...filters){
 }    
 
 function updateChart() {
-  
-  if (selectedRegion || searchValue)  data = filterGraphData(dataUnfiltered, {selectedRegion: selectedRegion, searchValue: searchValue})
-  else data = dataUnfiltered;
+  svgMain.select("#svgContainer").remove()
+  svg = svgMain.append('g').attr('id', 'svgContainer');
+  data = filterGraphData(dataUnfiltered, {selectedRegion: selectedRegion, searchValue: searchValue})
+
     // svg.selectAll('circle').forEach(n =>  n.remove()); 
     svgMain.select('#svg').remove()
     svg = svgMain.append('g').attr('id', 'svg')
@@ -215,17 +216,20 @@ function chart () {
 
   const nodes = data.nodes
   const links = data.links;
-                
   var connected = [];
+
+  function setNodeId(node) {
+    return node.id;
+  }
+
   const simulation = d3
     .forceSimulation(nodes)
-
 
     .force(
       "link",
       d3
         .forceLink(links)
-        .id(d => d.id)
+        .id((d,i) => d.id)
         .distance(200)
     )
     .force(
@@ -611,33 +615,27 @@ function initZoom(element) {
 }
 
 //////////// MAIN //////////// 
-function main(){
+function main(readSourceData = true){
   var SOURCE_FILE = `${sourceFolder}/${sourceFile}`;
 
 
+      fetch(SOURCE_FILE)
+        .then(response => response.blob())
+        .then(blob => 
+          Promise.all ([
+            readXlsxFile(blob, {sheet:1, schema: SCHEMAS[0] }),
+            readXlsxFile(blob, {sheet:2, schema: SCHEMAS[1] }),
+            
+          ] )
+          .then((rows ) => {
+            const dataComposed = composeGraphData(rows);
+            dataUnfiltered = dataComposed;
+            const dataJSON = JSON.stringify(dataUnfiltered);
+            // console.log(dataJSON)
 
-	//log('LINK:', LINK)
-	fetch(SOURCE_FILE)
-		.then(response => response.blob())
-		.then(blob => 
-      Promise.all ([
-        readXlsxFile(blob, {sheet:1, schema: SCHEMAS[0] }),
-        readXlsxFile(blob, {sheet:2, schema: SCHEMAS[1] }),
-        
-      ] )
-      .then((rows ) => {
-        data = composeGraphData(rows);
-        dataUnfiltered = data;
-        const dataJSON = JSON.stringify(data);
-        // console.log(dataJSON)
-        console.log('data',data, dataUnfiltered)
-        svgMain.select("#svgContainer").remove()
-        svg = svgMain.append('g')
-                .attr('id', 'svgContainer');
-
-        updateChart();
-      }) 
-    )
+            updateChart();
+          }) 
+        )
 }
 
 main();

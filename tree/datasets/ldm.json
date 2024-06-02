@@ -1,0 +1,41 @@
+{
+  "name": "LDM",
+  "children": [
+   {
+    "name": "What is it?",
+    "children": [
+     {
+      "name": "Definition"
+      
+     },
+     {
+      "name": "Scope"
+     }
+    ]
+   },
+   {
+    "name": "Why do we need it?",
+    "children": [
+     {"name": "Business Rationale", "value": 17010},
+     {"name": "IT Rationale", "value": 5842}
+  ]}
+    
+   ,
+   {
+    "name": "How do we use it?"
+    
+   },
+   {
+    "name": "How do we create it?"
+    
+   },
+   {
+    "name": "How do we manage it?",
+    "children": [
+      {"name": "Who owns it?", "value": 4116},
+      {"name": "Who owns it?", "value": 4116}
+    ]
+   }
+  ]
+ }
+ 

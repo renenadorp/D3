@@ -19,31 +19,34 @@
 
                   <select class="custom-select" id="inputGroupSelect01" oninput="sourceFile=value; main();" >
                     <!-- <option value="energy.json">Energy Flow</option> -->
-                    <option value="CaldicRoadmap.xlsx" >CaldicRoadmap</option>
-                    <option value="Philosophy.xlsx" selected >Philosophers</option>
+                    <option value="CaldicRoadmap.xlsx" selected>Caldic Roadmap</option>
+                    <option value="Philosophy.xlsx"  >Philosophers</option>
                     <option value="ObvionRoadmap.xlsx"  >Obvion Roadmap</option>
+                    <option value="Football_EC_2024.xlsx"  >European Championships 2024</option>
                   </select>
               </div>
               <div class="input-group mb-4 col-sm-4" >
-                  <label class="input-group-text" for="inputGroupSelect02">Colors By</label>
-                  <select class="custom-select" id="inputGroupSelect02" oninput="colorBy=value; main();" >
+                  <label class="input-group-text" for="colorByOptionList">Colors By</label>
+                  <select class="custom-select" id="colorByOptionList" oninput="colorBy=value; main();" >
                   
-                      <option value='TimeLineId'    selected >TimeLine     </option>
-                      <option value='Year'           >Year           </option>
-                      <option value='Month'          >Month          </option>
-                      <option value='Day'            >Day            </option>
-                      <option value='Name'           >Name           </option>
-                      <option value='AnnTitle'       >AnnTitle       </option>
-                      <option value='AnnLabel'       >AnnLabel       </option>
-                      <option value='Description'    >Description    </option>
-                      <option value='AnnType'        >AnnType        </option>
-                      <option value='AnnConnectorEnd'>AnnConnectorEnd</option>
-                      <option value='AnnLineType'    >AnnLineType    </option>
-                      <option value='Stream'         >Stream         </option>
-                      <option value='Country'        >Country        </option>
-
+                
                 </select>
             </div>
+            <div class="input-group mb-4 col-sm-4" >
+              <label class="input-group-text" for="colorByColorScheme">Color Scheme</label>
+              <select class="custom-select" id="colorByColorScheme" oninput="colorScheme=value; main();" >
+                <option value ="schemeSet1" >schemeSet1</option> 
+                <option value ="schemeCategory10" >schemeCategory10</option> 
+                <option value ="schemeAccent" >schemeAccent</option> 
+                <option value ="schemeDark2" >schemeDark2</option> 
+                <option value ="schemeTableau10" selected >schemeTableau10</option> 
+                <option value ="schemeCustom1" >schemeCustom1</option> 
+
+                
+                
+                            
+            </select>
+        </div>
         </div>
       </div>
           
