@@ -1,0 +1,35 @@
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #dedede;
+  stroke-width: 1px;
+}
+
+div.content {
+  margin: 50px;
+}
+
+  circle:hover {stroke: #f8ad0a;}
+  body, svg {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        /* font-size: 48px; */
+ } 
+
+body {
+  margin: 10px;
+}
+
+dummy {
+  color: #ffb700;
+}
