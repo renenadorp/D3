@@ -1,39 +1,55 @@
-var sourceFile    =`CaldicRoadmap.xlsx`;
+var sourceFile    =`CaldicRFP.xlsx`;
 var colorBy       = 'TimeLineId';
 var colorScheme   = 'schemeTableau10';
 
 const sourceFileSettings = [
-      {sourceFile: "Football_EC_2024.xlsx", 
+  { sourceFile: "Football_EC_2024.xlsx", 
+    colorByList: [
+          {  value: 'TimeLineId', name: 'TimeLine'},
+          {  value: 'Country', name: 'Country'},
+        ],
+        svgHeight: 500,
+        XaxisPadding: {left: 15, right:2 } //Number of days to add left/right to the x-axis
+  },
+  {sourceFile: "CaldicRFP.xlsx", 
           colorByList: [
                   {  value: 'TimeLineId', name: 'TimeLine'},
                   {  value: 'Country', name: 'Country'},
                 ],
-                svgHeight: 500,
-                XaxisPadding: {left: 15, right:2 } //Number of days to add left/right to the x-axis
+                svgHeight: 300,
+                XaxisPadding: {left: 5, right:2 } //Number of days to add left/right to the x-axis
       },
-      {sourceFile: "CaldicRoadmap.xlsx", colorByList: [
-                  {  value: 'TimeLineId', name: 'TimeLine'},
-                  {  value: 'Stream', name: 'Stream'},
-                ],
-                svgHeight: 1150,
-                XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
-              },
-      {sourceFile: "ObvionRoadmap.xlsx", colorByList: [
+      
+    {sourceFile: "CaldicRoadmap.xlsx", colorByList: [
+                          {  value: 'TimeLineId', name: 'TimeLine'},
+                          {  value: 'Stream', name: 'Stream'},
+                        ],
+                        svgHeight: 1150,
+                        XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
+                      },
+              {sourceFile: "ObvionRoadmap.xlsx", colorByList: [
                   {  value: 'TimeLineId', name: 'TimeLine'},
                   {  value: 'Stream', name: 'Stream'},
                 ],
                 svgHeight: 550,
                 XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
               },
-      {sourceFile: "Philosophy.xlsx", colorByList: [
-                  {  value: 'TimeLineId', name: 'TimeLine'},
-                  {  value: 'Stream', name: 'Stream'},
-                  {  value: 'Country', name: 'Country'},
-                  {  value: 'DateOfBirth', name: 'DateOfBirth'},
-                ],
-                svgHeight: 2500,
-                XaxisPadding: {left: 10, right:5000 } //Number of days to add left/right to the x-axis
-              }
+              {sourceFile: "Philosophy.xlsx", colorByList: [
+                {  value: 'TimeLineId', name: 'TimeLine'},
+                {  value: 'Stream', name: 'Stream'},
+                {  value: 'Country', name: 'Country'},
+                {  value: 'DateOfBirth', name: 'DateOfBirth'},
+              ],
+              svgHeight: 2500,
+              XaxisPadding: {left: 10, right:5000 } //Number of days to add left/right to the x-axis
+            },
+           {sourceFile: "LDM_Stages.xlsx", colorByList: [
+              {  value: 'TimeLineId', name: 'TimeLine'},
+
+            ],
+            svgHeight: 600,
+            XaxisPadding: {left: 10, right:10 } //Number of days to add left/right to the x-axis
+          }
 ]
 const colorSchemeList = [
   {name: "schemeSet1"       , scheme: d3.schemeSet1  },
