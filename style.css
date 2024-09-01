@@ -1,12 +1,42 @@
-body {margin:30px 0 0 30px; background-color: #E9ECED; font-size: 10pt}
+body {margin:100px; 
+    background-color: #E9ECED; 
+    font-size: 20pt;
+    display: grid;
+}
+
 .title {
   text-align: left;
   xborder: 1px solid red;
   margin-bottom: 5px;
 }
 
-
+div.title{width:100%;xborder:1px solid red;text-align: center;}
 h1 {
-  text-align: left;
-  color: #6f2a2a
+  text-align: center;
+  color: #34467e
 }
+h2 {
+  text-align: center;
+  color: #444444
+
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%
+  /* align-items: stretch; */
+  
+  
+}
+
+
+div.tile {
+  display:grid;
+  /* place-self: center stretch; */
+  align-self: center;
+  
+}
+

@@ -203,7 +203,7 @@ function main(){
   
   height    = settings.svgHeight ;
   var canvasHeight = settings.svgHeight - margin.bottom - margin.top ;
-  console.log(height, canvasHeight)
+  // console.log(height, canvasHeight)
   _x = d3.scaleTime().range([0, width]);
   _y = d3.scaleLinear().range([0, canvasHeight   ]);
 
@@ -247,7 +247,7 @@ function main(){
         xDomainExtent = d3.extent(data, function (d) {
           return d.Date;
         });
-        console.log(xDomainExtent)
+        // console.log(xDomainExtent)
         // date.addDays(5)
         xDomainExtent[0] = addDays( xDomainExtent[0], -settings.XaxisPadding.left);
         xDomainExtent[1] = addDays( xDomainExtent[1], settings.XaxisPadding.right);

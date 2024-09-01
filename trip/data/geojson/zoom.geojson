@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "Zoom",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [ -77.013601723972371, 38.89362141122028 ] } },
+{ "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [ -77.003556119254654, 38.893641954379213 ] } },
+{ "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [ -77.003597205572518, 38.886143701369058 ] } },
+{ "type": "Feature", "properties": { "id": 4 }, "geometry": { "type": "Point", "coordinates": [ -77.013581180813446, 38.885999899256532 ] } }
+]
+}

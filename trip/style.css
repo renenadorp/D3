@@ -1,0 +1,147 @@
+body {margin:10px; 
+  background-color: #E9ECED; 
+  font-size: 20pt;
+  display: grid;
+}
+
+.title {
+text-align: left;
+xborder: 1px solid red;
+margin-bottom: 5px;
+}
+
+div.title{width:100%;xborder:1px solid red;text-align: center;}
+h1 {
+text-align: center;
+color: #34467e
+}
+h2 {
+text-align: center;
+color: #444444
+
+}
+
+
+.grid-header {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    margin-bottom: 5px;
+    /* align-items: stretch; */
+    
+    
+    }
+    
+div#grid-container {
+  grid-column-gap: 5px;
+  grid-row-gap: 15px;
+  /* grid-template-columns: 270px auto auto auto; */
+  transition: 600ms ease-in-out;;
+  display: grid;
+  grid-template-columns: 280px 0px 1fr;
+
+  /* align-items: stretch; */
+  display: grid;
+}
+
+div#grid-container:hover {
+  /* transition: margin-right 2s ease-in-out; */
+  grid-template-columns: 280px 400px 1fr;
+  
+}
+
+
+      
+  div.tile {
+    display:grid;
+    /* place-self: center stretch; */
+    align-self: center;
+    
+    }
+
+    div.tile#menu {
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      vertical-align: top;
+      height: 100%;
+      padding: 5px;
+    
+    }    
+    
+    div.tile#details {
+      /* border: 1px solid lightgrey; */
+      border-radius: 5px;
+      vertical-align: top;
+      height: 100%;
+      /* padding: 5px; */
+    
+    }    
+    
+    div#viz{
+      xmargin-top: 10px;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      xbackground-color: whitesmoke;
+    }
+    
+    rect.menuItem {
+      stroke:  lightgrey;
+      stroke-width: 1px;
+      border-radius: 3px;
+      fill:white;
+      fill-opacity: .3;
+      rx:3;
+      
+    }
+    rect.menuItemSelected {
+      stroke:  #ff0000;
+      stroke-width: 1px;
+      border-radius: 3px;
+      fill:white;
+      fill-opacity: .3;
+      rx:3;
+      
+    }
+    
+    
+    text.menuItem {
+      border-radius: 3px;
+      fill:black;
+      font-size: 12pt;
+      
+      
+    }
+    
+    g.arrow-details {
+      fill: #bcbcbc;
+      cursor:pointer;
+    }
+    g.svgDetailsDiv div {
+      border: 1px solid red;
+    }
+    div.details {
+      width: 387px;
+      border: 1px solid lightgrey;
+      padding: 3px;
+      height: 1000px;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+    div.detailsTitle {
+      xbackground-color: lightgrey;
+      font-weight: 800;
+      font-size: 12pt;
+      color: #888888;
+      padding-left: 3px;
+    }
+    div.detailsDescr {
+      font-weight: 400;
+      font-size: 12pt;
+      padding-left: 3px;
+      color: #888888;
+      
+    }
+        
+       

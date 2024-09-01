@@ -169,19 +169,25 @@ function filterGraphData(graphdata, ...filters){
   
   //Add nodes from links (the linked nodes need to exist in the node list)
   links.map(link => {
-    link_target = graphdata.nodes.find(node => node.id === link.target)
+    link_target = graphdata.nodes.find(node => {
+      // console.log(node); 
+      return node.id === link.target})
     link_source = graphdata.nodes.find(node => node.id === link.source)
     
     // console.log('link_source', link_source)
     // console.log('link_target', link_target)
     
 
-    if (nodes.find(node => node.id == link_source.id) === undefined) nodes.push(link_source)
-    if (nodes.find(node => node.id == link_target.id) === undefined) nodes.push(link_target)
+    if (nodes.find(node => {
+      // console.log(link_source); 
+      return node.id == link_source.id}) === undefined) nodes.push(link_source)
+    if (nodes.find(node => {
+      // console.log(link_target); 
+      return node.id == link_target.id}) === undefined) nodes.push(link_target)
 
   })
   const return_nodes_links = {'nodes': nodes, 'links': links}
-  console.log('return_nodes_links', return_nodes_links)
+  // console.log('return_nodes_links', return_nodes_links)
   return return_nodes_links
 }    
 
@@ -629,6 +635,7 @@ function main(readSourceData = true){
           ] )
           .then((rows ) => {
             const dataComposed = composeGraphData(rows);
+            console.log(dataComposed)
             dataUnfiltered = dataComposed;
             const dataJSON = JSON.stringify(dataUnfiltered);
             // console.log(dataJSON)

@@ -1,0 +1,261 @@
+{"Curve":
+[
+    {
+        "p1": {"x": 390, "y": 1615},
+        "p2": {"x": 655, "y": 1093},
+        "cp": {"x": 490, "y": 1600}
+    },
+    {
+        "p1": {"x": 655, "y": 1093},
+        "p2": {"x": 1000, "y": 740},
+        "cp": {"x": 830, "y": 630}
+    },
+    {
+        "p1": {"x": 1000, "y": 740},
+        "p2": {"x": 1092, "y": 1000},
+        "cp": {"x": 1070, "y": 790}
+    }
+    
+    ,
+    {
+        "p1": {"x": 1092, "y": 1000},
+        "p2": {"x": 1265, "y": 1500},
+        "cp": {"x": 1130, "y": 1460}
+    }
+    
+    ,
+    {
+        "p1": {"x": 1265, "y": 1500},
+        "p2": {"x": 1655, "y": 1320},
+        "cp": {"x": 1425, "y": 1540}
+    }
+    
+    ,
+    {
+        "p1": {"x": 1655, "y": 1320},
+        "p2": {"x": 2300, "y": 1105},
+        "cp": {"x": 1900, "y": 1085}
+    }
+       
+],
+"Phases": ["Innovation", "Inflation", "Disillusionment", "Enlightenment", "Plateau"]
+,
+"HypeCycles":
+[
+    {
+    "name"  : "HypeCycle of Emerging Tech, 2022",
+    "points":
+    [
+        {
+            "label" : "Data Observability",
+            "progress" : 0.123,
+            "position": "left", 
+            "dx":-30, 
+            "dy": -16,
+            "plateau": 4
+        }
+        ,
+        {
+            "label" : "Cloud Data Ecosystems",
+            "progress" : 0.405,
+            "position": "right", 
+            "dx": 65, 
+            "dy": 5,
+            "plateau": 4
+        }
+       
+        ,
+        {
+            "label" : "NFT",
+            "progress" : 0.399,
+            "position": "right", 
+            "dx": 65, 
+            "dy": -5,
+            "plateau": 4
+        }
+        ,
+        {
+            "label" : "Metaverse",
+            "progress" : 0.1,
+            "position": "right", 
+            "dx": 45, 
+            "dy": 5,
+            "plateau": 12
+        }
+        ,
+        {
+            "label" : "Digital Twin",
+            "progress" : 0.045,
+            "position": "left", 
+            "dx": -60, 
+            "dy": 0,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Autonomic Systems",
+            "progress" : 0.01,
+            "position": "right", 
+            "dx": 40, 
+            "dy": 20,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Digital Humans",
+            "progress" : 0.21,
+            "position": "right", 
+            "dx": 40, 
+            "dy": 20,
+            "plateau": 10
+        }
+       
+        ,
+        {
+            "label" : "Dynamic Risk Governance",
+            "progress" : 0.17,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -20,
+            "plateau": 4
+        }
+       
+        ,
+        {
+            "label" : "Decentralized Identity",
+            "progress" : 0.39,
+            "position": "right", 
+            "dx": 40, 
+            "dy": -20,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Cloud Sustainability",
+            "progress" : 0.14,
+            "position": "right", 
+            "dx": 40, 
+            "dy": -10,
+            "plateau": 3
+        }
+       
+        ,
+        {
+            "label" : "Causal AI ",
+            "progress" : 0.09,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -20,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Foundation Models",
+            "progress" : 0.32,
+            "position": "left", 
+            "dx": 0, 
+            "dy": -50,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Web 3",
+            "progress" : 0.31,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -10,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Computational Storage",
+            "progress" : 0.30,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -10,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Superapps",
+            "progress" : 0.28,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -20,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Industry Cloud Platforms",
+            "progress" : 0.27,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -10,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Internal Talent Marketplace",
+            "progress" : 0.25,
+            "position": "left", 
+            "dx": -40, 
+            "dy": -10,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Observability Driven Development",
+            "progress" : 0.15,
+            "position": "right", 
+            "dx": 40, 
+            "dy": -20,
+            "plateau": 6
+        }
+       
+
+        ,
+        {
+            "label" : "Open Telemetry",
+            "progress" : 0.08,
+            "position": "left", 
+            "dx": -30, 
+            "dy": -10,
+            "plateau": 2
+        }
+       
+        ,
+        {
+            "label" : "Augmented FinOps",
+            "progress" : 0.07,
+            "position": "right", 
+            "dx": 40, 
+            "dy": 0,
+            "plateau": 6
+        }
+       
+        ,
+        {
+            "label" : "Generative Design AI",
+            "progress" : 0.02,
+            "position": "right", 
+            "dx": 40, 
+            "dy": 0,
+            "plateau": 6
+        }
+       
+
+        
+    ]
+    }
+]
+}

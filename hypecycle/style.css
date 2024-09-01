@@ -1,0 +1,97 @@
+/* HTML styles */
+html{ width: 100%; }
+body{ 
+  width: 100%; 
+  margin: 0; padding: 0; 
+  display: flex;
+  xfont-family: 'Courier New', Courier, monospace;
+
+  xcolor:  #179ad7;
+  font-family: sans-serif; font-size: 100%;
+}
+div.title h1 {
+  font-size: 62pt;
+  font-weight: 750;
+  text-align: center;  
+  color: #e03232;
+}
+div#viz {
+  xbackground-image: url('./xhypecycle.png');
+  background-color: #f7f7f8;
+  
+}
+div#gartner {
+  background-image: url('./hypecycle.png');
+
+}
+path#HypeCycleCurve {
+
+	fill: none;
+	stroke-width: 6px;
+	stroke: #444444;
+	stroke-dasharray: 0px;
+}
+
+nodeText {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+line.callout {
+  stroke: #3a3a3a;
+  stroke-width: 1
+}
+
+text.callout {
+  font-size: 22pt;
+  font-weight: 300;
+}
+
+text.AxisLabel {
+  font-size: 52pt;
+  font-weight: 950;
+  fill: #162b54
+
+}
+
+text.PhaseLabel {
+  font-size: 22pt;
+  font-weight: 950;
+  fill: #162b54;
+  word-break:break-all;
+
+
+}
+
+g.x-axis g.tick line {
+  stroke: white;
+  stroke-width: 10;
+}
+text.GraphTitle {
+font-size: 82pt;
+font-weight: 950;
+fill: #162b54
+}
+
+text.Legend {
+  font-size: 24pt;
+  font-weight: 250;
+  xfill: #162b54
+
+}
+
+rect.button {
+  fill: #037bff;
+  border-radius: 10;
+  cursor: pointer;
+}
+
+text.button {
+  font-size: 24pt;
+  font-weight: 250;
+  fill: white;
+  text-anchor: middle;
+  cursor: pointer;
+
+
+
+}
