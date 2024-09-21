@@ -1,5 +1,5 @@
 
-var sourceFile=`caldic.xlsx`;
+var sourceFile=`Rituals.xlsx`;
 const sourceFolder = 'datasets';
 const SCHEMAS  = 
 [

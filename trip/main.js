@@ -51,7 +51,9 @@ const themes = [
 
       },
 
-    }
+    },
+    panels: {
+    details: {position: {top:104, left: 1250}, width: 800}}
   }];
 const theme = themes[0];
 
@@ -257,6 +259,16 @@ const SCHEMAS =
       prop: 'Url',
       type: String
     }
+    ,
+    'Cost': {
+      prop: 'Cost',
+      type: Number
+    }
+    ,
+    'Km': {
+      prop: 'Km',
+      type: Number
+    }
   }
 
     //Id	TipId	StepName	Sort	Title	Descr	Picture	Url
@@ -264,7 +276,7 @@ const SCHEMAS =
 
 // TOOLTIP
 d3.select('body').append('div').attr('id', 'ToolTip')
-      .attr('style', 'position: absolute; opacity: 0; top: 104px; left: 300px');  
+      .attr('style', `position: absolute; opacity: 0; top: 104px; left: ${theme.panels.details.position.left}px`);  
 
 //MARGIN CONVENTION
 var MARGIN = { LEFT: 0, RIGHT: 0, TOP: 0, BOTTOM: 0 }
@@ -278,7 +290,7 @@ const svgMenuCanvas = d3.select("#menu").append("svg")
   .attr("height", '100%')
 
 const svgDetailsCanvas = d3.select("#details").append("svg")
-  .attr("width", 400)
+  .attr("width", theme.panels.details.width)
   .attr("height", '100%')
 
 const svgCanvas = d3.select("#viz").append("svg")
@@ -387,7 +399,7 @@ function main() {
             const cities = citiesUnfiltered.filter(e => (e.Include=="Y"))
             dataGeoJSON = dataGeoJSON();
             drawMenu(trip, tripDetails);
-            drawChart(vectors, dataGeoJSON, countries, cities, trip)
+            drawMap(vectors, dataGeoJSON, countries, cities, trip)
 
           }
           )
@@ -445,14 +457,15 @@ function drawMenu(trip, tripDetails){
                   const tripDetailsTripId = tripDetails.filter(r => r.TripId == d.Id)
                   let htmlList = "<div class='details'> ";
                   tripDetailsTripId.map(r => {
-                    htmlList += `<div class='detailsTitle' style='max-width: 350px'>${r.Title}</div>`;
-                    if (r.Image) htmlList += `<div class='detailsImage'><img src="${r.Image}" width="360px" height="auto" /img> </div>`;
-                    htmlList += `<div class='detailsDescr' style='max-width: 350px'>${r.Descr}</div>`;
+                    htmlList += `<div class='detailsTitle' style='max-width: ${theme.panels.details.width - 20}px'>${r.Title}</div>`;
+                    if (r.Cost) htmlList += `<div class='detailsCost'>€${r.Cost} </div>`;
+                    if (r.Image) htmlList += `<div class='detailsImage'><img src="${r.Image}" width="${theme.panels.details.width - 20}px" height="auto" /img> </div>`;
+                    htmlList += `<div class='detailsDescr' style='max-width: ${theme.panels.details.width - 20}px'>${r.Descr}</div>`;
                     }
                   )
 
                   htmlList += '</div>'
-                  tooltip.transition().duration(1000).attr('style', 'position: absolute; opacity: 1; top: 104px; left: 300px');
+                  tooltip.transition().duration(1000).attr('style', `position: absolute; opacity: 1; top: ${theme.panels.details.position.top}px; left: ${theme.panels.details.position.left}px`);
                   tooltip.html(htmlList)
 
                   ////////////////////////////////////////////
@@ -537,7 +550,7 @@ function drawMenu(trip, tripDetails){
 
 };
 
-function drawChart(vectors, dataGeoJSON, countries, cities, trip) {
+function drawMap(vectors, dataGeoJSON, countries, cities, trip) {
 
   let projection = d3.geoConicEquidistant()
     .rotate([-20.0, 0.0])

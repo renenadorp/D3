@@ -1,0 +1,41 @@
+body {margin:10px; 
+  background-color: white;
+  font-size: 20pt;
+  display: grid;
+}
+
+circle.node {
+  /* r: 5; */
+  /* fill: white; */
+  stroke: #4c4c4c;
+  stroke-width: 0.5px;
+
+}
+
+text.nodeText {
+  font-size: x-small;
+}
+
+g.link line.link {
+  /* stroke: #4c4c4c; */
+  /* stroke-width: .5; */
+}
+
+    
+div.grid-container {
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-columns:  100px 100px;
+  display: grid;
+
+  /* align-items: stretch; */
+  display: grid;
+}
+   
+div.tile {
+  display:grid;
+  /* place-self: center stretch; */
+  align-self: center;
+  
+  }
+

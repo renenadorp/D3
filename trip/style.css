@@ -40,7 +40,7 @@ div#grid-container {
   /* grid-template-columns: 270px auto auto auto; */
   transition: 600ms ease-in-out;;
   display: grid;
-  grid-template-columns: 280px 0px 1fr;
+  grid-template-columns: 280px 950px 1fr;
 
   /* align-items: stretch; */
   display: grid;
@@ -48,7 +48,7 @@ div#grid-container {
 
 div#grid-container:hover {
   /* transition: margin-right 2s ease-in-out; */
-  grid-template-columns: 280px 400px 1fr;
+  grid-template-columns: 280px 950px 1fr;
   
 }
 
@@ -122,7 +122,7 @@ div#grid-container:hover {
       border: 1px solid red;
     }
     div.details {
-      width: 387px;
+      width: 800px;
       border: 1px solid lightgrey;
       padding: 3px;
       height: 1000px;
@@ -132,7 +132,8 @@ div#grid-container:hover {
     div.detailsTitle {
       xbackground-color: lightgrey;
       font-weight: 800;
-      font-size: 12pt;
+      font-size: 18pt;
+      padding-top: 5px;
       color: #888888;
       padding-left: 3px;
     }
@@ -141,6 +142,13 @@ div#grid-container:hover {
       font-size: 12pt;
       padding-left: 3px;
       color: #888888;
+      
+    }
+    div.detailsCost {
+      font-weight: 400;
+      font-size: 18pt;
+      padding-left: 3px;
+      color: red;
       
     }
         
