@@ -12,30 +12,109 @@ circle.node {
 
 }
 
-text.nodeText {
-  font-size: x-small;
+text.node {
+  font-size: 8pt;
+  fill: #878787;
+  font-weight: 700
 }
 
-g.link line.link {
-  /* stroke: #4c4c4c; */
-  /* stroke-width: .5; */
+path.line {
+  stroke: #D9D9D9;
+  stroke-width: 5px;
+  stroke-opacity: 0.5;
+
+}
+circle.node {
+  fill: #F2F2F2;
+  fill-opacity:1;
+  stroke: #A51F24;
+  stroke-opacity: 0.5;
 }
 
     
-div.grid-container {
+div.grid-container-header {
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-columns:  100px 100px;
+  grid-template-columns:  80px 80px 300px;
   display: grid;
-
+  margin-bottom: 10px;
+  
   /* align-items: stretch; */
-  display: grid;
+  /* display: grid; */
 }
-   
+
 div.tile {
   display:grid;
   /* place-self: center stretch; */
-  align-self: center;
+  align-self: top;
+  text-align: left;
   
+}
+
+div.grid-container-viz div.tile{
+  border: 1px solid #F2F2F2;
+}
+
+div.grid-container-viz {
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns:  800px 800px;
+    display: grid;
+  
+    /* align-items: stretch; */
+    display: grid;
   }
 
+  g.Story text {
+    font-size: 12pt;
+  }
+
+  g.Story text.Header {
+    font-size: 14pt;
+    fill: #A51F24;
+    font-weight: 800;
+  }
+
+button {
+  width: 70px;
+  height: 30px;
+  color: white;
+  background-color: #A51F24;
+  font-size: 12pt;
+  border-radius: 3px;
+  border: 0px solid red;
+}
+
+p#StageCurrent {
+  font-size: 14pt;
+  font-weight: 800
+}
+g.tick text {
+  fill:  #4c4c4c;
+
+}
+g.tick line {
+  stroke:  #A51F24;
+
+}
+path.domain {
+  stroke: #A51F24;
+  stroke-width: 2px;
+}  
+
+line.transition {
+  stroke: #A51F24;
+  stroke-width: 5px;
+}
+
+path.transition {
+  stroke: none;
+  fill: #A51F24;
+  /* stroke-width: 10px; */
+}
+
+text.axisLabel {
+  fill: #A51F24;
+  font-weight: 600;
+
+}

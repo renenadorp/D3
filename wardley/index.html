@@ -16,18 +16,21 @@
 
   
   <div class="title">
-    <h2>Wardley Maps</h2>
+    <h2>Wardley Mapping</h2>
   </div>      
   
-  <div class="grid-container">
+  <div class="grid-container-header">
   <div class="tile" id="prev"><button onclick="StageIncrement=-1;drawMap()">Prev</button></div> 
   <div class="tile" id="next"><button onclick="StageIncrement=+1;drawMap()">Next</button></div> 
+  <div class="tile" id="StageCurrent"><p id="StageCurrent">Current Stage: 0</p></div> 
   </div>
 
-  <div class="grid-container">
+  <div class="grid-container-viz">
 
-  <div class="tile" id="viz"></div>
+    <div class="tile" id="viz"></div>
+    <div class="tile" id="story"></div>
   </div>
+
 
 
 

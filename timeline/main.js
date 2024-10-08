@@ -16,7 +16,7 @@ const sourceFileSettings = [
                   {  value: 'TimeLineId', name: 'TimeLine'},
                   {  value: 'Country', name: 'Country'},
                 ],
-                svgHeight: 300,
+                svgHeight: 350,
                 XaxisPadding: {left: 5, right:2 } //Number of days to add left/right to the x-axis
       },
       
