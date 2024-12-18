@@ -3,6 +3,7 @@ let transition = {duration: {normal: 2000, short: 1000, tiny: 500, long: 4000}}
 
 let StageCurrent = 0;
 let selectMap = 'Ilionx';
+let selectLanguage = 'nl'
 let mapNodes, mapLinks, mapSizeStoryLines;
 let promiseList = [];
 
@@ -212,8 +213,13 @@ const SCHEMAS =
         type: String
       }
       ,
-      'StoryLine': {
-        prop: 'StoryLine',
+      'StoryLine_nl': {
+        prop: 'StoryLine_nl',
+        type: String
+      },
+
+      'StoryLine_en': {
+        prop: 'StoryLine_en',
         type: String
       },
 
@@ -240,7 +246,7 @@ const margin = { top: 40, right: 120, bottom: 100, left: 100 };
 const marginStory = { top: 30, right: 120, bottom: 100, left: 10 };
 
 const width = 600;
-const height = 600;
+const height =800;
 
 
 const svgStory = d3.select('#story')
@@ -421,12 +427,15 @@ function drawMap() {
           .attr('transform', d => `translate(${xScale(d.Evolution)},${yScale(d.Visibility)})`)
           ;
 
-        gEnter.append('circle').attr('class', 'node').attr('id', d => d.Name).attr('r', d => d.Size).style('opacity',0)
+          gEnter.append('circle').attr('class', 'node').attr('id', d => d.Name).attr('r', d => d.Size).style('opacity',0)
+          .transition().duration(transition.duration.normal).style('opacity',1)
+        ;
+        gEnter.append('circle').attr('class', 'node-center').attr('id', d => d.Name).attr('r', d => d.Size/3).style('opacity',0)
           .transition().duration(transition.duration.normal).style('opacity',1)
         ;
         gEnter.append('text').text(d => d.Name).attr('class', 'node').attr('text-anchor', 'middle').style('opacity',0)
-        .transition().duration(transition.duration.normal).style('opacity',1)
-              .attr('dy', d => -d.Size);
+          .transition().duration(transition.duration.normal).style('opacity',1)
+              .attr('dy', d => -d.Size - 5);
 
       },
       update => {
@@ -438,10 +447,14 @@ function drawMap() {
             .select('circle.node')
             .attr('r', d => d.Size)
             ;
+            gUpdate
+            .select('circle.node-center')
+            .attr('r', d => d.Size/3)
+            ;
   
             gUpdate
             .select('text.node')
-            .attr('dy', d => -d.Size);
+            .attr('dy', d => -d.Size - 5);
             ;
   
     
@@ -459,7 +472,7 @@ function drawMap() {
         enter => {
           // console.log('enter')
           const gEnter =enter.append('g').attr('class','Story')
-          gEnter.append('text').attr('y',  (d,i) => i*30).text(d => d.StoryLine).attr('class', d => d.LineType)
+          gEnter.append('text').attr('y',  (d,i) => i*30).text(d => d[`StoryLine_${selectLanguage}`]).attr('class', d => d.LineType)
         },
         update => {
           update.selectAll('text').remove()

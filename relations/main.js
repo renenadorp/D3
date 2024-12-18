@@ -1,5 +1,5 @@
 
-var sourceFile=`Rituals.xlsx`;
+var sourceFile=`Ilionx.xlsx`;
 const sourceFolder = 'datasets';
 const SCHEMAS  = 
 [

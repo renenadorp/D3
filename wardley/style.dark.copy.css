@@ -1,0 +1,129 @@
+body {margin:10px; 
+  background-color: #0A031C;
+  font-size: 10pt;
+  display: grid;
+}
+.title h2 {color: #78a9ff}
+
+text.node {
+  font-size: 10pt;
+  fill: white;
+  font-weight: 700
+}
+
+path.line {
+  stroke: #d4bbff;
+  stroke-width: 2px;
+  stroke-opacity: 0.5;
+
+}
+circle.node {
+  fill: #8a3ffc;
+  fill-opacity:.6;
+  stroke: #6929c4;
+  stroke-opacity: 1;
+  stroke-width: 2;
+}
+
+  
+circle.node-center {
+  fill: #d4bbff;
+  fill-opacity:1;
+  stroke: none;
+  stroke-opacity: 0;
+  stroke-width: 0;
+}
+
+    
+div.grid-container-header {
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-columns:  80px 80px 80px 300px;
+  display: grid;
+  margin-bottom: 10px;
+  
+  /* align-items: stretch; */
+  /* display: grid; */
+}
+
+div.tile {
+  display:grid;
+  /* place-self: center stretch; */
+  align-self: top;
+  text-align: left;
+  
+}
+
+div.grid-container-viz div.tile{
+  border: 1px solid #a6c8ff;
+}
+
+div.grid-container-viz {
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns:  800px 800px;
+    display: grid;
+  
+    /* align-items: stretch; */
+    display: grid;
+  }
+
+  g.Story text {
+    font-size: 10pt;
+    fill: white;
+  }
+
+  g.Story text.Header {
+    font-size: 12pt;
+    fill: #78a9ff;
+    font-weight: 800;
+  }
+
+button {
+  width: 70px;
+  height: 40px;
+  color: white;
+  background-color: #0043ce;
+  font-size: 12pt;
+  border-radius: 3px;
+  border: 0px solid #0043ce;
+}
+
+p#StageCurrent {
+  font-size: 14pt;
+  font-weight: 800;
+  color: white;
+  
+}
+g.tick text {
+  fill:  #a6c8ff;
+
+}
+g.tick line, path.domain {
+  stroke:  #78a9ff;
+  stroke-width: 1px;
+  stroke-opacity: .8;
+
+}
+/* path.domain {
+  stroke: white;
+  stroke-width: 1px;
+  stroke-opacity: .8;
+}   */
+
+line.transition {
+  stroke: red;
+  stroke-width: 5px;
+}
+
+path.transition {
+  stroke: none;
+  fill: red;
+  /* stroke-width: 10px; */
+}
+
+text.axisLabel {
+  fill: #78a9ff;
+  font-weight: 600;
+
+}

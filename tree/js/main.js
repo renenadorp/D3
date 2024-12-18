@@ -1,105 +1,29 @@
 
 // Tree
 
-var sourceFile=`DataPlatformCosts.xlsx`;
+var sourceFile=`RetailKPIs.xlsx`;
 const sourceFolder = 'datasets';
 const NODECOLOR = {CHILDREN: "#ffb700", NOCHILDREN: "white"}
 const SCHEMA  = {
 	'childId': {
 	  prop: 'childId',
-	  type: Number
+	  type: String
 	},
 	'parentId': {
 		prop: 'parentId',
-		type: Number,
-		required: true
+		type: String,
+		required: false
 	},
 	'childLabel': {
 	prop: 'childLabel',
 	type: String,
-	required: true
+	required: false
 	},
 	'parentLabel': {
 	prop: 'parentLabel',
 	type: String,
-	required: true
-	},
-	'childIdCopy': {
-	prop: 'childIdCopy',
-	type: Number
-	},
-	'leaf': {
-	prop: 'leaf',
-	type: Number
-	},
-	'childCount': {
-	prop: 'childCount',
-	type: Number
-	},
-	'parentChildCount': {
-	prop: 'parentChildCount',
-	type: Number
-	},
-	'grade': {
-	prop: 'grade',
-	type: Number
-	},
-	'relevance': {
-	prop: 'relevance',
-	type: Number
-	},
-	'value': {
-	prop: 'value',
-	type: Number
-	},
-	'intermediateValue': {
-	prop: 'intermediateValue',
-	type: Number
-	},
-	'sort': {
-	prop: 'sort',
-	type: Number
-	},
-	'level': {
-	prop: 'level',
-	type: Number
-	},	  
-	'type': {
-	prop: 'type',
-	type: String
-	},
-	'prio': {
-	prop: 'prio',
-	type: Number
-	},	  
-	'description': {
-	prop: 'description',
-	type: String
-	},	  	  
-	'gradeInergy': {
-	prop: 'gradeInergy',
-	type: Number
-	},			
-	'gradeIlionx': {
-	prop: 'gradeIlionx',
-	type: Number
-	},			
-	'gradeWortell': {
-	prop: 'gradeWortell',
-	type: Number
-	},
-	'gradeMotion10': {
-	prop: 'gradeMotion10',
-	type: Number
-	},
-	'gradeMotion10': {
-	prop: 'gradeMotion10',
-	type: Number
-	},
-	'gradeInspark': {
-	prop: 'gradeInspark',
-	type: Number
-	},				
+	required: false
+	}				
 }
 // Set the dimensions and margins of the diagram
 var margin = {top: 0, right: 0, bottom: 0, left: 80},
@@ -178,7 +102,7 @@ function update(source) {
       .attr("text-anchor", function(d) {
           return d.children || d._children ? "end" : "start";
       })
-      .text(function(d) { return d.data.data.childLabel; });
+      .text(function(d) {return d.data.name; });
 
   // UPDATE
   var nodeUpdate = nodeEnter.merge(node);
@@ -293,7 +217,7 @@ return;
 function searchData (data)  {
     // If there is no search text, then return original data;
     if (!(typeof searchText === "string"    && searchText.length > 0  )) return data;
-    console.log('searchText', searchText)
+    // console.log('searchText', searchText)
     //find data 
     var foundData = [];
     function addFound(foundData, row) {
@@ -388,14 +312,14 @@ function stratifyData (data) {
 
 function main() {
   var SOURCE_FILE = `${sourceFolder}/${sourceFile}`;
-
+  // console.log(SOURCE_FILE)
   fetch(SOURCE_FILE)
   .then(response => response.blob())
   .then(blob => readXlsxFile(blob, {sheet:1, schema: SCHEMA })
   .then(({rows,errors} ) => {
     // console.log('rows',rows,errors)
     
-    // console.log('data', rows)
+    // console.log('data', rows,errors)
     data = rows;
     updateChart();
     
