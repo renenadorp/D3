@@ -29,9 +29,19 @@
 </div>
 
 <div class="input-group   " >
-  <label class="input-group-text" for="inputGroupSelect02">Exam</label>
+  <label class="input-group-text" for="inputGroupSelect02">Source</label>
 
-<select class="custom-select" id="inputGroupSelect02" oninput="selectedExam=value; main();" >
+<select class="custom-select" id="inputGroupSelect02" oninput="selectedSource=value; main();" >
+  <option value="CourseSlides" selected>Course Slides</option>
+  <option value="Book" >Book</option>
+  <option value="PDF Coffee" >PDF Coffee</option>
+</select>
+</div>
+
+<div class="input-group   " >
+  <label class="input-group-text" for="inputGroupSelect03">Section</label>
+
+<select class="custom-select" id="inputGroupSelect03" oninput="selectedSection=value; main();" >
   <option value="1" selected>1</option>
   <option value="2" >2</option>
   <option value="3" >3</option>

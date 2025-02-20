@@ -1,6 +1,7 @@
-let selectedTopic = 'DMBOK';
-let selectedExam = 1;
-let examQuestions;
+let selectedTopic   = 'DMBOK';
+let selectedSource  = 'CourseSlides';
+let selectedSection = 1;
+let sectionQuestions;
 let examFinished;
 let minQuestionNumber, maxQuestionNumber, currentQuestionNumber;
 let examAnswers = new Map();
@@ -11,18 +12,19 @@ const themes = [
     canvas   : {size: {width: 2000, height: 2000},
                 margin: {top: 50, right: 0, bottom: 0, left: 50}
               },
-    question : {box   : {width: 1305, height: 150, fill: "#293ea8", fillOpacity: 1}, 
+    question : {box   : {width: 1500, height: 150, fill: "#293ea8", fillOpacity: 1}, 
                 button: {fillActive: "#293ea8", fillInactive: "darkgrey", height: 45, width: 120, text : {fontsize: 20}},
                 number: {circle: {r: 40, fill: "none", stroke: "white", strokeWidth: 2}, 
-                         text:   {fontsize:55, fill: "white"}},
-                text  : {fontsize: 26, lineheight:30, margin: {left: 140, right:10}},
+                         text:   {fontsize:35, fill: "white"}},
+                text  : {fontsize: 20, lineheight:30, margin: {left: 140, right:10}},
+                type  : {text  : {fontsize: 16, lineheight:30, margin: {left: 140, right:10}}},
+
                 stats : {text: {fontsize: 16, fill: "darkgrey" }}
 
               },
    
   }];
 const theme = themes[0];
-//Id	Include	Topic	Exam	Number	Question	A	B	C	D	E	F	Answer
 const SCHEMAS =
   [
     //Sheet 1: Questions
@@ -42,9 +44,14 @@ const SCHEMAS =
         type: String,
       }
       ,
-      'Exam': {
-        prop: 'Exam',
-        type: Number
+      'Source': {
+        prop: 'Source',
+        type: String,
+      }
+      ,
+      'Section': {
+        prop: 'Section',
+        type: String
       }
 
       ,
@@ -55,6 +62,11 @@ const SCHEMAS =
       ,
       'Question': {
         prop: 'Question',
+        type: String
+      }
+      ,
+      'QuestionType': {
+        prop: 'QuestionType',
         type: String
       }
       ,
@@ -99,11 +111,32 @@ const SCHEMAS =
         type: String
       }
       ,
+      'Chapter': {
+        prop: 'Chapter',
+        type: String
+      }
+      ,
       'Explanation': {
         prop: 'Explanation',
         type: String
       }
+      ,
+      'QuestionNbr': {
+        prop: 'QuestionNbr',
+        type: String
+      }
       
+      ,
+      'NumberOrg': {
+        prop: 'NumberOrg',
+        type: String
+      }
+
+      ,
+      'SetOrg': {
+        prop: 'SetOrg',
+        type: String
+      }
 
 
     }    
@@ -126,9 +159,8 @@ const gExamResults        = svg.append('g').attr('id','ExamResults').attr("trans
 
 let data;
 
-
-
 function main() {
+  // console.log(selectedSection, selectedSource, selectedTopic)
   examAnswers = new Map();
 
   let questionsUnfiltered = {};
@@ -148,15 +180,22 @@ function main() {
       
       // const chapters = chaptersUnfiltered.filter(e => (e.Include=="Y")).sort((a,b) => (a.Section - b.Section))
       // const sections = sectionsUnfiltered.filter(e => (e.Include=="Y"))//.sort((a,b) => (a.Section - b.Section))
-      examQuestions = questionsUnfiltered.filter(e => (e.Include=="Y" & e.Topic==selectedTopic & e.Exam==selectedExam))//.sort((a,b) => (a.Section - b.Section))
-      // console.log(examQuestions)
+      // console.log(questionsUnfiltered)
+      // console.log(selectedTopic, selectedSource, selectedSection)
+      sectionQuestions = questionsUnfiltered.filter(e => ( e.Include=="Y"  
+                                                        & e.Topic==selectedTopic 
+                                                        & e.Source==selectedSource 
+                                                        & e.Section==selectedSection
+                                                        ))//.sort((a,b) => (a.Section - b.Section))
+      // console.log(sectionQuestions, selectedTopic, selectedSource, selectedSection, questionsUnfiltered)
+
       // Get unique list of Exams
-      const menu = [...new Set(examQuestions.map(item => item.Number))]; // [ 'A', 'B']
+      const menu = [...new Set(sectionQuestions.map(item => item.Number))]; // [ 'A', 'B']
       // drawMenu(menu);
 
 
-      minQuestionNumber = d3.min(examQuestions, d => d.Number);
-      maxQuestionNumber = d3.max(examQuestions, d => d.Number);
+      minQuestionNumber = d3.min(sectionQuestions, d => d.Number);
+      maxQuestionNumber = d3.max(sectionQuestions, d => d.Number);
       currentQuestionNumber = minQuestionNumber;
       drawScreen(); //Buttons, Question, Choices
   }
@@ -221,7 +260,15 @@ function drawScreen(action) {
   drawButtons();
   drawQuestion(currentQuestionNumber);
 
-  // drawAnswers();
+
+  // svg.append("svg:foreignObject")
+  // .attr("width", 200)
+  // .attr("height", 200);
+  // .append("div")
+  // .html("<span style='color:red'>Hello</span> <span
+  // style='color:blue'>world</span>!");
+  
+  
 
 }
 function buttonMouseOver(){
@@ -269,6 +316,8 @@ function drawButtons(){
       .attr('dy',theme.question.button.height/2 + theme.question.button.text.fontsize/4)
       .attr('dx',  theme.question.button.width/2).attr('text-anchor', 'middle')
   }
+    // Button Answer
+
 }
 function updateStats () {
   gControlButtons.selectAll('g.QuestionStats').remove();
@@ -314,8 +363,10 @@ function mouseClickRadioDot(e,d){
   for (const [k, v] of examAnswers) {
     v ? countAnswers += 1: countAnswers+=0
   }
-  // console.log(countAnswers, examQuestions.length)
-  if (countAnswers == examQuestions.length) 
+  // console.log(countAnswers, sectionQuestions.length)
+
+  // console.log(sectionQuestions)
+  if (countAnswers == sectionQuestions.length) 
   {
     examFinished = true;
     drawSubmitExam();
@@ -341,9 +392,10 @@ function splitText(str,i){
 }
 function drawQuestion(questionNumber) {
   updateStats();
-  const question = examQuestions.filter(r => r.Number==questionNumber);
+  const question = sectionQuestions.filter(r => r.Number==questionNumber);
   const choices = new Map();
   const options =['A', 'B', 'C','D','E','F','G']
+  // console.log("question:",question)
   options.map(o => {
    if (question[0][o]) choices.set(o, question[0][o])
   })
@@ -353,6 +405,11 @@ function drawQuestion(questionNumber) {
     enter => {
       let gEnter = enter.append('g').attr('transform',`translate(${0},${50})`).attr('class', 'Q');
       gEnter.append('rect').attr('x', 0).attr('y', 0).attr('width', theme.question.box.width).attr('height', theme.question.box.height).attr('rx', 10).attr("fill", theme.question.box.fill).attr("fill-opacity", theme.question.box.fillOpacity);
+ 
+      const gQuestionType = gEnter.append('g').attr('class', 'gQuestionType').attr('transform',`translate(${theme.question.box.width - 160},${10})`)
+      gQuestionType.append('rect').attr('x', 0).attr('y', 0).attr('width', 150).attr('height', 40).attr('rx', 10).attr("fill", "#2D3135").attr("fill-opacity", 0.3).attr("stroke", "#789CBD").attr("stroke-width", 2);
+      gQuestionType.append('text').text(d => d.QuestionType).attr('x', 20).attr('y', 25).attr('font-size', theme.question.type.text.fontsize);
+
       gEnter.append('line').attr('x1', (theme.question.number.circle.r * 2) + 30).attr('y1', 0).attr('x2', (theme.question.number.circle.r * 2) + 30).attr('y2', theme.question.box.height).attr('stroke', 'white').attr('stroke-width', 2)
       gEnter.append('circle').attr('class','number').attr('cx', theme.question.number.circle.r + 15).attr('cy',theme.question.box.height/2).attr('r', theme.question.number.circle.r).attr('stroke','white').attr('stroke-width', 2).attr('fill','none')
       gEnter.append('text').attr('class','number').text(d => d.Number).attr('x', theme.question.number.circle.r + 15).attr('y', theme.question.box.height/2 + theme.question.number.text.fontsize / 3).attr('font-size', theme.question.number.text.fontsize).attr('font-weight', 1000).attr('text-anchor','middle')
@@ -370,7 +427,7 @@ function drawQuestion(questionNumber) {
       // update.append('text').text(d => d.Question).attr('class', 'Q').attr('dx', 40).attr('dy', 40);
    
       // update.select("tspan.line2").text(d => `${d.Question.substring(20,30)}`).attr('x', 40).attr('y', 70).attr("fill-opacity", 0).transition().duration(1000).attr("fill-opacity",1);
-      
+      update.select('.gQuestionType').select('text').text(d => d.QuestionType)
       update.select("text.number").text(d =>d.Number);
       update.select("tspan.line1").text(d =>splitText(d.Question, 1)).attr('x', theme.question.text.margin.left).attr('y', 1*theme.question.text.lineheight+ 10).attr("fill-opacity", 0).attr('font-size', theme.question.text.fontsize).transition().duration(1000).attr("fill-opacity",1);;
       update.select("tspan.line2").text(d =>splitText(d.Question, 2)).attr('x', theme.question.text.margin.left).attr('y', 2*theme.question.text.lineheight+ 10).attr("fill-opacity", 0).attr('font-size', theme.question.text.fontsize).transition().duration(1000).attr("fill-opacity",1);;
@@ -396,14 +453,14 @@ function drawQuestion(questionNumber) {
         .on("mouseover", mouseOverRadioDot)
         .on("mouseout", mouseOutRadioDot)
         .on("click", mouseClickRadioDot)
-      gEnter.append('text').text(d => `${d[0]}. ${d[1]}`).attr('dx', 50).attr('dy', 40);
+      gEnter.append('text').text(d => `${d[0]}. ${d[1]}`).attr('dx', 50).attr('dy', 40).attr('font-size', theme.question.text.fontsize);
 
     },
     update => {
       // console.log('update')
       // update.append('rect').attr('x', 0).attr('y', 0).attr('width', 900).attr('height', 100).attr('rx', 10);
       // update.append('text').text(d => d.Question).attr('class', 'Q').attr('dx', 40).attr('dy', 40);
-      update.select("text").text(d => { return `${d[0]}. ${d[1]}`;}).attr('dx', 50).attr('dy', 40).attr("fill-opacity", 0).transition().duration(1000).attr("fill-opacity",1);
+      update.select("text").text(d => { return `${d[0]}. ${d[1]}`;}).attr('dx', 50).attr('dy', 40).attr("fill-opacity", 0).transition().duration(1000).attr("fill-opacity",1).attr('font-size', theme.question.text.fontsize);
       
       
       update.select("circle.radioDot").attr("cx", 25).attr("cy", 30).attr("r",8).attr("class",d => setRadioDotClass(d))
@@ -419,9 +476,13 @@ function drawQuestion(questionNumber) {
 
   )
 
+
+
   return;
 }
+
 function drawSubmitExam(){
+  console.log('drawSubmitExam')
   const gSubmitButton = gShowResultsButton.append('g').attr('class','button');
   gSubmitButton
     .append("rect")
@@ -437,7 +498,7 @@ function drawSubmitExam(){
   return;
 }
 function showResults() {
-  // console.log(examAnswers, examQuestions)
+  console.log(examAnswers, sectionQuestions)
   d3.select('g#ControlButtons').remove();
   d3.select('g#Question').remove();
   d3.select('g#SubmitExam').remove();
@@ -465,7 +526,7 @@ function showResults() {
     .attr("y2", (theme.question.text.lineheight    /2 ) +2   )
     .attr("class","ExamResult");
 
-  gExamResultsList.selectAll('.examResult').data(examQuestions)
+  gExamResultsList.selectAll('.examResult').data(sectionQuestions)
   .join(
     enter => {
       const gEnter = enter.append('g').attr('transform', `translate(${0},${50})`);
