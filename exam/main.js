@@ -49,6 +49,12 @@ const SCHEMAS =
         type: String,
       }
       ,
+      'NumberTotal': {
+        prop: 'NumberTotal',
+        type: Number
+      }
+
+      ,
       'Section': {
         prop: 'Section',
         type: String

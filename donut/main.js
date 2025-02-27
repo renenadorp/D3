@@ -8,8 +8,8 @@ const height = 900;
 const settings = [
   {
     sheet: "DamaWheelIlionx",
-    colorScaleFont : d3.scaleOrdinal().domain([0,9]).range([  "white",    "#E8003D",    ]),
-    colorScaleFill : d3.scaleLinear().domain([0,9]).range([   "#E8003D",  "white",      ]), 
+    colorScaleFont : d3.scaleOrdinal().domain([0,9]).range([  "#E8003D", "white",       ]),
+    colorScaleFill : d3.scaleLinear().domain([0,9]).range([   "white", "#E8003D",       ]), 
     label:  { text: "Data\nGovernance", FontColor: "#E8003D"},
     pie:    { stroke:  "black", strokeWidth: 1}
 
@@ -58,6 +58,7 @@ const svg = d3.select('#viz')
 
 export function main(sheet) {
   // console.log('sheet:', sheet)
+  svg.select('#chart').remove();
   let dataUnfiltered = {};
   let promiseList = [];
 
@@ -82,7 +83,7 @@ export function main(sheet) {
         settings: settings[+sheet-1]
         })
 
-      svg.append(() => chart);
+      svg.append('g').attr('id', 'chart').append(() => chart);
 
 })
 }

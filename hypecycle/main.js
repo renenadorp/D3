@@ -139,7 +139,7 @@ const svgCanvas = d3.select("#viz").append("svg")
   					.attr("height", CONST.canvas.height)
                       .attr("transform",  `scale(${1})`);
 const svg = svgCanvas.append("g")
-  					.attr("transform", `translate(${CONST.canvas.margin.left}, ${CONST.canvas.margin.top})`)
+  					.attr("transform", `translate(${CONST.canvas.margin.left}, ${CONST.canvas.margin.top}) scale(0.5)`)
 svgCanvas.append('text').text(CONST.canvas.graph.labels.title)
     .attr('x', 100)
     .attr('y',200)

@@ -11,6 +11,9 @@
   import { main } from "./main.js"; //import main function from source
   window.main = main; //add main function to global scope
 
+  import { chart } from "./main.js"; //import main function from source
+  window.chart = chart; //add function to global scope
+
 </script>
 <title>Donut Chart</title>
 
@@ -24,15 +27,21 @@
     <div class="input-group">
     <div class="input-group-prepend">
     <span class="input-group-text" id="" >
-    SettingSelection
+    Select Wheel
     </span>
     </div>
     <div class="form-control-container">
-    <input name="rings" class="form-control" type="number" min="1" max="2" step="1" value="1" id="settings" 
-      onchange="main(value);" >
+
+      <select class="custom-select" id="inputGroupSelect01" oninput="chart().change(value)" >  
+        <option value="Dama" selected>Dama</option>
+        <option value="Ilionx">Ilionx</option>
+
+
+      </select>
     </div>
   </div>
 </div>
+
 
 <div class="grid-item-viz">
 
