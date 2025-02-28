@@ -3,13 +3,13 @@ body {
 }
 .grid {
     grid-column-gap: 5px;
-    grid-row-gap: 15px;
+    grid-row-gap: 5px;
     /* grid-template-columns: 270px auto auto auto; */
     /* transition: 600ms ease-in-out;; */
     display: grid;
-    grid-template-columns: 200px auto 1fr;
+    grid-template-columns: 10px 200px 100px;
   
-    /* align-items: stretch; */
+    align-items: center;
   }
 
 
@@ -25,8 +25,8 @@ body {
 
 
   .grid-item-viz {
-    grid-row-start: 1;
-    /* grid-column-end: five; */
+    grid-column-start: 3;
+    grid-row-start: 2;    /* grid-column-end: five; */
     /* grid-row-start: row1-start; */
     /* grid-row-end: 3; */
     border: 0px solid red;

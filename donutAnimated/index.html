@@ -22,44 +22,37 @@
 <body>
 
   <div class="container">
-    <div class="grid-item-selection">
 
-    <div class="input-group">
-    <div class="input-group-prepend">
-    <span class="input-group-text" id="" >
-    Select Wheel
-    </span>
+      <div class="grid-item-selection">
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+          <span class="input-group-text" id="" >
+          Select Wheel
+          </span>
+          </div>
+          <div class="form-control-container">
+
+            <select class="custom-select" id="inputGroupSelect01" oninput="chart().change(value)" >  
+              <option value="Dama" selected>Dama</option>
+              <option value="Ilionx">Ilionx</option>
+
+
+            </select>
+          </div>
+        </div>
     </div>
-    <div class="form-control-container">
-
-      <select class="custom-select" id="inputGroupSelect01" oninput="chart().change(value)" >  
-        <option value="Dama" selected>Dama</option>
-        <option value="Ilionx">Ilionx</option>
 
 
-      </select>
+    <div class="grid-item-viz">
+
+      <div class="tile" id="viz"></div>
     </div>
-  </div>
-</div>
-
-
-<div class="grid-item-viz">
-
-  <div class="tile" id="viz"></div>
-</div>
 
 
 
 </div>
 
-
-
-<div class="grid-container-header">
-
-
-  <div class="grid-container-viz">
-
-  </div>
 
 
 

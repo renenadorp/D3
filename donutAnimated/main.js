@@ -15,6 +15,11 @@ const svg = d3.select('#viz')
   .attr('height', height + margin.top + margin.bottom)
   .append('g')
   .attr('transform', `translate(${width / 2}, ${height / 2}) scale(0.8)`);
+
+const svgCenterLabel = 
+  svg.append('text').text('Data Governance').attr('text-anchor', 'middle')
+    .attr('font-size',36).attr('dy', 10)
+    .attr('font-weight', 400)
 let labelGroup;
 const settings = [
   {
@@ -61,7 +66,7 @@ const SCHEMAS =
 
 export const chart = (init) => {
   // const height = Math.min(500, width / 2);
-  console.log('chart function called!!!', init)
+  // console.log('chart function called!!!', init)
 
   const outerRadius = 500;
   const innerRadius = outerRadius * 0.3;
@@ -79,7 +84,7 @@ export const chart = (init) => {
     .data(pie)
     .join("path")
     .attr("fill", (d, i) => {
-      // console.log(d.data[focusColumn]); 
+      // console.log(d.data); 
       return colorScaleFill(d.data[focusColumn])
     })
     .attr("d", arc)
@@ -105,10 +110,11 @@ export const chart = (init) => {
         (d.startAngle / 2 + d.endAngle / 2 + Math.PI) * 180 / Math.PI;
       return `translate(${arcLabel.centroid(d)}), rotate(${rotation - 90})`
     })
-    .attr("fill", d => "black")
+    .attr("fill", d => d.data[focusColumn] == 0 ? "black": "white")
+    .attr("opacity", d => d.data[valueColumn] > 0 ? 1: 0)
     .selectAll("tspan")
     .data(d => {
-      const lines = d.data[valueColumn] > 0 ? `${d.data.name}`.split(/\n/) : "";
+      const lines = `${d.data.name}`.split(/\n/);
       // console.log(lines, title);
       return (d.endAngle - d.startAngle) > 0.25 ? lines : lines.slice(0, 1);
     })
@@ -147,6 +153,12 @@ export const chart = (init) => {
           (d.startAngle / 2 + d.endAngle / 2 + Math.PI) * 180 / Math.PI;
         return `translate(${arcLabel.centroid(d)}), rotate(${rotation - 90})`
       })
+      // .transition().duration(750)
+      .attr("fill", d => d.data[focusColumn] == 0 ? "black": "white")
+
+      .attr("opacity", d => {
+        return d.data[valueColumn] > 0 ? 1: 0
+  })
 
 
     return
@@ -184,7 +196,7 @@ export function main(init) {
 
         const dataFiltered = dataUnfiltered
         chartData = dataFiltered;
-        console.log('chartData:', chartData);
+        // console.log('chartData:', chartData);
 
         chart(init);
 
