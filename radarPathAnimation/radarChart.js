@@ -21,7 +21,7 @@ export const RadarChart = (chartElement, data, options = {}) => {
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.schemeCategory10	//Color function
 	};
-	console.log('RadarChart', data, options, chartElement)
+
 	//Put all of the options into a variable called cfg
 	if('undefined' !== typeof options){
 	  for(var i in options){

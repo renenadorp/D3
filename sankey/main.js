@@ -103,7 +103,7 @@ var linkColor='source';
 var selectedLinkColor='source';
 var nodeAlign='left';
 
-var sourceFile 	= "obvion.json";
+var sourceFile 	= "x.json";
 var SOURCE_FILE ;
 
 link_width = function(label){

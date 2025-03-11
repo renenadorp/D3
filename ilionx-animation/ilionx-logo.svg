@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg version="1.1" width="600px" height="700px" viewBox="0 0 500.0 700.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<!-- Arrow Left -->
+<g transform="translate(0 0)"><path d="M110.050166,0 L308,300.720785 L96.7733032,621 L0,621 L212.448119,300.720785 L13.8875736,0 L110.050166,0 Z" fill="green"></path></g>
+
+<!-- Lines Righ Top -->
+<g transform="translate(358.0, 0.0)"><path d="M149,0 L4.02620639,223 L0,216.87941 L140.996169,0 L149,0 Z"></path></g>
+<g transform="translate(348.0, 0.0)"><path d="M138,0 L4.02525297,207 L0,200.85336 L129.998064,0 L138,0 Z"></path></g>
+<g transform="translate(336.0, 0.0)"><path d="M128,0 L4.05601491,190 L0,183.860918 L119.943029,0 L128,0 Z" fill="green"></path></g>
+<g transform="translate(313.0, 0.0)"><path d="M105,0 L4.02119917,155 L0,148.892432 L97.0061229,0 L105,0 Z" fill="green"></path></g>
+<g transform="translate(325.0, 0.0)"><path d="M116,0 L4.01673815,174 L0,167.82125 L108.002929,0 L116,0 Z"></path></g>
+
+
+<!-- Lines Right Bottom -->
+
+<g transform="translate(332.0, 406.0)"><path d="M48.0660081,0 L52,6.2627605 L3.93399187,81 L0,74.7372395 L48.0660081,0 Z"></path></g>
+<g transform="translate(342.0, 424.0)"><path d="M48.0660081,0 L52,6.2627605 L3.93399187,81 L0,74.7372395 L48.0660081,0 Z"></path></g>
+<g transform="translate(352.0, 441.0)"><path d="M47.9990716,0 L52,6.37545235 L4.0009284,81 L0,74.6245476 L47.9990716,0 Z"></path></g>
+<g transform="translate(363.0, 458.0)"><path d="M48.0660081,0 L52,6.2627605 L3.93399187,81 L0,74.7311235 L48.0660081,0 Z"></path></g>
+<g transform="translate(418.0, 545.0)"><path d="M48.0655509,0 L52,6.25695449 L7.10134821,76 L0.840074384,76 L0,74.6618427 L48.0655509,0 Z"></path></g>
+<g transform="translate(319.0, 389.0)"><path d="M48.1465847,0 L52,6.35079007 L3.92577989,81 L0,74.7528217 L48.1465847,0 Z"></path></g>
+<g transform="translate(309.0, 373.0)"><path d="M48.1263698,0 L52,6.32746083 L3.47959897,81 L0,75.5166054 L26.8911168,33.5136817 L35.7780368,19.0066722 L48.1263698,0 Z"></path></g>
+<g transform="translate(375.0, 476.0)"><path d="M48.0655509,0 L52,6.2627605 L3.92840539,81 L0,74.7311235 L48.0655509,0 Z"></path></g>
+<g transform="translate(482.0, 596.0)"><path d="M16.8497268,0 L21,6.282177 L8.40255009,25 L0,25 L16.8497268,0 Z"></path></g>
+<g transform="translate(505.0, 613.0)"><path d="M5.05896958,0 L10,8 L0,8 L5.05896958,0 Z"></path></g>
+<g transform="translate(462.0, 580.0)"><path d="M27.0060241,0 L31,6.20492397 L8.09638554,41 L0,41 L27.0060241,0 Z"></path></g>
+<g transform="translate(439.0, 561.0)"><path d="M38.978595,0 L43,6.33302441 L8.14164632,60 L0,60 L38.978595,0 Z"></path></g>
+<g transform="translate(396.0, 509.0)"><path d="M47.9990716,0 L52,6.37545235 L4.00696298,81 L0,74.6184409 L47.9990716,0 Z"></path></g>
+<g transform="translate(385.0, 493.0)"><path d="M48.0655509,0 L52,6.26323341 L3.92840539,81 L0,74.7367666 L48.0655509,0 Z"></path></g>
+<g transform="translate(408.0, 528.0)"><path d="M48.0655509,0 L52,6.26323341 L3.92840539,81 L0,74.7367666 L48.0655509,0 Z"></path></g>
+
+
+
+
+
+
+
+</svg>

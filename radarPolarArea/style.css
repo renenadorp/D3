@@ -1,0 +1,23 @@
+body {
+    margin: 0px;
+}
+.grid {
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    /* grid-template-columns: 270px auto auto auto; */
+    /* transition: 600ms ease-in-out;; */
+    display: grid;
+    grid-template-columns: 20px auto 1fr;
+  
+    /* align-items: stretch; */
+  }
+
+  .grid-item-viz {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    /* grid-column-end: five; */
+    /* grid-row-start: row1-start; */
+    /* grid-row-end: 3; */
+    xborder: 1px solid red;
+    justify-self: left;
+  }

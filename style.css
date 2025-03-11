@@ -40,3 +40,25 @@ div.tile {
   
 }
 
+
+.containerframe {
+  height: 300px;
+  margin:auto;
+  overflow: hidden;
+  width: 300px;
+  xborder:red solid 5px;
+}
+iframe {
+  --scale: .7;
+  border: 0 solid;
+  height: 300px;
+  margin-left:0px;
+  margin-top: 0px;
+  width: 300px;
+  transform:scale(var(--scale));
+  -webkit-transform:scale(var(--scale));
+  -moz-transform:scale(var(--scale));
+  -o-transform:scale(var(--scale));
+  -ms-transform:scale(var(--scale));
+}    
+
