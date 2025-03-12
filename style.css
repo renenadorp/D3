@@ -41,24 +41,264 @@ div.tile {
 }
 
 
-.containerframe {
-  height: 300px;
-  margin:auto;
-  overflow: hidden;
-  width: 300px;
-  xborder:red solid 5px;
+.thumbnail {
+  --bg-image-size: 200px;
+  border: 6px solid white;
+  text-align: center;
 }
-iframe {
-  --scale: .7;
-  border: 0 solid;
-  height: 300px;
-  margin-left:0px;
-  margin-top: 0px;
-  width: 300px;
-  transform:scale(var(--scale));
-  -webkit-transform:scale(var(--scale));
-  -moz-transform:scale(var(--scale));
-  -o-transform:scale(var(--scale));
-  -ms-transform:scale(var(--scale));
-}    
+#thumbnail-links{
+  background-image: url('/links/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-disc{
+  background-image: url('/disc/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-bsc{
+  background-image: url('/bsc/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-maturity{
+  background-image: url('/maturity/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-capability{
+  background-image: url('/capability/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-competitor{
+  background-image: url('/inergy/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-transmap{
+  background-image: url('/transmap/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-timeline{
+  background-image: url('/timeline/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-spin{
+  background-image: url('/spin/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-relations{
+  background-image: url('/relations/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-datamodel{
+  background-image: url('/datamodel/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-sankey{
+  background-image: url('/sankey/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-tree{
+  background-image: url('/tree/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-radialtree{
+  background-image: url('/radialtree/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-process{
+  background-image: url('/process/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-trip{
+  background-image: url('/trip/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-exam{
+  background-image: url('/exam/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-hypecycle{
+  background-image: url('/hypecycle/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-wardley{
+  background-image: url('/wardley/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-donut{
+  background-image: url('/donut/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-donutAnimated{
+  background-image: url('/donutAnimated/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
 
+
+#thumbnail-radar{
+  background-image: url('/radar/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+
+
+
+
+#thumbnail-radarAnimated{
+  background-image: url('/radarAnimated/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-logo-animation{
+  background-image: url('/ilionx-animation/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
+#thumbnail-radarPolarArea{
+  background-image: url('/radarPolarArea/thumbnail.png');
+  background-size: var(--bg-image-size);
+  background-repeat: no-repeat;
+  width: var(--bg-image-size);
+  height: var(--bg-image-size);
+  border: none;
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 0 0 8px 8px white inset;
+}
